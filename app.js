@@ -68,7 +68,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', indexRouter);
+app.use('/', index/Router);
 app.use('/home', homeRouter);
 
 // catch 404 and forward to error handler
