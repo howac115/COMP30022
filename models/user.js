@@ -7,11 +7,9 @@ var ObjectId = Schema.ObjectId;
 var UserSchema = new Schema({
   first_name: {
     type: String,
-    required: true,
   },
   family_name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -28,18 +26,6 @@ var UserSchema = new Schema({
   summary: {
     type: String,
   },
-  tag: [
-    {
-      type: ObjectId,
-      ref: "Tag",
-    },
-  ],
-  followed_tag: [
-    {
-      type: ObjectId,
-      ref: "Tag",
-    },
-  ],
   password: {
     type: String,
     required: true,
