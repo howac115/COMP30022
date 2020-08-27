@@ -10,7 +10,6 @@ var session = require('express-session');
 // Connects to routes
 var indexRouter = require('./routes/index');
 var homeRouter = require('./routes/home');
-var dashboardRouter = require('./routes/dashboard');
 
 var compression = require('compression');
 var helmet = require('helmet');
@@ -71,8 +70,6 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/home', homeRouter);
-app.use('/dashboard', dashboardRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
