@@ -20,7 +20,7 @@ require('./config/passport')(passport);
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-var dev_db_url = 'mongodb+srv://incubeta:1234@incubeta-wowel.mongodb.net/INFO30005?retryWrites=true&w=majority'
+var dev_db_url = 'mongodb+srv://yutao:brysjhhrhlyqqlmgsycl@bountyprogrammers.iu0xm.mongodb.net/BountyProgrammers?retryWrites=true&w=majority'
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {
     useUnifiedTopology: true,
@@ -68,7 +68,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', indexRouter);
+app.use('/', index/Router);
 app.use('/home', homeRouter);
 
 // catch 404 and forward to error handler
