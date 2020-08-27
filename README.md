@@ -1,2 +1,2 @@
 # COMP30022
-Bounty Programmers Repository
+Bounty Programmers Repository.
