@@ -5,8 +5,30 @@
     height: 100vh;
     
     .login_box {
+        opacity:0.95;
         width: 350px;
         padding: 1.5rem 1.5rem 2rem 1.5rem;
     }
-    background-color:  #D0D1CD;
+
+    background-image: url('/Users/harryking/Documents/IT-Project/COMP30022/public/images/login-background.jpeg');
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+
+.signUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    .signUp_box {
+        opacity:0.95;
+        width: 350px;
+        padding: 1.5rem 1.5rem 2rem 1.5rem;
+    }
+
+    background-image: url('/Users/harryking/Documents/IT-Project/COMP30022/public/images/login-background.jpeg');
+    background-repeat:no-repeat;
+    background-size: cover;
 }

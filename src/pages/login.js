@@ -41,30 +41,29 @@ class Login extends React.Component{
         return (
             <div className="login">
                 <form className="box login_box" onSubmit={this.handleLogin}>
-                    <label class="label">Login</label>
-                    <div class="field">
-                        <p class="control ">
-                            <input class="input" type="email" 
+                    <label className="label"><center><strong><font size="50px">LOGIN</font></strong></center></label>
+                    <div className="field">
+                        <label className="label">Email</label>
+                        <div className="control ">
+                            <input className="input" type="email" 
                                     placeholder="Email" 
                                     value={this.state.email} 
                                     name='email'
                                     onChange={this.handleInput}/>
-                            <span class="icon is-small is-left"></span>
-                            <span class="icon is-small is-right"></span>
-                        </p>
+                        </div>
                     </div>
-                    <div class="field">
-                        <p class="control">
-                            <input class="input" type="password" 
+                    <div className="field">
+                        <label className="label">Password</label>
+                        <div className="control">
+                            <input className="input" type="password" 
                                 placeholder="Password" 
                                 value={this.state.password} 
                                 name='password'
                                 onChange={this.handleInput}/>
-                            <span class="icon is-small is-left"> </span>
-                        </p>
+                        </div>
                     </div>
-                    <div class="control">
-                        <button class="button is-dark">LOGIN</button>
+                    <div className="control">
+                        <button className="button is-dark">Login</button>
                     </div>
                 </form>
             </div>
