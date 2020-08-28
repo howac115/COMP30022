@@ -1,9 +1,6 @@
 import React from 'react'
 
-
-
-
-class HomeHeader extends React.Component{
+class Header extends React.Component{
     state ={
 
     } //状态
@@ -28,7 +25,7 @@ class HomeHeader extends React.Component{
                     <a class="button is-dark" href="/">
                         <strong>Sign up</strong>
                     </a>
-                    <a class="button is-light" href="/">Log in</a>
+                    <a class="button is-light" href="/login">Log in</a>
                 </React.Fragment>
             );
         }
@@ -40,7 +37,7 @@ class HomeHeader extends React.Component{
                 <nav class="navbar is-light" role="navigation" aria-label="main navigation">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="/">
-                            <p>EXPORTFOLIO</p>
+                            <div className='logo-text'>EXPORTFOLIO</div>
                         </a>
                         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" href="/">
                             <span aria-hidden="true"></span>
@@ -79,4 +76,4 @@ class HomeHeader extends React.Component{
     }
 }
 
-export default HomeHeader;
+export default Header;
