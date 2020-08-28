@@ -1,0 +1,12 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    .login_box {
+        width: 350px;
+        padding: 1.5rem 1.5rem 2rem 1.5rem;
+    }
+    background-color:  #D0D1CD;
+}
