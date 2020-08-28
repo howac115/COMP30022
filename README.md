@@ -16,12 +16,12 @@ Register  --
    5. send the HTTP request
 
 Login --
-      1. relative url:  /home/login       absolute url: http://localhost:3000/home/login
-      2. method:  POST
-      3. HTTP request Header: Content-Type application/json 
-      4. HTTP request Body example, all the following field should be filled
+    1. relative url:  /home/login       absolute url: http://localhost:3000/home/login
+    2. method:  POST
+    3. HTTP request Header: Content-Type application/json 
+    4. HTTP request Body example, all the following field should be filled
                 {
                    "email":  "12312@gmail.com",
                    "12312@gmail.com"
                  }
-      5. send the HTTP request
+    5. send the HTTP request
