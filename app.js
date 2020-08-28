@@ -33,6 +33,7 @@ var logger = require('morgan');
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+var cors = require("cors");
 
 // Connects to routes
 var indexRouter = require('./routes/index');
@@ -79,6 +80,9 @@ app.use(
         saveUninitialized: true
     })
 )
+
+// Allow cross origin request
+app.use(cors());
 
 // Passport middleware
 app.use(passport.initialize());
