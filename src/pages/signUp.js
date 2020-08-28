@@ -14,7 +14,6 @@ class SignUp extends React.Component{
     handleSignUp = event =>{
         event.preventDefault(); 
         const signUpDetail = {...this.state};
-        alert('Sign Up Success');
         axios.post('register', signUpDetail).then(res =>{
             alert('Sign Up Success');
             this.props.history.push('/login');
@@ -34,10 +33,10 @@ class SignUp extends React.Component{
     };
 
     state = {
-        firstName:'',
-        lastName:'',
+        first_name:'',
+        family_name:'',
         email:'',
-        password1:'',
+        password:'',
         password2:''
     };
 
@@ -52,8 +51,8 @@ class SignUp extends React.Component{
                         <div className="control">
                             <input className="input" type="text" 
                             placeholder="Enter Your First Name"
-                            value={this.state.firstName}
-                            name='firstName'
+                            value={this.state.first_name}
+                            name='first_name'
                             onChange={this.handleInput}/>
                         </div>
                     </div>
@@ -63,8 +62,8 @@ class SignUp extends React.Component{
                         <div className="control">
                             <input className="input" type="text" 
                                 placeholder="Enter Your Last Name"
-                                value={this.state.lastName} 
-                                name='lastName'
+                                value={this.state.family_name} 
+                                name='family_name'
                                 onChange={this.handleInput}/>
                         </div>
                     </div>
@@ -86,8 +85,8 @@ class SignUp extends React.Component{
                         <div className="control">
                             <input className="input" type="password" 
                                 placeholder="Enter your password"
-                                value={this.state.password1} 
-                                name='password1' 
+                                value={this.state.password} 
+                                name='password' 
                                 onChange={this.handleInput}/>
 
                         </div>
@@ -115,10 +114,10 @@ class SignUp extends React.Component{
 
                     <div className="field is-grouped">
                         <div className="control">
-                            <button className="button is-link">Sign Up</button>
+                            <button className="button is-dark">Sign Up</button>
                         </div>
                         <div className="control">
-                            <button className="button is-link is-light" onClick={this.handleCancel}>Cancel</button>
+                            <button className="button is-light" onClick={this.handleCancel}>Cancel</button>
                         </div>
                     </div>
 
