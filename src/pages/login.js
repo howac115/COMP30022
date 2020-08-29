@@ -24,7 +24,9 @@ class Login extends React.Component{
         //跳转首页
         else this.props.history.push('/');
     };
-    
+    handleBack = event =>{
+        this.props.history.push('/');
+    };
     state = {
         email:'',
         password:''
@@ -62,9 +64,15 @@ class Login extends React.Component{
                                 onChange={this.handleInput}/>
                         </div>
                     </div>
-                    <div className="control">
-                        <button className="button is-dark">Login</button>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <button className="button is-dark">Login</button>
+                        </div>
+                        <div className="control">
+                            <button className="button is-light" onClick={this.handleBack}>Back</button>
+                        </div>
                     </div>
+
                 </form>
             </div>
         );

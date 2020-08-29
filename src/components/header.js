@@ -1,17 +1,24 @@
 import React from 'react'
+import UserProfile from './userProfile.js'
+import Panel from './panel.js';
 
 class Header extends React.Component{
-
+    toProfile =() =>{
+        Panel.open({
+            component: UserProfile
+        })
+    };
+     
     renderUsernameLink(){
         const username = this.props.username;
         if (username){
             return (
-                <a className="button is-light" href="/">
+                <button className="button is-light" onClick={this.toProfile}>
                     <span className='username'>
                         <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
                         {this.props.username}
                     </span>
-                </a>
+                </button>
             );
         }
         else{
