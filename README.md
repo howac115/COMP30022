@@ -1,2 +1,2 @@
 # COMP30022
-Bounty Programmers Repository.
+temp 1 homepage + contact me
