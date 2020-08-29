@@ -4,7 +4,7 @@ import Header from '../components/header.js'
 class App extends React.Component{
 
     state = {
-        username:'h'
+        username:''
     }
 
     render(){
