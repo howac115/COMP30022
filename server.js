@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 const app = express();
 
@@ -19,7 +19,7 @@ mongoose.connect(db)
     .catch(err => console.log(err));
 
 // Use Routes
-app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
