@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "../commons/axios";
+import axios from 'axios';
 //React.fragement 可用于两个并列的component 
 /**
  * 1.命名和绑定
@@ -14,7 +14,7 @@ class SignUp extends React.Component {
     handleSignUp = event => {
         event.preventDefault();
         const signUpDetail = { ...this.state };
-        axios.post('register', signUpDetail).then(res => {
+        axios.post('/api/auth/register', signUpDetail).then(res => {
             alert('Sign Up Success');
             this.props.history.push('/login');
         });
@@ -33,8 +33,8 @@ class SignUp extends React.Component {
     };
 
     state = {
-        first_name: '',
-        family_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         password2: ''
@@ -51,8 +51,8 @@ class SignUp extends React.Component {
                         <div className="control">
                             <input className="input" type="text"
                                 placeholder="Enter Your First Name"
-                                value={this.state.first_name}
-                                name='first_name'
+                                value={this.state.firstName}
+                                name='firstName'
                                 onChange={this.handleInput} />
                         </div>
                     </div>
@@ -62,8 +62,8 @@ class SignUp extends React.Component {
                         <div className="control">
                             <input className="input" type="text"
                                 placeholder="Enter Your Last Name"
-                                value={this.state.family_name}
-                                name='family_name'
+                                value={this.state.lastName}
+                                name='lastName'
                                 onChange={this.handleInput} />
                         </div>
                     </div>
