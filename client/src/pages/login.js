@@ -1,82 +1,73 @@
 import React from "react";
-
-//React.fragement 可用于两个并列的component 
-/**
- * 1.命名和绑定
- * events
- * this
- * 传递参数
- */
+import axios from 'axios';
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 
-class Login extends React.Component {
-
-    /*合成事件对象*/
-    handleLogin = event => {
-        event.preventDefault(); //阻止默认行为
-        //处理登录逻辑
-        if (!this.state.email) {
-            alert("Please enter Email")
+export default function Login(props){
+    const {register, handleSubmit, errors} = useForm();
+    
+    const handleLogin = async data => {
+        try{
+            toast.success('Login Success');
+            const {email, password} = data;
+            const res = await axios.post('/home/login',{email, password});
+            const token = res.data;
+            global.auth.setUserToken(token);
+            toast.success('Login Success');
+            props.history.push('/');
+        }catch(error){
+            const errorMessage = error.response.data.message;
+            toast.error(errorMessage);
         }
-        else if (!this.state.password) {
-            alert("Please enter Password")
-        }
-        //跳转首页
-        else this.props.history.push('/');
+
     };
-    handleBack = event => {
-        this.props.history.push('/');
-    };
-    state = {
-        email: '',
-        password: ''
+    const handleBack = () => {
+        props.history.push('/');
     };
 
-    handleInput = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-        console.log(this.state);
-    };
-
-    render() {
-        return (
-            <div className="login">
-                <form className="box login_box" onSubmit={this.handleLogin}>
-                    <label className="label"><center><strong><font size="50px">LOGIN</font></strong></center></label>
-                    <div className="field">
-                        <label className="label">Email</label>
-                        <div className="control ">
-                            <input className="input" type="email"
-                                placeholder="Email"
-                                value={this.state.email}
-                                name='email'
-                                onChange={this.handleInput} />
-                        </div>
+    return (
+        <div className="login">
+            <form className="box login_box" onSubmit={handleSubmit(handleLogin)}>
+                <label className="label"><center><strong><font size="50px">LOGIN</font></strong></center></label>
+                <div className="field">
+                    <label className="label">Email</label>
+                    <div className="control ">
+                        <input className={`input ${errors.email && 'is-danger'}`} 
+                            type="email"
+                            placeholder="Email"
+                            name='email'  
+                            ref={register({required:true})}/>
+                    {
+                    errors.email && (<p className="helper has-text-danger">Email is required.</p>)
+                    }
                     </div>
-                    <div className="field">
-                        <label className="label">Password</label>
-                        <div className="control">
-                            <input className="input" type="password"
-                                placeholder="Password"
-                                value={this.state.password}
-                                name='password'
-                                onChange={this.handleInput} />
-                        </div>
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <button className="button is-dark">Login</button>
-                        </div>
-                        <div className="control">
-                            <button className="button is-light" onClick={this.handleBack}>Back</button>
-                        </div>
-                    </div>
+                </div>
 
-                </form>
-            </div>
-        );
-    }
-}
+                <div className="field">
+                    <label className="label">Password</label>
+                    <div className="control">
+                        <input className={`input ${errors.password && 'is-danger'}`} 
+                            type="password"
+                            placeholder="Password"
+                            name='password' 
+                            ref={register({required:true})}/>
+                    {
+                    errors.password && (<p className="helper has-text-danger">Password is required.</p>)
+                    }
+                    </div>
+                </div>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <button className="button is-dark">Login</button>
+                    </div>
+                    <div className="control">
+                        <button className="button is-light" onClick={handleBack}>Back</button>
+                    </div>
+                </div>
 
-export default Login;
+            </form>
+        </div>
+    );
+ }
+
