@@ -4,11 +4,19 @@ Bounty Programmers Repository.
 To run locally
 ### `npm install`
 
+Install neccessary modules for server.
+
 ### `cd client`
+
+Navigate to client folder.
 
 ### `npm install`
 
-### delete everything except: /src, /public, /node_modules, .gitignore, package.json, package-lock.json, README.md, yarn.lock
+Install neccessary modules for client/react.
+
+### `cd ..`
+
+Navigate back one level.
 
 ### `npm run dev`
 
