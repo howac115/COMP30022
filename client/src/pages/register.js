@@ -19,7 +19,8 @@ export default function SignUp(props){
             toast.success('Sign Up Success');
             props.history.push('/login');
         }catch(error){
-            console.log(error);
+            const errorMessage = error.response.data.error;
+            toast.error(errorMessage);
         }
     };
 

@@ -9,7 +9,6 @@ export default function Login(props){
     
     const handleLogin = async data => {
         try{
-            toast.success('Login Success');
             const {email, password} = data;
             const res = await axios.post('/api/auth/login',{email, password});
             const token = res.data;
