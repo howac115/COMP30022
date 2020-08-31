@@ -17,7 +17,7 @@ export default function Login(props){
             toast.success('Login Success');
             props.history.push('/');
         }catch(error){
-            const errorMessage = error.response.data.message;
+            const errorMessage = error.response.data.error;
             toast.error(errorMessage);
         }
 
