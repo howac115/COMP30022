@@ -21,4 +21,15 @@ const isLogin = () =>{
     return !!token;
 };
 
-global.auth = {setUserToken, getUser};
+const logout =() => {
+    localStorage.removeItem(UserToken);
+}
+
+/* const logout = () =>{
+*   global.auth.logout();
+*   props.close('logout');
+*   props.history.push('/');
+*}
+*
+*/
+global.auth = {setUserToken, getUser, logout};

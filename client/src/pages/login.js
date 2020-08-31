@@ -37,10 +37,9 @@ export default function Login(props){
                             type="email"
                             placeholder="Email"
                             name='email'  
-                            ref={register({required:true})}/>
-                    {
-                    errors.email && (<p className="helper has-text-danger">Email is required.</p>)
-                    }
+                            ref={register({required:true})}
+                        />
+                        {errors.email && <p className="helper has-text-danger">Email is required.</p> }
                     </div>
                 </div>
 
@@ -51,10 +50,9 @@ export default function Login(props){
                             type="password"
                             placeholder="Password"
                             name='password' 
-                            ref={register({required:true})}/>
-                    {
-                    errors.password && (<p className="helper has-text-danger">Password is required.</p>)
-                    }
+                            ref={register({required:true})}
+                        />
+                        {errors.password && <p className="helper has-text-danger">Password is required.</p>}
                     </div>
                 </div>
                 <div className="field is-grouped">
@@ -69,5 +67,5 @@ export default function Login(props){
             </form>
         </div>
     );
- }
+}
 

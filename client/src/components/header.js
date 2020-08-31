@@ -11,13 +11,13 @@ class Header extends React.Component{
     // };
      
     renderUsernameLink(){
-        const username = this.props.username;
+        const username = this.props.user; //this.props.user.username;
         if (username){
             return (
-                <button className="button is-light" onClick={this.toProfile}>
+                <button className="button is-light" >
                     <span className='username'>
                         <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
-                        {this.props.username}
+                        {username}
                     </span>
                 </button>
             );
