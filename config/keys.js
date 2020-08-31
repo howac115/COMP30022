@@ -1,5 +1,3 @@
-dbPassword = 'mongodb+srv://haoqic:1234@incubeta-wowel.mongodb.net/INFO30005?retryWrites=true&w=majority';
-
 module.exports = {
-    mongoURI: dbPassword
-};
+    mongoURL: 'mongodb+srv://yutao:brysjhhrhlyqqlmgsycl@bountyprogrammers.iu0xm.mongodb.net/BountyProgrammers?retryWrites=true&w=majority'
+}
