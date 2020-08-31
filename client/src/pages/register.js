@@ -96,7 +96,7 @@ export default function SignUp(props){
                                   value === password.current
                               })}
                         />
-                        {errors.password2 && <p className="helper has-text-danger">Not same as before.</p>)}  
+                        {errors.password2 && <p className="helper has-text-danger">Not same as before.</p>}  
                     </div>
                 </div>
 
