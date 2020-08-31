@@ -1,22 +1,23 @@
 import React from 'react'
-import UserProfile from './userProfile.js'
-import Panel from './panel.js';
+//import UserProfile from './userProfile.js'
+//import Panel from './panel.js';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component{
-    toProfile =() =>{
-        Panel.open({
-            component: UserProfile
-        })
-    };
+    // toProfile =() =>{
+    //     Panel.open({
+    //         component: UserProfile
+    //     })
+    // };
      
     renderUsernameLink(){
-        const username = this.props.username;
+        const username = this.props.user; //this.props.user.username;
         if (username){
             return (
-                <button className="button is-light" onClick={this.toProfile}>
+                <button className="button is-light" >
                     <span className='username'>
                         <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
-                        {this.props.username}
+                        {username}
                     </span>
                 </button>
             );
@@ -24,10 +25,10 @@ class Header extends React.Component{
         else{
             return(
                 <React.Fragment>
-                    <a className="button is-dark" href="/register">
+                    <Link className="button is-dark" to="/register">
                         <strong>Sign up</strong>
-                    </a>
-                    <a className="button is-light" href="/login">Log in</a>
+                    </Link>
+                    <Link className="button is-light" to="/login">Log in</Link>
                 </React.Fragment>
             );
         }
@@ -38,27 +39,27 @@ class Header extends React.Component{
             <div className='homeHeader'>
                 <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
-                        <a className="navbar-item" href="/">
+                        <Link className="navbar-item" to="/">
                             <div className='logo-text'>EXPORTFOLIO</div>
-                        </a>
-                        <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" href="/">
+                        </Link>
+                        <Link role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" to="/">
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
-                        </a>
+                        </Link>
                     </div>
 
                     <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-start">
-                            <a className="navbar-item" href="/">Home</a>
-                            <a className="navbar-item" href="/">Template</a>
+                            <Link className="navbar-item" to="/">Home</Link>
+                            <Link className="navbar-item" to="/">Template</Link>
                             <div className="navbar-item has-dropdown is-hoverable">
-                                <a className="navbar-link" href="/">More</a>
+                                <Link className="navbar-link" to="/">More</Link>
                                 <div className="navbar-dropdown">
-                                    <a className="navbar-item" href="/">About</a>
-                                    <a className="navbar-item" href="/"> Contact</a>
+                                    <Link className="navbar-item" to="/">About</Link>
+                                    <Link className="navbar-item" to="/"> Contact</Link>
                                     <hr className="navbar-divider"/>
-                                    <a className="navbar-item" href="/">Report an issue</a>
+                                    <Link className="navbar-item" to="/">Report an issue</Link>
                                 </div>
                             </div>
                         </div>
