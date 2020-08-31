@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 
+<<<<<<< HEAD
 export default function SignUp(props){
     const {register, handleSubmit, errors, watch} = useForm();
     const password = useRef({});
@@ -20,6 +21,24 @@ export default function SignUp(props){
             props.history.push('/login');
         }catch(error){
             console.log(error);
+=======
+export default function SignUp(props) {
+    const { register, handleSubmit, errors, watch } = useForm();
+    const password = useRef({});
+    password.current = watch("password", "");
+
+    const handleSignUp = async data => {
+        try {
+            const { firstName, lastName, email, password, password2 } = data;
+            const res = await axios.post('/api/auth/register', { firstName, lastName, email, password, password2 });
+            const token = res.data;
+            global.auth.setUserToken(token);
+            toast.success('Sign Up Success');
+            props.history.push('/login');
+        } catch (error) {
+            const errorMessage = error.response.data.error;
+            toast.error(errorMessage);
+>>>>>>> master
         }
     };
 
@@ -39,15 +58,22 @@ export default function SignUp(props){
                             type="text"
                             placeholder="Enter Your First Name"
                             name='firstName'
+<<<<<<< HEAD
                             ref={register({required:true})}
                         />
                         {errors.firstName && <p className="helper has-text-danger">First Name is required.</p>}    
+=======
+                            ref={register({ required: true })}
+                        />
+                        {errors.firstName && <p className="helper has-text-danger">First Name is required.</p>}
+>>>>>>> master
                     </div>
                 </div>
 
                 <div className="field">
                     <label className="label">Last Name</label>
                     <div className="control">
+<<<<<<< HEAD
                         <input className={`input ${errors.lastName && 'is-danger'}`} 
                             type="text"
                             placeholder="Enter Your Last Name"
@@ -55,6 +81,15 @@ export default function SignUp(props){
                             ref={register({required:true})}
                         />
                         {errors.lastName && <p className="helper has-text-danger">Last Name is required.</p>}  
+=======
+                        <input className={`input ${errors.lastName && 'is-danger'}`}
+                            type="text"
+                            placeholder="Enter Your Last Name"
+                            name='lastName'
+                            ref={register({ required: true })}
+                        />
+                        {errors.lastName && <p className="helper has-text-danger">Last Name is required.</p>}
+>>>>>>> master
                     </div>
                 </div>
 
@@ -65,9 +100,15 @@ export default function SignUp(props){
                             type="email"
                             placeholder="123@abc.com"
                             name='email'
+<<<<<<< HEAD
                             ref={register({required:true})}
                         />
                         {errors.email && <p className="helper has-text-danger">Email is required.</p>}                          
+=======
+                            ref={register({ required: true })}
+                        />
+                        {errors.email && <p className="helper has-text-danger">Email is required.</p>}
+>>>>>>> master
                     </div>
                 </div>
 
@@ -78,9 +119,15 @@ export default function SignUp(props){
                             type="password"
                             placeholder="Enter your password"
                             name='password'
+<<<<<<< HEAD
                             ref={register({required:true})} 
                         />
                         {errors.password && <p className="helper has-text-danger">Password is required.</p>}  
+=======
+                            ref={register({ required: true })}
+                        />
+                        {errors.password && <p className="helper has-text-danger">Password is required.</p>}
+>>>>>>> master
                     </div>
                 </div>
 
@@ -93,6 +140,7 @@ export default function SignUp(props){
                             name='password2'
                             ref={register({
                                 validate: value =>
+<<<<<<< HEAD
                                   value === password.current
                               })}
                         />
@@ -116,6 +164,31 @@ export default function SignUp(props){
 
                 <div className="field is-grouped">
 
+=======
+                                    value === password.current
+                            })}
+                        />
+                        {errors.password2 && <p className="helper has-text-danger">Not same as before.</p>}
+                    </div>
+                </div>
+
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox"
+                                name="checkbox"
+                                ref={register({ required: true })}
+                                value={true}
+                            /> &nbsp;
+                            I agree to the <a href="https://www.google.com">terms and conditions</a>
+                        </label>
+                        {errors.checkbox && <p className="helper has-text-danger">Please agree the terms and conditions</p>}
+                    </div>
+                </div>
+
+                <div className="field is-grouped">
+
+>>>>>>> master
                     <div className="control">
                         <button className="button is-dark">Sign Up</button>
                     </div>
@@ -129,6 +202,14 @@ export default function SignUp(props){
         </div>
     );
 
+<<<<<<< HEAD
+=======
+                </div>
+            </form>
+        </div>
+    );
+
+>>>>>>> master
 }
 
 
