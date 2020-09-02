@@ -23,8 +23,9 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "react-toastify": "^6.0.8",
+    "session": "^0.1.0",
+    "use-react-router": "^1.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
