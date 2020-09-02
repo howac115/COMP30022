@@ -9,17 +9,26 @@ class Header extends React.Component{
     //         component: UserProfile
     //     })
     // };
+    logout = () =>{
+        global.auth.logout();   
+        this.props.close('logout');
+        this.props.history.push('/');
+    };
      
     renderUsernameLink(){
         const username = this.props.user; //this.props.user.username;
         if (username){
             return (
-                <button className="button is-light" >
-                    <span className='username'>
-                        <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
-                        {username}
-                    </span>
-                </button>
+                <React.Fragment>
+                    <button className="button is-light" >
+                        <span className='username'>
+                            <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
+                            {username}    
+                        </span>
+                    </button>
+                    <button className="button is-dark" onClick={this.logout}>Logout</button>
+                </React.Fragment>
+
             );
         }
         else{

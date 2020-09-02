@@ -13,9 +13,7 @@ export default function SignUp(props){
         try{
             console.log("here");
             const {firstName, lastName,email, password, password2} = data;
-            const res = await axios.post('/api/auth/register',{firstName, lastName, email, password, password2});
-            //const token = res.data;
-            //global.auth.setUserToken(token);
+            await axios.post('/api/auth/register',{firstName, lastName, email, password, password2});
             toast.success('Sign Up Success');
             props.history.push('/login');
         }catch(error){

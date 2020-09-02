@@ -3,12 +3,13 @@ import Header from './components/header.js';
 
 const Layout = props => {
     const user  = useMemo(()=> {
-        return (global.auth.getUser() || {});
+        const user  = global.auth.getUser() || {};
+        return user ;
     },[]);
     
     return(
         <div className="main">
-            <Header user=''/>
+            <Header user={user}/>
         </div>
     );
 };
