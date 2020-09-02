@@ -10,13 +10,16 @@ const app = express();
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
-// Database Config
+
+
+// Database config
 const db = require('./config/keys').mongoURL;
 
 // Connect to MongoDB
 mongoose.connect(db)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
+
 
 // Use Routes
 app.use('/api/auth', auth);

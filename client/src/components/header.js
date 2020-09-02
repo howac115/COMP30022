@@ -1,7 +1,7 @@
 import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class Header extends React.Component{
     // toProfile =() =>{
@@ -10,13 +10,13 @@ class Header extends React.Component{
     //     })
     // };
     logout = () =>{
-        global.auth.logout();   
-        this.props.close('logout');
+        global.auth.logout();
         this.props.history.push('/');
+        this.props.history.go();
     };
-     
+
     renderUsernameLink(){
-        const username = this.props.user; //this.props.user.username;
+        const username = this.props.user.id; //this.props.user.username;
         if (username){
             return (
                 <React.Fragment>
@@ -87,4 +87,4 @@ class Header extends React.Component{
     }
 }
 
-export default Header;
+export default withRouter(Header);
