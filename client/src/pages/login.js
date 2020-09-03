@@ -10,10 +10,13 @@ export default function Login(props){
     const handleLogin = async data => {
         try{
             const {email, password} = data;
-            const res = await axios.post('/api/auth/login',{email, password});
+            const res = await axios.post('/auth/login',{email, password});
             const token = res.data.token;
             global.auth.setUserToken(token);
-            toast.success('Login Success');
+            const _res = await axios.get('/user/' + global.auth.getUser().id);
+            const userName = _res.data.firstName;
+            global.auth.setUserName(userName);
+            toast.success('Welcome '+ userName);
             props.history.push('/');
         }catch(error){
             const errorMessage = error.response.data.error;

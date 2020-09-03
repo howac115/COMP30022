@@ -91,8 +91,3 @@ exports.register_post = function (req, res) {
     }
   });
 };
-
-// GET request to handle logout redirects to login page
-exports.logout_get = function (req, res, next) {
-  req.logout();
-};

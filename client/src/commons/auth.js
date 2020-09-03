@@ -1,9 +1,17 @@
 import decode from 'jwt-decode';
 
 const JWT = "user_token_id";
+const Name = "user_name";
 
 const setUserToken = token =>{
     localStorage.setItem(JWT, token);
+};
+
+const setUserName = userName =>{
+    localStorage.setItem(Name, userName);
+};
+const getUserName = () =>{
+    return localStorage.getItem(Name);
 };
 
 const getUserToken = () =>{
@@ -12,7 +20,6 @@ const getUserToken = () =>{
 //decode here
 const getUser = () => {
     const userToken = getUserToken();
-    console.log(userToken);
     if (isLogin()){
         const user = decode(userToken);
         return user;
@@ -21,6 +28,7 @@ const getUser = () => {
         return null;
     } 
 };
+
 const isLogin = () => {
     const token = getUserToken();
     return !!token;
@@ -29,7 +37,7 @@ const isLogin = () => {
 const isTokenExpried = token =>{
     try{
         const info = decode(token);
-        if(info.exp < Date.now /1000){
+        if(info.exp < Date.now){
             return true;
         }else return false;
     }catch(error){
@@ -39,6 +47,7 @@ const isTokenExpried = token =>{
 
 const logout =() => {
     localStorage.removeItem(JWT);
+    localStorage.removeItem(Name);
 }
 
 // const logout = () =>{
@@ -47,4 +56,4 @@ const logout =() => {
 //     props.history.push('/');
 // }
 
-global.auth = {setUserToken, getUser, logout};
+global.auth = {setUserToken, getUser, logout, setUserName, getUserName};
