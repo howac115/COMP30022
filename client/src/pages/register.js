@@ -4,20 +4,19 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 
-export default function SignUp(props) {
-    const { register, handleSubmit, errors, watch } = useForm();
+export default function SignUp(props){
+    const {register, handleSubmit, errors, watch} = useForm();
     const password = useRef({});
-    password.current = watch("password", "");
+    password.current = watch("password","");
 
     const handleSignUp = async data => {
-        try {
-            const { firstName, lastName, email, password, password2 } = data;
-            const res = await axios.post('/api/auth/register', { firstName, lastName, email, password, password2 });
-            const token = res.data;
-            global.auth.setUserToken(token);
+        try{
+            console.log("here");
+            const {firstName, lastName,email, password, password2} = data;
+            await axios.post('/auth/register',{firstName, lastName, email, password, password2});
             toast.success('Sign Up Success');
             props.history.push('/login');
-        } catch (error) {
+        }catch(error){
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
         }
@@ -39,7 +38,7 @@ export default function SignUp(props) {
                             type="text"
                             placeholder="Enter Your First Name"
                             name='firstName'
-                            ref={register({ required: true })}
+                            ref={register({required:true})}
                         />
                         {errors.firstName && <p className="helper has-text-danger">First Name is required.</p>}
                     </div>
@@ -52,7 +51,7 @@ export default function SignUp(props) {
                             type="text"
                             placeholder="Enter Your Last Name"
                             name='lastName'
-                            ref={register({ required: true })}
+                            ref={register({required:true})}
                         />
                         {errors.lastName && <p className="helper has-text-danger">Last Name is required.</p>}
                     </div>
@@ -65,7 +64,7 @@ export default function SignUp(props) {
                             type="email"
                             placeholder="123@abc.com"
                             name='email'
-                            ref={register({ required: true })}
+                            ref={register({required:true})}
                         />
                         {errors.email && <p className="helper has-text-danger">Email is required.</p>}
                     </div>
@@ -78,7 +77,7 @@ export default function SignUp(props) {
                             type="password"
                             placeholder="Enter your password"
                             name='password'
-                            ref={register({ required: true })}
+                            ref={register({required:true})}
                         />
                         {errors.password && <p className="helper has-text-danger">Password is required.</p>}
                     </div>
@@ -93,8 +92,8 @@ export default function SignUp(props) {
                             name='password2'
                             ref={register({
                                 validate: value =>
-                                    value === password.current
-                            })}
+                                  value === password.current
+                              })}
                         />
                         {errors.password2 && <p className="helper has-text-danger">Not same as before.</p>}
                     </div>
@@ -105,12 +104,12 @@ export default function SignUp(props) {
                         <label className="checkbox">
                             <input type="checkbox"
                                 name="checkbox"
-                                ref={register({ required: true })}
+                                ref={register({required:true})}
                                 value={true}
                             /> &nbsp;
                             I agree to the <a href="https://www.google.com">terms and conditions</a>
                         </label>
-                        {errors.checkbox && <p className="helper has-text-danger">Please agree the terms and conditions</p>}
+                    {errors.checkbox && <p className="helper has-text-danger">Please agree the terms and conditions</p> }
                     </div>
                 </div>
 
@@ -123,12 +122,10 @@ export default function SignUp(props) {
                     <div className="control">
                         <button className="button is-light" onClick={handleCancel}>Cancel</button>
                     </div>
-
+            
                 </div>
             </form>
         </div>
     );
 
 }
-
-

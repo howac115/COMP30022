@@ -1,0 +1,11 @@
+heading1 {
+    align-content: center;
+    margin: 30px 60px;
+    font-family: "Source Sans Pro", "Arial", sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    letter-spacing: 0.2rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+  }

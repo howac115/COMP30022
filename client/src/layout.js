@@ -3,12 +3,15 @@ import Header from './components/header.js';
 
 const Layout = props => {
     const user  = useMemo(()=> {
-        return (global.auth.getUser() || {});
+        if (global.auth.getUser()){
+            return  {id: global.auth.getUserName()};
+        }
+        return {};
     },[]);
-    
+
     return(
         <div className="main">
-            <Header user=''/>
+            <Header user={user}/>
         </div>
     );
 };

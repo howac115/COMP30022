@@ -1,5 +1,6 @@
-var bcrypt = require("bcryptjs");
-var passport = require("passport");
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 /* Load user model */
 var User = require("../models/user");
@@ -20,7 +21,24 @@ exports.login_post = function (req, res) {
     // Match password
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (isMatch) {
-        res.status(200).json(user)
+        jwt.sign(
+          { id: user.id },
+          config.get('jwtSecret'),
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              token,
+              user: {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+              }
+            })
+          }
+        )
+        // res.status(200).json(user)
       } else {
         res.status(409).json({ error: 'Password incorrect' })
       }
@@ -47,15 +65,29 @@ exports.register_post = function (req, res) {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser.save().then(user => res.status(200).json(user))
-            .catch((err) => console.log(err));
+          newUser.save().then(user => {
+
+            jwt.sign(
+              { id: user.id },
+              config.get('jwtSecret'),
+              { expiresIn: 3600 },
+              (err, token) => {
+                if (err) throw err;
+                res.json({
+                  token,
+                  user: {
+                    id: user.id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email
+                  }
+                })
+              }
+            )
+          }
+          );
         });
       });
     }
   });
-};
-
-// GET request to handle logout redirects to login page
-exports.logout_get = function (req, res, next) {
-  req.logout();
 };

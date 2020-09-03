@@ -1,29 +1,42 @@
 import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-class Header extends React.Component{
+class Header extends React.Component {
     // toProfile =() =>{
     //     Panel.open({
     //         component: UserProfile
     //     })
     // };
-     
-    renderUsernameLink(){
-        const username = this.props.user; //this.props.user.username;
-        if (username){
+    logout = () => {
+        global.auth.logout();
+        this.props.history.push('/');
+        this.props.history.go();
+    };
+
+    toHome = () => {
+        const loggedUserId = global.auth.getUserId().id;
+        this.props.history.push('/' + loggedUserId);
+    };
+    renderUsernameLink() {
+        const username = this.props.user.id; //this.props.user.username;
+        if (username) {
             return (
-                <button className="button is-light" >
-                    <span className='username'>
-                        <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
-                        {username}
-                    </span>
-                </button>
+                <React.Fragment>
+                    <button className="button is-light" onClick={this.toHome} >
+                        <span className='username'>
+                            <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
+                            {username}
+                        </span>
+                    </button>
+                    <button className="button is-dark" onClick={this.logout}>Logout</button>
+                </React.Fragment>
+
             );
         }
-        else{
-            return(
+        else {
+            return (
                 <React.Fragment>
                     <Link className="button is-dark" to="/register">
                         <strong>Sign up</strong>
@@ -33,9 +46,21 @@ class Header extends React.Component{
             );
         }
     }
-    
-    render(){
-        return(
+
+    renderEdit() {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/edit") {
+            const loggedUserId = global.auth.getUserId().id;
+            const editLink = "/" + loggedUserId + "/edit"
+            if (loggedUserId === this.props.match.params.id) {
+                return (
+                    <Link className="navbar-item" to={editLink}>Edit</Link>
+                );
+            }
+        }
+    }
+
+    render() {
+        return (
             <div className='homeHeader'>
                 <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
@@ -43,9 +68,7 @@ class Header extends React.Component{
                             <div className='logo-text'>EXPORTFOLIO</div>
                         </Link>
                         <Link role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" to="/">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
+
                         </Link>
                     </div>
 
@@ -58,10 +81,11 @@ class Header extends React.Component{
                                 <div className="navbar-dropdown">
                                     <Link className="navbar-item" to="/">About</Link>
                                     <Link className="navbar-item" to="/"> Contact</Link>
-                                    <hr className="navbar-divider"/>
+                                    <hr className="navbar-divider" />
                                     <Link className="navbar-item" to="/">Report an issue</Link>
                                 </div>
                             </div>
+                            {this.renderEdit()}
                         </div>
 
                         <div className="navbar-end">
@@ -78,4 +102,4 @@ class Header extends React.Component{
     }
 }
 
-export default Header;
+export default withRouter(Header);

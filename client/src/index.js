@@ -10,8 +10,8 @@ import "./commons/auth.js";
 ReactDOM.render(
 <div>
     <ToastContainer
-    position="top-center"
-    autoClose={1500}
+    position="top-right"
+    autoClose={3000}
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick
@@ -21,5 +21,5 @@ ReactDOM.render(
     pauseOnHover
     />
     <Router />
-</div>, 
+</div>,
 document.getElementById('root'));
