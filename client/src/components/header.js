@@ -2,6 +2,7 @@ import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
+import Edit from '../pages/edit';
 
 class Header extends React.Component {
     // toProfile =() =>{
@@ -43,6 +44,18 @@ class Header extends React.Component {
         }
     }
 
+    renderEdit() {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") != "/edit") {
+            const loggedUserId = global.auth.getUserId().id;
+            const editLink = "/" + loggedUserId + "/edit"
+            if (loggedUserId == this.props.match.params.id) {
+                return (
+                    <Link className="navbar-item" to={editLink}>Edit</Link>
+                );
+            }
+        }
+    }
+
     render() {
         return (
             <div className='homeHeader'>
@@ -71,6 +84,7 @@ class Header extends React.Component {
                                     <Link className="navbar-item" to="/">Report an issue</Link>
                                 </div>
                             </div>
+                            {this.renderEdit()}
                         </div>
 
                         <div className="navbar-end">

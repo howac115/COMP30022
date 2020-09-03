@@ -1,22 +1,38 @@
 import decode from 'jwt-decode';
-import axios from 'axios';
 
 const JWT = "user_token_id";
+const Name = "user_name";
 
 const setUserToken = token => {
     localStorage.setItem(JWT, token);
 };
+
+const setUserName = userName => {
+    localStorage.setItem(Name, userName);
+};
+const getUserName = () => {
+    return localStorage.getItem(Name);
+};
+
+const getUserId = () => {
+    return decode(getUserToken());
+}
 
 const getUserToken = () => {
     return localStorage.getItem(JWT);
 };
 //decode here
 const getUser = () => {
-    const user = decode(getUserToken());
-    return axios
-        .get('/user/' + user.id)
-        .then(res => { console.log(res.data); return res.data })
+    const userToken = getUserToken();
+    if (isLogin()) {
+        const user = decode(userToken);
+        return user;
+    }
+    else {
+        return null;
+    }
 };
+
 const isLogin = () => {
     const token = getUserToken();
     return !!token;
@@ -25,7 +41,7 @@ const isLogin = () => {
 const isTokenExpried = token => {
     try {
         const info = decode(token);
-        if (info.exp < Date.now / 1000) {
+        if (info.exp < Date.now) {
             return true;
         } else return false;
     } catch (error) {
@@ -35,6 +51,7 @@ const isTokenExpried = token => {
 
 const logout = () => {
     localStorage.removeItem(JWT);
+    localStorage.removeItem(Name);
 }
 
 // const logout = () =>{
@@ -43,4 +60,4 @@ const logout = () => {
 //     props.history.push('/');
 // }
 
-global.auth = { setUserToken, getUser, logout };
+global.auth = { setUserToken, getUser, logout, setUserName, getUserName, getUserId };

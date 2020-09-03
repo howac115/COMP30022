@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-
 export default function Login(props) {
     const { register, handleSubmit, errors } = useForm();
 
@@ -13,14 +12,17 @@ export default function Login(props) {
             const res = await axios.post('/auth/login', { email, password });
             const token = res.data.token;
             global.auth.setUserToken(token);
-            toast.success('Hello');
-            props.history.push('/');
+            const _res = await axios.get('/user/' + global.auth.getUser().id);
+            const userName = _res.data.firstName;
+            global.auth.setUserName(userName);
+            toast.success('Welcome ' + userName);
+            props.history.push('/' + res.data.user.id);
         } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
         }
-    };
 
+    };
     const handleBack = () => {
         console.log(props);
         props.history.push('/');
