@@ -15,7 +15,7 @@ class Header extends React.Component {
         this.props.history.push('/');
         this.props.history.go();
     };
-    
+
     toHome = () => {
         const loggedUserId = global.auth.getUserId().id;
         this.props.history.push('/'+loggedUserId);
@@ -62,43 +62,30 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div className='homeHeader'>
-                <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-                    <div className="navbar-brand">
-                        <Link className="navbar-item" to="/">
-                            <div className='logo-text'>EXPORTFOLIO</div>
-                        </Link>
-                        <Link role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" to="/">
+            <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                    <Link className="navbar-item" to="/">
+                        <div className='logo-text'>EXPORTFOLIO</div>
+                    </Link>
+                </div>
 
-                        </Link>
+                <div className="navbar-menu">
+                    <div className="navbar-start">
+                        <Link className="navbar-item" to="/">Home</Link>
+                        <Link className="navbar-item" to="/">Template</Link>
+                        {this.renderEdit()}
                     </div>
-
-                    <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-start">
-                            <Link className="navbar-item" to="/">Home</Link>
-                            <Link className="navbar-item" to="/">Template</Link>
-                            <div className="navbar-item has-dropdown is-hoverable">
-                                <Link className="navbar-link" to="/">More</Link>
-                                <div className="navbar-dropdown">
-                                    <Link className="navbar-item" to="/">About</Link>
-                                    <Link className="navbar-item" to="/"> Contact</Link>
-                                    <hr className="navbar-divider" />
-                                    <Link className="navbar-item" to="/">Report an issue</Link>
-                                </div>
-                            </div>
-                            {this.renderEdit()}
-                        </div>
-
-                        <div className="navbar-end">
-                            <div className="navbar-item">
-                                <div className="buttons">
-                                    {this.renderUsernameLink()}
-                                </div>
+                </div>
+                <div className="navbar-menu is-active">
+                    <div className="navbar-end">
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                {this.renderUsernameLink()}
                             </div>
                         </div>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         );
     }
 }
