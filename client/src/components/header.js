@@ -2,7 +2,6 @@ import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
-import Edit from '../pages/edit';
 
 class Header extends React.Component {
     // toProfile =() =>{
@@ -16,12 +15,16 @@ class Header extends React.Component {
         this.props.history.go();
     };
 
+    toHome = () => {
+        const loggedUserId = global.auth.getUserId().id;
+        this.props.history.push('/' + loggedUserId);
+    };
     renderUsernameLink() {
         const username = this.props.user.id; //this.props.user.username;
         if (username) {
             return (
                 <React.Fragment>
-                    <button className="button is-light" >
+                    <button className="button is-light" onClick={this.toHome} >
                         <span className='username'>
                             <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
                             {username}
@@ -45,10 +48,10 @@ class Header extends React.Component {
     }
 
     renderEdit() {
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") != "/edit") {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/edit") {
             const loggedUserId = global.auth.getUserId().id;
             const editLink = "/" + loggedUserId + "/edit"
-            if (loggedUserId == this.props.match.params.id) {
+            if (loggedUserId === this.props.match.params.id) {
                 return (
                     <Link className="navbar-item" to={editLink}>Edit</Link>
                 );
@@ -65,9 +68,7 @@ class Header extends React.Component {
                             <div className='logo-text'>EXPORTFOLIO</div>
                         </Link>
                         <Link role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" to="/">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
+
                         </Link>
                     </div>
 

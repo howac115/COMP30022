@@ -8,6 +8,7 @@ class Edit extends React.Component {
         return (
             <div className='Edit'>
                 <Layout />
+                <h1>You are in edit mode</h1>
             </div>
         );
     }
