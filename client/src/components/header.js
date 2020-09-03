@@ -13,7 +13,7 @@ class Header extends React.Component {
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
-        this.props.history.go();
+        toast.success("You have successfully log out")
     };
 
     toHome = () => {
