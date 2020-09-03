@@ -22,5 +22,5 @@ ReactDOM.render(
     pauseOnHover
     />
     <Router />
-</div>, 
+</div>,
 document.getElementById('root'));
