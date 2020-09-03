@@ -2,15 +2,15 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Layout from '../layout.js';
 
-export default function App(props) {
+class App extends React.Component {
 
-    console.log(props);
-
-    console.log(global.auth.getUserToken);
-
+  render() {
     return (
-        <div className='App'>
-            <Layout />
-        </div>
+      <div className='App'>
+        <Layout/>
+      </div>
     );
+  }
 }
+
+export default App;

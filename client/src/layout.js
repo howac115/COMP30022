@@ -1,14 +1,16 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import Header from './components/header.js';
 
 const Layout = props => {
-    const user  = useMemo(()=> {
-        return (global.auth.getUser() || {});
-    },[]);
-    
-    return(
+    const user = useMemo(() => {
+        const user = global.auth.getUser() || {};
+        console.log(user)
+        return user;
+    }, []);
+
+    return (
         <div className="main">
-            <Header user=''/>
+            <Header user={user} />
         </div>
     );
 };

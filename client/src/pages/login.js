@@ -10,19 +10,19 @@ export default function Login(props) {
     const handleLogin = async data => {
         try {
             const { email, password } = data;
-            const res = await axios.post('/api/auth/login', { email, password });
-            console.log(res.data);
+            const res = await axios.post('/auth/login', { email, password });
             const token = res.data.token;
             global.auth.setUserToken(token);
-            toast.success('Login Success');
+            toast.success('Hello');
             props.history.push('/');
         } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
         }
-
     };
+
     const handleBack = () => {
+        console.log(props);
         props.history.push('/');
     };
 

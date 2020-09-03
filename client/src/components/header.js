@@ -1,22 +1,34 @@
 import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
-import { Link } from 'react-router-dom';
-import user from '../models/user';
+import { Link, withRouter } from 'react-router-dom';
 
 class Header extends React.Component {
+    // toProfile =() =>{
+    //     Panel.open({
+    //         component: UserProfile
+    //     })
+    // };
+    logout = () => {
+        global.auth.logout();
+        this.props.history.push('/');
+        this.props.history.go();
+    };
 
     renderUsernameLink() {
-        const user = global.auth.getUser(); //this.props.user.username;
-        if (user) {
+        const username = this.props.user.id; //this.props.user.username;
+        if (username) {
             return (
-                <button className="button is-light" >
-                    <span className='username'>
-                        <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
-                        {user.firstName}
-                    </span>
-                    <Link className="button is-light" to="/logout">Log out</Link>
-                </button>
+                <React.Fragment>
+                    <button className="button is-light" >
+                        <span className='username'>
+                            <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
+                            {username}
+                        </span>
+                    </button>
+                    <button className="button is-dark" onClick={this.logout}>Logout</button>
+                </React.Fragment>
+
             );
         }
         else {
@@ -75,4 +87,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);

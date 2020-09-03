@@ -1,18 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const passport = require('passport');
 const path = require('path');
 
-const auth = require('./routes/api/auth');
+const auth = require('./routes/auth');
+const user = require('./routes/user');
 
 const app = express();
 
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
-// Passport config
-require('./config/passport')(passport);
+
 
 // Database config
 const db = require('./config/keys').mongoURL;
@@ -24,7 +23,8 @@ mongoose.connect(db)
 
 
 // Use Routes
-app.use('/api/auth', auth);
+app.use('/auth', auth);
+app.use('/user', user);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

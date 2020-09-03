@@ -12,7 +12,6 @@ class Router extends React.Component {
                 <Switch>
                     <Route path='/' exact component={App}></Route>
                     <Route path='/login' component={Login}></Route>
-                    <Route path='/logout' component={Login}></Route>
                     <Route path='/register' component={Register}></Route>
                     <Route component={NotFound}></Route>
                 </Switch>
