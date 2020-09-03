@@ -3,22 +3,21 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
+export default function Login(props) {
+    const { register, handleSubmit, errors } = useForm();
 
-export default function Login(props){
-    const {register, handleSubmit, errors} = useForm();
-    
     const handleLogin = async data => {
-        try{
-            const {email, password} = data;
-            const res = await axios.post('/auth/login',{email, password});
+        try {
+            const { email, password } = data;
+            const res = await axios.post('/auth/login', { email, password });
             const token = res.data.token;
             global.auth.setUserToken(token);
             const _res = await axios.get('/user/' + global.auth.getUser().id);
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
-            toast.success('Welcome '+ userName);
-            props.history.push('/');
-        }catch(error){
+            toast.success('Welcome ' + userName);
+            props.history.push('/' + res.data.user.id);
+        } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
         }
@@ -36,24 +35,24 @@ export default function Login(props){
                 <div className="field">
                     <label className="label">Email</label>
                     <div className="control ">
-                        <input className={`input ${errors.email && 'is-danger'}`} 
+                        <input className={`input ${errors.email && 'is-danger'}`}
                             type="email"
                             placeholder="Email"
-                            name='email'  
-                            ref={register({required:true})}
+                            name='email'
+                            ref={register({ required: true })}
                         />
-                        {errors.email && <p className="helper has-text-danger">Email is required.</p> }
+                        {errors.email && <p className="helper has-text-danger">Email is required.</p>}
                     </div>
                 </div>
 
                 <div className="field">
                     <label className="label">Password</label>
                     <div className="control">
-                        <input className={`input ${errors.password && 'is-danger'}`} 
+                        <input className={`input ${errors.password && 'is-danger'}`}
                             type="password"
                             placeholder="Password"
-                            name='password' 
-                            ref={register({required:true})}
+                            name='password'
+                            ref={register({ required: true })}
                         />
                         {errors.password && <p className="helper has-text-danger">Password is required.</p>}
                     </div>

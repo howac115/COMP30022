@@ -3,30 +3,34 @@ import decode from 'jwt-decode';
 const JWT = "user_token_id";
 const Name = "user_name";
 
-const setUserToken = token =>{
+const setUserToken = token => {
     localStorage.setItem(JWT, token);
 };
 
-const setUserName = userName =>{
+const setUserName = userName => {
     localStorage.setItem(Name, userName);
 };
-const getUserName = () =>{
+const getUserName = () => {
     return localStorage.getItem(Name);
 };
 
-const getUserToken = () =>{
+const getUserId = () => {
+    return decode(getUserToken());
+}
+
+const getUserToken = () => {
     return localStorage.getItem(JWT);
 };
 //decode here
 const getUser = () => {
     const userToken = getUserToken();
-    if (isLogin()){
+    if (isLogin()) {
         const user = decode(userToken);
         return user;
     }
-    else{
+    else {
         return null;
-    } 
+    }
 };
 
 const isLogin = () => {
@@ -34,18 +38,18 @@ const isLogin = () => {
     return !!token;
 };
 
-const isTokenExpried = token =>{
-    try{
+const isTokenExpried = token => {
+    try {
         const info = decode(token);
-        if(info.exp < Date.now){
+        if (info.exp < Date.now) {
             return true;
-        }else return false;
-    }catch(error){
+        } else return false;
+    } catch (error) {
         return false;
     }
 }
 
-const logout =() => {
+const logout = () => {
     localStorage.removeItem(JWT);
     localStorage.removeItem(Name);
 }
@@ -56,4 +60,4 @@ const logout =() => {
 //     props.history.push('/');
 // }
 
-global.auth = {setUserToken, getUser, logout, setUserName, getUserName};
+global.auth = { setUserToken, getUser, logout, setUserName, getUserName, getUserId };
