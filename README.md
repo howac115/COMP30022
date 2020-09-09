@@ -1,7 +1,7 @@
 # COMP30022
 Instruction for testing portfolio template:
 
-1. For testing the template please download "temp1" not "tempHomepage", just ignore "tempHomepage".
+1. For testing the template please download "temp1" not "temp1Homepage", just ignore "tempHomepage".
 
 2. Please clone 'faker' into your file:
      npm install --save faker
