@@ -25,4 +25,4 @@ class Router extends React.Component {
     }
 }
 
-export default Router; 
+export default Router;

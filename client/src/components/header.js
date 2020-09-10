@@ -2,6 +2,7 @@ import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
+import { toast } from "react-toastify";
 import Edit from '../pages/edit';
 
 class Header extends React.Component {
@@ -13,12 +14,12 @@ class Header extends React.Component {
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
-        this.props.history.go();
+        toast.success("You have successfully log out")
     };
 
     toHome = () => {
         const loggedUserId = global.auth.getUserId().id;
-        this.props.history.push('/'+loggedUserId);
+        this.props.history.push('/' + loggedUserId);
     };
     renderUsernameLink() {
         const username = this.props.user.id; //this.props.user.username;

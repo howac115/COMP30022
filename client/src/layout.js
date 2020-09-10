@@ -8,7 +8,7 @@ const Layout = props => {
         }
         return {};
     },[]);
-    
+
     return(
         <div className="main">
             <Header user={user}/>
