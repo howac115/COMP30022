@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function Login(props) {
+
     const { register, handleSubmit, errors } = useForm();
 
     const handleLogin = async data => {
@@ -70,4 +71,3 @@ export default function Login(props) {
         </div>
     );
 }
-

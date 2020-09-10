@@ -38,16 +38,16 @@ const isLogin = () => {
     return !!token;
 };
 
-const isTokenExpried = token => {
-    try {
-        const info = decode(token);
-        if (info.exp < Date.now) {
-            return true;
-        } else return false;
-    } catch (error) {
-        return false;
-    }
-}
+// const isTokenExpried = token => {
+//     try {
+//         const info = decode(token);
+//         if (info.exp < Date.now) {
+//             return true;
+//         } else return false;
+//     } catch (error) {
+//         return false;
+//     }
+// }
 
 const logout = () => {
     localStorage.removeItem(JWT);

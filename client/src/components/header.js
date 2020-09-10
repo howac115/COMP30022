@@ -2,6 +2,7 @@ import React from 'react'
 //import UserProfile from './userProfile.js'
 //import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 class Header extends React.Component {
     // toProfile =() =>{
@@ -12,7 +13,7 @@ class Header extends React.Component {
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
-        this.props.history.go();
+        toast.success("You have successfully log out")
     };
 
     toHome = () => {
@@ -47,13 +48,15 @@ class Header extends React.Component {
         }
     }
 
-    renderEdit() {
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/edit") {
+    renderCreate() {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
             const loggedUserId = global.auth.getUserId().id;
-            const editLink = "/" + loggedUserId + "/edit"
+            const createLink = "/" + loggedUserId + "/create"
             if (loggedUserId === this.props.match.params.id) {
                 return (
-                    <Link className="navbar-item" to={editLink}>Edit</Link>
+                    <React.Fragment>
+                        <Link className="navbar-item" to={createLink}>Create</Link>
+                    </React.Fragment>
                 );
             }
         }
@@ -61,43 +64,30 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div className='homeHeader'>
-                <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-                    <div className="navbar-brand">
-                        <Link className="navbar-item" to="/">
-                            <div className='logo-text'>EXPORTFOLIO</div>
-                        </Link>
-                        <Link role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" to="/">
+            <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                    <Link className="navbar-item" to="/">
+                        <div className='logo-text'>EXPORTFOLIO</div>
+                    </Link>
+                </div>
 
-                        </Link>
+                <div className="navbar-menu">
+                    <div className="navbar-start">
+                        <Link className="navbar-item" to="/">Home</Link>
+                        <Link className="navbar-item" to="/">Template</Link>
+                        {this.renderCreate()}
                     </div>
-
-                    <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-start">
-                            <Link className="navbar-item" to="/">Home</Link>
-                            <Link className="navbar-item" to="/">Template</Link>
-                            <div className="navbar-item has-dropdown is-hoverable">
-                                <Link className="navbar-link" to="/">More</Link>
-                                <div className="navbar-dropdown">
-                                    <Link className="navbar-item" to="/">About</Link>
-                                    <Link className="navbar-item" to="/"> Contact</Link>
-                                    <hr className="navbar-divider" />
-                                    <Link className="navbar-item" to="/">Report an issue</Link>
-                                </div>
-                            </div>
-                            {this.renderEdit()}
-                        </div>
-
-                        <div className="navbar-end">
-                            <div className="navbar-item">
-                                <div className="buttons">
-                                    {this.renderUsernameLink()}
-                                </div>
+                </div>
+                <div className="navbar-menu is-active">
+                    <div className="navbar-end">
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                {this.renderUsernameLink()}
                             </div>
                         </div>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         );
     }
 }
