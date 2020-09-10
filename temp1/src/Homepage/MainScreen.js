@@ -1,6 +1,6 @@
 import React from "react";
 import './style.css';
-import { Link } from 'react-router-dom';
+
 
 const Screen = props => {
   return (
@@ -11,7 +11,7 @@ const Screen = props => {
           <div className="showcase-wel"><span className="text-primary">Nice</span> to meet you</div>
           {/* <h1><span className="text-primary">Nice</span> to meet you</h1> */}
           <p className="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor, eligendi laboriosam. Repellendus officia harum eaque.</p>
-          <div className="btn" ><Link to="/info">About me</Link></div>
+          <a href="/aboutme" className="btn btn-light">About me</a>
         </div>
 
         <div className="showcase-bottom-img"></div>
