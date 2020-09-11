@@ -5,6 +5,7 @@ const path = require('path');
 
 const auth = require('./routes/auth');
 const user = require('./routes/user');
+const folio = require('./routes/folio');
 
 const app = express();
 
@@ -25,6 +26,7 @@ mongoose.connect(db)
 // Use Routes
 app.use('/auth', auth);
 app.use('/user', user);
+app.use('/folio', folio);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

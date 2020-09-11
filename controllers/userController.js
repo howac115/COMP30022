@@ -1,5 +1,4 @@
 var User = require("../models/user");
-const user = require("../models/user");
 // import decode from 'jwt-decode';
 
 // const JWT = "user_token_id";
