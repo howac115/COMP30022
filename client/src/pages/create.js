@@ -1,23 +1,24 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { withRouter } from 'react-router-dom';
 import Layout from '../layout.js';
-
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
 export default function Create(props) {
-
+    let history = useHistory();
     const { register, handleSubmit, errors } = useForm();
 
     const handleCreate = async data => {
         const { name } = data;
         await axios.post('/folio/create', { name });
         toast.success(name + ' successfully created!');
+        console.log(props);
+        history.push('/'+ global.auth.getUser().id);
     };
 
     const handleCancel = () => {
-        props.history.push('/');
+        history.push('/');
     };
 
     return (
@@ -30,13 +31,13 @@ export default function Create(props) {
 
                     <div className="field">
                         <div className="control">
-                            <input className={`input ${errors && 'is-danger'}`}
+                            <input className={`input ${errors.name && 'is-danger'}`}
                                 type="text"
                                 placeholder="My Awesome Portfolio"
                                 name='name'
                                 ref={register({ required: true })}
                             />
-                            {errors && <p className="helper has-text-danger">Name is required.</p>}
+                            {errors.name && <p className="helper has-text-danger">Name is required.</p>}
                         </div>
                     </div>
 
