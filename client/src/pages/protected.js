@@ -12,7 +12,7 @@ class ProtectedRoute extends React.Component {
             isAuthenticated = (this.props.computedMatch.params.id === global.auth.getUserId().id);
         }
         if (isAuthenticated !== true) {
-            toast.error("You must not edit other's page!")
+            toast.error("You could not edit others's portfolio!");
         }
         return isAuthenticated ? (
             <Component />

@@ -1,23 +1,33 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { withRouter } from 'react-router-dom';
 import Layout from '../layout.js';
-
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-export default function Create(props) {
+var Folio = require("../models/folio.js");
+var User = require("../models/user.js");
 
+export default function Create(props) {
+    let history = useHistory();
     const { register, handleSubmit, errors } = useForm();
 
     const handleCreate = async data => {
-        const { name } = data;
-        await axios.post('/folio/create', { name });
-        toast.success(name + ' successfully created!');
-    };
+        try {
+            const { name } = data;
+            const user = global.auth.getUser().id;
+            await axios.post('/folio/create', { name, user });
+            toast.success(name + ' successfully created!');
+            history.push('/' + global.auth.getUser().id);
+        } catch (error) {
+            const errorMessage = error.response.data.error;
+            toast.error(errorMessage);
+        }
+    }
 
     const handleCancel = () => {
-        props.history.push('/');
+        console.log(history);
+        history.push('/' + global.auth.getUser().id);
     };
 
     return (
@@ -30,13 +40,13 @@ export default function Create(props) {
 
                     <div className="field">
                         <div className="control">
-                            <input className={`input ${errors && 'is-danger'}`}
+                            <input className={`input ${errors.name && 'is-danger'}`}
                                 type="text"
                                 placeholder="My Awesome Portfolio"
                                 name='name'
                                 ref={register({ required: true })}
                             />
-                            {errors && <p className="helper has-text-danger">Name is required.</p>}
+                            {errors.name && <p className="helper has-text-danger">Name is required.</p>}
                         </div>
                     </div>
 

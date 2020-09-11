@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
 var UserSchema = new Schema({
     firstName: {
@@ -11,16 +13,6 @@ var UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-    },
-    phoneNum: {
-        type: String,
-    },
-
-    profileImg: {
-        type: String,
-    },
-    summary: {
-        type: String,
     },
     password: {
         type: String,
@@ -38,9 +30,12 @@ var UserSchema = new Schema({
     emailConsent: {
         type: Boolean,
     },
-    isAdmin: {
-        type: Boolean,
-    },
+    folios: [
+        {
+            type: ObjectId,
+            ref: "Folio",
+        },
+    ],
 });
 
 // Virtual for user "full" name.
