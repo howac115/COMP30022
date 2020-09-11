@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../layout.js';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { Card, Col, Typography, Row } from 'antd';
 import "antd/dist/antd.css";
@@ -12,7 +12,7 @@ const { Meta } = Card;
 
 export default function FolioList(props) {
 
-    let history = useHistory();
+    // let history = useHistory();
     const [folios, setFolios] = useState([]);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function FolioList(props) {
                 style={{ width: 300, marginTop: 16 }}
                 actions={[
                     <a href='#'> <SettingOutlined /></a>,
-                    <a href='#'> <EditOutlined /></a>,
+                    <a href={folio.name + '/edit'}> <EditOutlined /></a>,
                     <a href={folio.name}> <EyeOutlined /></a>,
                 ]}
             >

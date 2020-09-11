@@ -22,8 +22,8 @@ class Router extends React.Component {
                     <Route path='/:id' exact component={User}></Route>
                     <ProtectedRoute path='/:id/folios' component={FolioList}></ProtectedRoute>
                     <ProtectedRoute path='/:id/create' component={Create}></ProtectedRoute>
+                    <ProtectedRoute Route path='/:id/:name/edit' component={Edit}></ProtectedRoute>
                     <Route path='/:id/:name' component={FolioPage}></Route>
-                    <Route path='/:id/:name/edit' component={Edit}></Route>
                     <Route component={NotFound}></Route>
                 </Switch>
             </BrowserRouter>

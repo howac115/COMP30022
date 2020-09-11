@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import { Card, Avatar, Col, Typography, Row } from 'antd';
-import { SmileOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography
 const { Meta } = Card;
 
 function FolioPage(props) {
 
+    let history = useHistory();
+    console.log(history)
+
     const folioDetail = async data => {
         try {
-
+            console.log(history);
         } catch (error) {
             const errorMessage = error.response.data.error;
         }

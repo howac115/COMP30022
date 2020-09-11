@@ -5,9 +5,6 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-var Folio = require("../models/folio.js");
-var User = require("../models/user.js");
-
 export default function Create(props) {
     let history = useHistory();
     const { register, handleSubmit, errors } = useForm();
