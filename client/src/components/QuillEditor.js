@@ -204,7 +204,8 @@ class QuillEditor extends React.Component {
             editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
             files: [],
         };
-
+        this.setState.editorHtml = axios.('/folio/' + props.name.user);
+        console.log(props.name.name);
         this.reactQuillRef = null;
         console.log(axios.post('/folio/' + props.user), {
             user: props.user, name: props.name

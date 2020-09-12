@@ -14,10 +14,9 @@ function Edit(props) {
     let history = useHistory();
     var pathArray = history.location.pathname.split('/');
     // const user = useSelector(state => state.user);
-
-    const [content, setContent] = useState("")
+    
+    const [content, setContent] = useState("123")
     const [files, setFiles] = useState([])
-
     const onEditorChange = (value) => {
         setContent(value)
         console.log(content)
@@ -26,17 +25,15 @@ function Edit(props) {
     const onFilesChange = (files) => {
         setFiles(files)
     }
-
+    const variables = {
+        user: global.auth.getUser().id,
+        name: pathArray[2],
+        content: content
+    }
     const onSubmit = (event) => {
         event.preventDefault();
         console.log('submit');
         setContent("");
-
-        const variables = {
-            user: global.auth.getUser().id,
-            name: pathArray[2],
-            content: content
-        }
 
         axios.post('/folio/' + variables.user + '/edit', variables)
             .then(response => {
@@ -61,6 +58,7 @@ function Edit(props) {
                 placeholder={"Start Posting Something"}
                 onEditorChange={onEditorChange}
                 onFilesChange={onFilesChange}
+                name = {variables}
             />
             <Form onClick={onSubmit}>
                 <div style={{ textAlign: 'center', margin: '2rem', }}>
