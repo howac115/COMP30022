@@ -30,7 +30,7 @@ function Edit(props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-
+        console.log('submit');
         setContent("");
 
         const variables = {
@@ -56,18 +56,18 @@ function Edit(props) {
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Editor</Title>
             </div>
-            {/* <QuillEditor
+            <QuillEditor
                 placeholder={"Start Posting Something"}
                 onEditorChange={onEditorChange}
                 onFilesChange={onFilesChange}
-            /> */}
-            <Form onSubmit={onSubmit}>
+            />
+            <Form onClick={onSubmit}>
                 <div style={{ textAlign: 'center', margin: '2rem', }}>
                     <Button
                         size="large"
                         htmlType="submit"
                         className=""
-                        onSubmit={onSubmit}
+                        onClick={onSubmit}
                     >
                         Submit
                 </Button>
