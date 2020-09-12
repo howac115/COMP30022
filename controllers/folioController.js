@@ -16,6 +16,18 @@ exports.folio_detail_get = function (req, res) {
     });
 }
 
+// POST request to get one specific folio
+exports.folio_detail_post = function (req, res) {
+    Folio.findOne({ user: req.body.user, name: req.body.name }, function (err, folio) {
+        if (err) {
+            res.status(409).json({ error: 'Folio not found' })
+        }
+        else {
+            res.status(200).json(folio);
+        }
+    });
+}
+
 // POST to get all portfolios of one user
 exports.folio_list_post = function (req, res) {
     Folio.find({ user: req.body.user })
