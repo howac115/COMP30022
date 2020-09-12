@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
+import Layout from '../layout.js';
 import hljs from 'highlight.js'
 import QuillEditor from '../components/QuillEditor';
 import { Typography, Button, Form, message } from 'antd';
@@ -51,30 +52,33 @@ function Edit(props) {
 
 
     return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-            <div style={{ textAlign: 'center' }}>
-                <Title level={2} > Editor</Title>
-            </div>
-            <QuillEditor
-                user={pathArray[1]}
-                name={pathArray[2]}
-                placeholder={"Start Posting Something"}
-                onEditorChange={onEditorChange}
-                onFilesChange={onFilesChange}
-            />
-            <Form onClick={onSubmit}>
-                <div style={{ textAlign: 'center', margin: '2rem', }}>
-                    <Button
-                        size="large"
-                        htmlType="submit"
-                        className=""
-                        onClick={onSubmit}
-                    >
-                        Submit
-                </Button>
+        <div className='Edit'>
+            <Layout />
+            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+                <div style={{ textAlign: 'center' }}>
+                    <Title level={2} > Editor</Title>
                 </div>
-            </Form>
-        </div>
+                <QuillEditor
+                    user={pathArray[1]}
+                    name={pathArray[2]}
+                    placeholder={"Start Posting Something"}
+                    onEditorChange={onEditorChange}
+                    onFilesChange={onFilesChange}
+                />
+                <Form onClick={onSubmit}>
+                    <div style={{ textAlign: 'center', margin: '2rem', }}>
+                        <Button
+                            size="large"
+                            htmlType="submit"
+                            className=""
+                            onClick={onSubmit}
+                        >
+                            Submit
+            </Button>
+                    </div>
+                </Form>
+            </div></div>
+
     )
 }
 

@@ -205,10 +205,16 @@ class QuillEditor extends React.Component {
             files: [],
         };
 
-        this.reactQuillRef = null;
-        console.log(axios.post('/folio/' + props.user), {
+        axios.post('/folio/' + props.name.user + '/one', {
             user: props.user, name: props.name
-        })
+        }).then((response) => {
+            this.state.editorHtml = response.data.content;
+            console.log(response.data.content);
+        }).catch((error) => {
+            console.log(error)
+        });
+
+        this.reactQuillRef = null;
         this.inputOpenImageRef = React.createRef();
         this.inputOpenVideoRef = React.createRef();
         this.inputOpenFileRef = React.createRef();
