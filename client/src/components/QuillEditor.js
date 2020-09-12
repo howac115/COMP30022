@@ -398,7 +398,9 @@ class QuillEditor extends React.Component {
                     onChange={this.handleChange}
                     modules={this.modules}
                     formats={this.formats}
+                    // fixme: to prefilled content
                     value={this.state.editorHtml}
+                    // value={this.props.value}
                     placeholder={this.props.placeholder}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
@@ -409,7 +411,7 @@ class QuillEditor extends React.Component {
     }
 
     modules = {
-        syntax: true,
+        //syntax: true,
         toolbar: {
             container: "#toolbar",
             //id ="toorbar"는  그 위에 B I U S I V F P 이거 있는 곳이다. 

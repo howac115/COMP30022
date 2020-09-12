@@ -49,6 +49,9 @@ class Header extends React.Component {
     }
 
     renderFolios() {
+
+        var pathArray = this.props.history.location.pathname.split('/')
+        console.log(pathArray)
         if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
             const loggedUserId = global.auth.getUserId().id;
             const createLink = "/" + loggedUserId + "/folios"

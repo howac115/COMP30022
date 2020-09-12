@@ -5,15 +5,14 @@ import QuillEditor from '../components/QuillEditor';
 import { Typography, Button, Form, message } from 'antd';
 import axios from 'axios';
 // import { useSelector, Provider } from "react-redux";
+import { toast } from "react-toastify";
 
 const { Title } = Typography;
 
 function Edit(props) {
 
     let history = useHistory();
-    hljs.configure({
-        languages: ['javascript', 'ruby', 'python', 'rust'],
-    })
+    var pathArray = history.location.pathname.split('/');
     // const user = useSelector(state => state.user);
 
     const [content, setContent] = useState("")
@@ -30,21 +29,21 @@ function Edit(props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-
+        console.log('submit');
         setContent("");
 
         const variables = {
-            content: content,
-            userID: global.auth.getUser()
+            user: global.auth.getUser().id,
+            name: pathArray[2],
+            content: content
         }
 
-        axios.post('/api/blog/createPost', variables)
+        axios.post('/folio/' + variables.user + '/edit', variables)
             .then(response => {
                 if (response) {
-                    message.success('Post Created!');
-
+                    toast.success('Post Created!');
                     setTimeout(() => {
-                        history.push('/blog')
+                        history.push('/' + variables.user + '/folios')
                     }, 2000);
                 }
             })
@@ -56,18 +55,18 @@ function Edit(props) {
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Editor</Title>
             </div>
-            {/* <QuillEditor
+            <QuillEditor
                 placeholder={"Start Posting Something"}
                 onEditorChange={onEditorChange}
                 onFilesChange={onFilesChange}
-            /> */}
-            <Form onSubmit={onSubmit}>
+            />
+            <Form onClick={onSubmit}>
                 <div style={{ textAlign: 'center', margin: '2rem', }}>
                     <Button
                         size="large"
                         htmlType="submit"
                         className=""
-                        onSubmit={onSubmit}
+                        onClick={onSubmit}
                     >
                         Submit
                 </Button>

@@ -45,3 +45,17 @@ exports.folio_create_post = function (req, res) {
         }
     })
 }
+
+// POST to edit one folio
+exports.folio_edit_post = function (req, res) {
+    Folio.findOneAndUpdate({
+        user: req.body.user,
+        name: req.body.name,
+    }, { content: req.body.content }, {}, function (err, updatedFolio) {
+        if (err) {
+            res.status(400).json({ success: false, err })
+        } else {
+            res.status(200).json({ success: true, updatedFolio })
+        }
+    })
+}

@@ -15,7 +15,7 @@ export default function Create(props) {
             const user = global.auth.getUser().id;
             await axios.post('/folio/create', { name, user });
             toast.success(name + ' successfully created!');
-            history.push('/' + global.auth.getUser().id);
+            history.push('/' + global.auth.getUser().id + '/folios');
         } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);

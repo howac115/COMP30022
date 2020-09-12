@@ -16,4 +16,7 @@ router.post('/all', folio_controller.folio_list_post);
 // POST request to create a folio
 router.post('/create', folio_controller.folio_create_post);
 
+// POST request to edit a folio
+router.post('/:id/edit', folio_controller.folio_edit_post);
+
 module.exports = router;
