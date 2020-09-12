@@ -398,7 +398,9 @@ class QuillEditor extends React.Component {
                     onChange={this.handleChange}
                     modules={this.modules}
                     formats={this.formats}
+                    // fixme: to prefilled content
                     value={this.state.editorHtml}
+                    // value={this.props.value}
                     placeholder={this.props.placeholder}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
