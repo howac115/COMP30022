@@ -77,9 +77,9 @@ export default function SignUp(props){
                             type="password"
                             placeholder="Enter your password"
                             name='password'
-                            ref={register({required:true})} 
+                            ref={register({required:"Password is required", minLength: 6 })} 
                         />
-                        {errors.password && <p className="helper has-text-danger">Password is required.</p>}  
+                        {errors.password && <p className="helper has-text-danger">Need to longer than 6 characters.</p>}  
                     </div>
                 </div>
 

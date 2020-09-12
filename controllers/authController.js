@@ -27,7 +27,7 @@ exports.login_post = function (req, res) {
           { expiresIn: 3600 },
           (err, token) => {
             if (err) throw err;
-            res.json({
+            res.status(200).json({
               token,
               user: {
                 id: user.id,
@@ -38,7 +38,6 @@ exports.login_post = function (req, res) {
             })
           }
         )
-        // res.status(200).json(user)
       } else {
         res.status(409).json({ error: 'Password incorrect' })
       }

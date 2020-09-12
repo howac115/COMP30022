@@ -10,4 +10,7 @@ var user_controller = require('../controllers/userController');
 // GET request for one user
 router.get('/:id', user_controller.user_detail_get);
 
+// GET request to view one specific folio of one user
+router.get('/:id/:name', user_controller.user_folio_get);
+
 module.exports = router;

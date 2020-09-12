@@ -3,7 +3,6 @@ import React from 'react'
 //import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
-import Edit from '../pages/edit';
 
 class Header extends React.Component {
     // toProfile =() =>{
@@ -49,13 +48,30 @@ class Header extends React.Component {
         }
     }
 
-    renderEdit() {
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/edit") {
+    renderFolios() {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
             const loggedUserId = global.auth.getUserId().id;
-            const editLink = "/" + loggedUserId + "/edit"
+            const createLink = "/" + loggedUserId + "/folios"
             if (loggedUserId === this.props.match.params.id) {
                 return (
-                    <Link className="navbar-item" to={editLink}>Edit</Link>
+                    <React.Fragment>
+                        <Link className="navbar-item" to={createLink}>Folios</Link>
+                    </React.Fragment>
+                );
+            }
+        }
+    }
+
+    renderCreate() {
+        var pathArray = this.props.history.location.pathname.split('/')
+        if (this.props.user.id && !pathArray.includes("create")) {
+            const loggedUserId = global.auth.getUser().id;
+            const createLink = "/" + loggedUserId + "/create"
+            if (loggedUserId === pathArray[1]) {
+                return (
+                    <React.Fragment>
+                        <Link className="navbar-item" to={createLink}>Create</Link>
+                    </React.Fragment>
                 );
             }
         }
@@ -74,7 +90,8 @@ class Header extends React.Component {
                     <div className="navbar-start">
                         <Link className="navbar-item" to="/">Home</Link>
                         <Link className="navbar-item" to="/">Template</Link>
-                        {this.renderEdit()}
+                        {this.renderFolios()}
+                        {this.renderCreate()}
                     </div>
                 </div>
                 <div className="navbar-menu is-active">
