@@ -11,7 +11,7 @@ var folio_controller = require('../controllers/folioController');
 router.get('/:id', folio_controller.folio_detail_get);
 
 // POST request to get one portfolio
-router.post('/:id', folio_controller.folio_detail_post);
+router.post('/:id/one', folio_controller.folio_detail_post);
 
 // GET request to all portfolios of one user
 router.post('/all', folio_controller.folio_list_post);

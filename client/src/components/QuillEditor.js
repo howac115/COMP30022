@@ -196,7 +196,7 @@ class QuillEditor extends React.Component {
     onFilesChange;
     onPollsChange;
     _isMounted;
-
+    
     constructor(props) {
         super(props);
 
@@ -204,12 +204,10 @@ class QuillEditor extends React.Component {
             editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
             files: [],
         };
-        this.setState.editorHtml = axios.('/folio/' + props.name.user);
-        console.log(props.name.name);
+
+
+        
         this.reactQuillRef = null;
-        console.log(axios.post('/folio/' + props.user), {
-            user: props.user, name: props.name
-        })
         this.inputOpenImageRef = React.createRef();
         this.inputOpenVideoRef = React.createRef();
         this.inputOpenFileRef = React.createRef();
@@ -217,6 +215,13 @@ class QuillEditor extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        axios.post('/folio/' + this.props.name.user + '/one', {
+            user: this.props.user, name: this.props.name
+        }).then((response) => {
+            this.setState( {editorHtml : response.data.content});
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     componentWillUnmount() {
