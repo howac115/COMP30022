@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import "react-quill/dist/quill.snow.css";
-
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
@@ -206,7 +206,9 @@ class QuillEditor extends React.Component {
         };
 
         this.reactQuillRef = null;
-
+        console.log(axios.post('/folio/' + props.user), {
+            user: props.user, name: props.name
+        })
         this.inputOpenImageRef = React.createRef();
         this.inputOpenVideoRef = React.createRef();
         this.inputOpenFileRef = React.createRef();
@@ -400,7 +402,6 @@ class QuillEditor extends React.Component {
                     formats={this.formats}
                     // fixme: to prefilled content
                     value={this.state.editorHtml}
-                    // value={this.props.value}
                     placeholder={this.props.placeholder}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />

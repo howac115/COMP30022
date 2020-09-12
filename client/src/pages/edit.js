@@ -56,6 +56,8 @@ function Edit(props) {
                 <Title level={2} > Editor</Title>
             </div>
             <QuillEditor
+                user={pathArray[1]}
+                name={pathArray[2]}
                 placeholder={"Start Posting Something"}
                 onEditorChange={onEditorChange}
                 onFilesChange={onFilesChange}
