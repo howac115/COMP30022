@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
+import hljs from 'highlight.js'
 import QuillEditor from '../components/QuillEditor';
 import { Typography, Button, Form, message } from 'antd';
 import axios from 'axios';
-import { useSelector } from "react-redux";
+// import { useSelector, Provider } from "react-redux";
 
 const { Title } = Typography;
 
 function Edit(props) {
-    const user = useSelector(state => state.user);
+
+    let history = useHistory();
+    hljs.configure({
+        languages: ['javascript', 'ruby', 'python', 'rust'],
+    })
+    // const user = useSelector(state => state.user);
 
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
@@ -27,13 +33,9 @@ function Edit(props) {
 
         setContent("");
 
-        if (user.userData && !user.userData.isAuth) {
-            return alert('Please Log in first');
-        }
-
         const variables = {
             content: content,
-            userID: user.userData._id
+            userID: global.auth.getUser()
         }
 
         axios.post('/api/blog/createPost', variables)
@@ -42,7 +44,7 @@ function Edit(props) {
                     message.success('Post Created!');
 
                     setTimeout(() => {
-                        props.history.push('/blog')
+                        history.push('/blog')
                     }, 2000);
                 }
             })
@@ -54,12 +56,11 @@ function Edit(props) {
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Editor</Title>
             </div>
-            <QuillEditor
+            {/* <QuillEditor
                 placeholder={"Start Posting Something"}
                 onEditorChange={onEditorChange}
                 onFilesChange={onFilesChange}
-            />
-
+            /> */}
             <Form onSubmit={onSubmit}>
                 <div style={{ textAlign: 'center', margin: '2rem', }}>
                     <Button

@@ -10,15 +10,21 @@ export default function Create(props) {
     const { register, handleSubmit, errors } = useForm();
 
     const handleCreate = async data => {
-        const { name } = data;
-        await axios.post('/folio/create', { name });
-        toast.success(name + ' successfully created!');
-        console.log(props);
-        history.push('/'+ global.auth.getUser().id);
-    };
+        try {
+            const { name } = data;
+            const user = global.auth.getUser().id;
+            await axios.post('/folio/create', { name, user });
+            toast.success(name + ' successfully created!');
+            history.push('/' + global.auth.getUser().id);
+        } catch (error) {
+            const errorMessage = error.response.data.error;
+            toast.error(errorMessage);
+        }
+    }
 
     const handleCancel = () => {
-        history.push('/');
+        console.log(history);
+        history.push('/' + global.auth.getUser().id);
     };
 
     return (

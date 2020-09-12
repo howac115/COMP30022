@@ -48,6 +48,20 @@ class Header extends React.Component {
         }
     }
 
+    renderFolios() {
+        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
+            const loggedUserId = global.auth.getUserId().id;
+            const createLink = "/" + loggedUserId + "/folios"
+            if (loggedUserId === this.props.match.params.id) {
+                return (
+                    <React.Fragment>
+                        <Link className="navbar-item" to={createLink}>Folios</Link>
+                    </React.Fragment>
+                );
+            }
+        }
+    }
+
     renderCreate() {
         if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
             const loggedUserId = global.auth.getUserId().id;
@@ -75,6 +89,7 @@ class Header extends React.Component {
                     <div className="navbar-start">
                         <Link className="navbar-item" to="/">Home</Link>
                         <Link className="navbar-item" to="/">Template</Link>
+                        {this.renderFolios()}
                         {this.renderCreate()}
                     </div>
                 </div>
