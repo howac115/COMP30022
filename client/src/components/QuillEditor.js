@@ -205,15 +205,6 @@ class QuillEditor extends React.Component {
             files: [],
         };
 
-        axios.post('/folio/' + props.name.user + '/one', {
-            user: props.user, name: props.name
-        }).then((response) => {
-            this.state.editorHtml = response.data.content;
-            console.log(response.data.content);
-        }).catch((error) => {
-            console.log(error)
-        });
-
         this.reactQuillRef = null;
         this.inputOpenImageRef = React.createRef();
         this.inputOpenVideoRef = React.createRef();
@@ -222,6 +213,15 @@ class QuillEditor extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        axios.post('/folio/' + this.props.name.user + '/one', {
+            user: this.props.user, name: this.props.name
+        }).then((response) => {
+            if (response.data.content) {
+                this.setState({ editorHtml: response.data.content });
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     componentWillUnmount() {

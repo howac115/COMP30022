@@ -20,7 +20,7 @@ export default function FolioList(props) {
         axios.post('/folio/all', { user })
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.folios)
+                    // console.log(response.data.folios)
                     setFolios(response.data.folios)
                 } else {
                     toast.error('Couldnt get folio`s lists')

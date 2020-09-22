@@ -49,33 +49,49 @@ class Header extends React.Component {
     }
 
     renderFolios() {
-
-        var pathArray = this.props.history.location.pathname.split('/')
-        console.log(pathArray)
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
+        // if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
+        //     const loggedUserId = global.auth.getUserId().id;
+        //     const createLink = "/" + loggedUserId + "/folios"
+        //     if (loggedUserId === this.props.match.params.id) {
+        //         return (
+        //             <React.Fragment>
+        //                 <Link className="navbar-item" to={createLink}>Folios</Link>
+        //             </React.Fragment>
+        //         );
+        //     }
+        // }
+        if (this.props.user.id) {
             const loggedUserId = global.auth.getUserId().id;
             const createLink = "/" + loggedUserId + "/folios"
-            if (loggedUserId === this.props.match.params.id) {
-                return (
-                    <React.Fragment>
-                        <Link className="navbar-item" to={createLink}>Folios</Link>
-                    </React.Fragment>
-                );
-            }
+            return (
+                <React.Fragment>
+                    <Link className="navbar-item" to={createLink}>Folios</Link>
+                </React.Fragment>
+            );
         }
     }
 
     renderCreate() {
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
-            const loggedUserId = global.auth.getUserId().id;
+        // var pathArray = this.props.history.location.pathname.split('/')
+        // if (this.props.user.id && !pathArray.includes("create")) {
+        //     const loggedUserId = global.auth.getUser().id;
+        //     const createLink = "/" + loggedUserId + "/create"
+        //     if (loggedUserId === pathArray[1]) {
+        //         return (
+        //             <React.Fragment>
+        //                 <Link className="navbar-item" to={createLink}>Create</Link>
+        //             </React.Fragment>
+        //         );
+        //     }
+        // }
+        if (this.props.user.id) {
+            const loggedUserId = global.auth.getUser().id;
             const createLink = "/" + loggedUserId + "/create"
-            if (loggedUserId === this.props.match.params.id) {
-                return (
-                    <React.Fragment>
-                        <Link className="navbar-item" to={createLink}>Create</Link>
-                    </React.Fragment>
-                );
-            }
+            return (
+                <React.Fragment>
+                    <Link className="navbar-item" to={createLink}>Create</Link>
+                </React.Fragment>
+            );
         }
     }
 

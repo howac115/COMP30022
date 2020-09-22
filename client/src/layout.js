@@ -1,17 +1,19 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import Header from './components/header.js';
+import HelperBot from './components/ChatBot.js';
 
 const Layout = props => {
-    const user  = useMemo(()=> {
-        if (global.auth.getUser()){
-            return  {id: global.auth.getUserName()};
+    const user = useMemo(() => {
+        if (global.auth.getUser()) {
+            return { id: global.auth.getUserName() };
         }
         return {};
-    },[]);
+    }, []);
 
-    return(
+    return (
         <div className="main">
-            <Header user={user}/>
+            <Header user={user} />
+            <HelperBot />
         </div>
     );
 };
