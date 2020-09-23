@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://yutao:brysjhhrhlyqqlmgsycl@bountyprogrammers.iu0xm.mongodb.net/BountyProgrammers?retryWrites=true&w=majority",
+  "jwtSecret": "exportfolio_secret"
+}

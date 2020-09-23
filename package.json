@@ -1,42 +1,33 @@
 {
-  "name": "incubeta",
-  "version": "0.0.0",
-  "private": true,
+  "name": "eportfolio",
+  "version": "1.0.0",
+  "description": "eportfolio",
+  "main": "server.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
+  "author": "Bounty Programmers",
+  "license": "ISC",
   "dependencies": {
-    "@popperjs/core": "^2.4.0",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^4.5.0",
-    "compression": "^1.7.4",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "~1.4.4",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "config": "^3.3.1",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-session": "^1.17.1",
-    "express-validator": "^6.4.0",
-    "helmet": "^3.22.0",
-    "http-errors": "~1.6.3",
-    "jquery": "^3.5.1",
-    "mango": "0.0.4",
-    "moment": "^2.24.0",
-    "mongoose": "^5.9.9",
-    "mongoose-random": "^0.1.1",
-    "morgan": "~1.9.1",
-    "multer": "^1.4.2",
-    "nodemailer": "^6.4.6",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "popper.js": "^1.16.0",
-    "pug": "^2.0.4",
-    "react": "^16.13.1",
-    "react-burger-menu": "^2.6.13",
-    "react-dom": "^16.13.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "react-toastify": "^6.0.8",
+    "session": "^0.1.0",
+    "use-react-router": "^1.0.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.4"
   }
 }
