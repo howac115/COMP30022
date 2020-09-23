@@ -4,8 +4,14 @@ import "../Homepage/style.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "../components/image";
+import CTE from "react-click-to-edit";
 
 class Achivement extends Component {
+
+  clickImge(){
+    console.log("test");
+  }
+
   render() {
     //const { classes } = this.props;
     const images = [
@@ -63,17 +69,27 @@ class Achivement extends Component {
         </div>
 
         <div className="achivement-top-content">
-          <h2>Lorem ipsum</h2>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda
-            aliquam dolor alias iste autem, quaerat magni unde accusantium qui
-            fuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis,
-            explicabo quisquam dolor placeat praesentium nesciunt mollitia quos
-            nobis natus voluptatum asperiores!
-          </p>
+          <div>
+          <CTE 
+              wrapperClass="second_title"
+              textClass="second_title_text"
+              initialValue={"Lorem ipsum"}
+              >
+          </CTE>
+          </div>
+          
+          <CTE 
+              wrapperClass="second_content"
+              textClass="second_content_text"
+              initialValue={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aliquam dolor alias iste autem, quaerat magni unde accusantium quifuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis, explicabo quisquam dolor placeat praesentium nesciunt mollitia quosnobis natus voluptatum asperiores!"}
+              >
+          </CTE>
+
         </div>
         <div className="image-slider">
+          
           <Carousel
+            
             responsive={responsive}
             ssr
             showDots
@@ -81,9 +97,11 @@ class Achivement extends Component {
             containerClass="container-with-dots"
             itemClass="image-item"
           >
-            {fakerData.slice(0, 5).map((card) => {
-              return <Image url={card.image} alt={card.headline} />;
-            })}
+              {fakerData.slice(0, 5).map((card, index) => {
+              return <Image url={card.image} alt={card.headline} onClick={() => {
+                this.props.history.push("/experience");
+              }}/>;
+              })}     
           </Carousel>
         </div>
       </div>

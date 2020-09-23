@@ -145,14 +145,28 @@ p {
   text-align: center;
   padding-top: 170px;
   height: 600px;
+  display: block;
 }
 
 #showcase .showcase-content .showcase-wel {
+  display: inline;
+}
+
+#showcase .showcase-content .showcase-wel .top-content-left{
   font-size: 60px;
   line-height: 1.2em;
 }
 
-#showcase .showcase-content p {
+#showcase .showcase-content .showcase-wel .top-content-text-left{
+  color: #f7c08a;
+}
+
+#showcase .showcase-content .showcase-wel .top-content-right{
+  font-size: 60px;
+  line-height: 1.2em;
+}
+
+#showcase .showcase-content div .top-content {
   padding-bottom: 20px;
   line-height: 1.7em;
 }
@@ -160,8 +174,19 @@ p {
 #showcase .showcase-bottom-img {
   float: left;
   width: 50%;
-  background: url('photo-1554415707-6e8cfc93fe23.jpeg') no-repeat;
-  min-height: 500px;
+  /* background: url('photo-1554415707-6e8cfc93fe23.jpeg') no-repeat; */
+  height: 500px;
+}
+
+#showcase .showcase-bottom-img img {
+  width: 100%;
+  height: 500px;
+}
+
+#showcase .showcase-bottom-img video {
+  width: 100%;
+  height: 500px;
+  display: none;
 }
 
 #showcase .showcase-bottom-content {
@@ -173,7 +198,20 @@ p {
   overflow: hidden;
 }
 
-#showcase .showcase-bottom-content p {
+#showcase .showcase-bottom-content div .bottom-content-left {
+  font-size: 30px;
+}
+
+#showcase .showcase-bottom-content div .bottom-content-text-left {
+  color: #f7c08a;
+}
+
+#showcase .showcase-bottom-content div .bottom-content-right {
+  font-size: 30px;
+}
+
+#showcase .showcase-bottom-content .bottom-content {
+  margin-top: 30px;
   padding-bottom: 30px;
 }
 
@@ -290,6 +328,21 @@ p {
   padding-bottom: 30px;
   width: 800px;
   margin: auto;
+}
+
+#home-achivement .achivement-top-content div .second_title_text {
+  font-size: 24px;
+}
+
+#home-achivement .achivement-top-content .second_content {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  width: 800px;
+  margin: auto;
+}
+
+#home-achivement .achivement-top-content .second_content_text {
+  font-size: 14px;
 }
 
 #home-achivement .image-slider {

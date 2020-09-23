@@ -1,7 +1,6 @@
 import React from 'react';
 import MainScreen from "../Homepage/MainScreen";
 import Contact from "../ContactMe/Contact";
-
 import Achievement from "../Achievement/achivement"
 import Experience from "../Experience/experience"
 import { Route, Link } from 'react-router-dom'
@@ -26,17 +25,14 @@ const toolbar = () => (
       <li>
         <Link to="/contact">Contact me</Link>
       </li>
-      <li>
-        <Link to="/edit">Edit</Link>
-      </li>
+
     </ul>
 
     <Route path='/' exact component={MainScreen} />
-
     <Route path='/contact' component={Contact} />
     <Route path='/achivement' component={Achievement} />
     <Route path='/experience' component={Experience} />
-    <Route path='/edit' component={MainScreen} />
+
 
   </div>
 

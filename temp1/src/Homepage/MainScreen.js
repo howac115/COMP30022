@@ -71,7 +71,7 @@ class Screen extends Component {
               <CTE
                 wrapperClass="top-content-right"
                 textClass="top-content-text-right"
-                initialValue={"to meet you"}
+                initialValue={" to meet you"}
               >
               </CTE>
             </div>
@@ -93,7 +93,7 @@ class Screen extends Component {
           />
           <div className="showcase-bottom-img" onClick={() => { this.upload.click() }}>
             <img src={this.state.bottomImgUrl} style={{ display: this.state.bottomImgDisplay }}></img>
-            <video autoplay="autoPlay" src={this.state.bottomVideoUrl} style={{ display: this.state.bottomVideoDisplay }}></video>
+            <video autoplay="autoplay" src={this.state.bottomVideoUrl} style={{ display: this.state.bottomVideoDisplay }}></video>
           </div>
           <div className="showcase-bottom-content">
             <div>
@@ -114,7 +114,7 @@ class Screen extends Component {
             <CTE
               wrapperClass="bottom-content"
               textClass="lead"
-              initialValue={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda/naliquam dolor alias iste autem, quaerat magni unde accusantium qui/nfuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis,/nexplicabo quisquam dolor placeat praesentium nesciunt mollitia quos/nnobis natus voluptatum asperiores!"}
+              initialValue={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aliquam dolor alias iste autem, quaerat magni unde accusantium quifuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis,explicabo quisquam dolor placeat praesentium nesciunt mollitia quosnobis natus voluptatum asperiores!"}
             />
             <a href="/experience" className="btn btn-light">Read More</a>
 
