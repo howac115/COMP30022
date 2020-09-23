@@ -17,11 +17,11 @@ class Screen extends Component {
 
   getObjectURL(file) {
     var url = null;
-    if (window.createObjcectURL != undefined) {
+    if (window.createObjcectURL !== undefined) {
       url = window.createOjcectURL(file);
-    } else if (window.URL != undefined) {
+    } else if (window.URL !== undefined) {
       url = window.URL.createObjectURL(file);
-    } else if (window.webkitURL != undefined) {
+    } else if (window.webkitURL !== undefined) {
       url = window.webkitURL.createObjectURL(file);
     }
     return url;
@@ -31,9 +31,9 @@ class Screen extends Component {
     event.stopPropagation();
     event.preventDefault();
     var file = event.target.files[0];
-    if (file != undefined) {
+    if (file !== undefined) {
       console.log(file);
-      if (file.type.indexOf("image") != -1) {
+      if (file.type.indexOf("image") !== -1) {
         var url = this.getObjectURL(file);
         this.setState({
           bottomImgDisplay: "block",
@@ -42,7 +42,7 @@ class Screen extends Component {
           bottomVideoDisplay: "none"
         });
       }
-      else if (file.type.indexOf("video") != -1) {
+      else if (file.type.indexOf("video") !== -1) {
         var url = this.getObjectURL(file);
         this.setState({
           bottomImgDisplay: "none",
