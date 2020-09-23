@@ -71,7 +71,7 @@ class Screen extends Component {
               <CTE
                 wrapperClass="top-content-right"
                 textClass="top-content-text-right"
-                initialValue={" to meet you"}
+                initialValue={"to meet you"}
               >
               </CTE>
             </div>
@@ -93,7 +93,7 @@ class Screen extends Component {
           />
           <div className="showcase-bottom-img" onClick={() => { this.upload.click() }}>
             <img src={this.state.bottomImgUrl} style={{ display: this.state.bottomImgDisplay }}></img>
-            <video autoplay="autoplay" src={this.state.bottomVideoUrl} style={{ display: this.state.bottomVideoDisplay }}></video>
+            <video autoplay="autoPlay" src={this.state.bottomVideoUrl} style={{ display: this.state.bottomVideoDisplay }}></video>
           </div>
           <div className="showcase-bottom-content">
             <div>
