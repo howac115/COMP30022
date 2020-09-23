@@ -14,8 +14,7 @@ function Edit(props) {
 
     let history = useHistory();
     var pathArray = history.location.pathname.split('/');
-    // const user = useSelector(state => state.user);
-    
+
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
     const onEditorChange = (value) => {
