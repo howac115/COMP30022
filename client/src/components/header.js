@@ -102,7 +102,7 @@ class Header extends React.Component {
                     <Nav className="ml-auto">
                         <div className="navbar-end">
                             <Link className="navbar-item" to="/">Home</Link>
-                            <Link className="navbar-item" to="https://www.eng.unimelb.edu.au/">Template</Link>
+                            <Link className="navbar-item" to="/">Template</Link>
                             {this.renderFolios()}
                             {this.renderCreate()}
                         </div>
