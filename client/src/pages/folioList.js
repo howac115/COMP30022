@@ -4,9 +4,10 @@ import Draggable from "react-draggable";
 import axios from 'axios';
 import { Card, Col, Typography, Row } from 'antd';
 import "antd/dist/antd.css";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import {ShareAltOutlined, DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+
 const { Title } = Typography
 const { Meta } = Card;
 
@@ -34,6 +35,12 @@ export default function FolioList(props) {
         toast.success(prop + ' succeccful delete');
         history.go(0);
     };
+    const handleShare = (prop) => {
+        const user = global.auth.getUser().id;
+        navigator.clipboard.writeText("https://exportfolio.herokuapp.com/"+ user + "/" +prop);
+        toast.success(prop + ' is succeccful copied to clipboard');
+      
+    };
     const renderCards = folios.map((folio, index) => {
         return <Col key={index} lg={8} md={12} xs={24}>
             <Draggable>
@@ -43,6 +50,7 @@ export default function FolioList(props) {
                         <button className="button is-danger" onClick={handleDelete.bind(this, folio.name)}><DeleteOutlined /></button>,
                         <button className="button is-light"><a href={folio.name + '/edit'}> <EditOutlined /></a></button>,
                         <button className="button is-light"><a href={folio.name}> <EyeOutlined /></a></button>,
+                        <button className="button is-light" onClick={handleShare.bind(this,folio.name)}><ShareAltOutlined /></button>,
                     ]}
                 >
                     <Meta
