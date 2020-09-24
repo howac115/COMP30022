@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import "react-quill/dist/quill.snow.css";
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
-
-// Quill.register('modules/clipboard', PlainClipboard, true);
 
 const QuillClipboard = Quill.import('modules/clipboard');
 
@@ -39,9 +36,6 @@ class Clipboard extends QuillClipboard {
                             if (node.getAttribute("property") === "og:url") {
                                 url = node.getAttribute("content");
                             }
-                            // if (node.getAttribute("property") === "og:description") {
-                            //     description = node.getAttribute("content");
-                            // }
                         }
 
                         const rendered = `<a href=${url} target="_blank"><div><img src=${image} alt=${title} width="20%"/><span>${title}</span></div></a>`;
@@ -86,7 +80,6 @@ ImageBlot.tagName = 'img';
 Quill.register(ImageBlot);
 
 class VideoBlot extends BlockEmbed {
-
     static create(value) {
         if (value && value.src) {
             const videoTag = super.create();
@@ -94,14 +87,14 @@ class VideoBlot extends BlockEmbed {
             videoTag.setAttribute('title', value.title);
             videoTag.setAttribute('width', '100%');
             videoTag.setAttribute('controls', '');
-
             return videoTag;
         } else {
             const iframeTag = document.createElement('iframe');
             iframeTag.setAttribute('src', value);
             iframeTag.setAttribute('frameborder', '0');
             iframeTag.setAttribute('allowfullscreen', true);
-            iframeTag.setAttribute('width', '100%');
+            iframeTag.setAttribute('width', '86%');
+            iframeTag.setAttribute('height', '550');
             return iframeTag;
         }
     }
@@ -112,7 +105,6 @@ class VideoBlot extends BlockEmbed {
         } else {
             return node.getAttribute('src');
         }
-        // return { src: node.getAttribute('src'), alt: node.getAttribute('title') };
     }
 
 }
@@ -125,10 +117,9 @@ class FileBlot extends BlockEmbed {
 
     static create(value) {
         const prefixTag = document.createElement('span');
-        prefixTag.innerText = "첨부파일 - ";
+        prefixTag.innerText = "File - ";
 
         const bTag = document.createElement('b');
-        //위에 첨부파일 글자 옆에  파일 이름이 b 태그를 사용해서 나온다.
         bTag.innerText = value;
 
         const linkTag = document.createElement('a');
@@ -136,7 +127,6 @@ class FileBlot extends BlockEmbed {
         linkTag.setAttribute("target", "_blank");
         linkTag.setAttribute("className", "file-link-inner-post");
         linkTag.appendChild(bTag);
-        //linkTag 이런식으로 나온다 <a href="btn_editPic@3x.png" target="_blank" classname="file-link-inner-post"><b>btn_editPic@3x.png</b></a>
 
         const node = super.create();
         node.appendChild(prefixTag);
@@ -161,7 +151,7 @@ class PollBlot extends BlockEmbed {
 
     static create(value) {
         const prefixTag = document.createElement('span');
-        prefixTag.innerText = "투표 - ";
+        prefixTag.innerText = "Poll - ";
 
         const bTag = document.createElement('b');
         bTag.innerText = value.title;
@@ -230,10 +220,6 @@ class QuillEditor extends React.Component {
 
     handleChange = (html) => {
         console.log('html', html)
-        // https://youtu.be/BbR-QCoKngE
-        // https://www.youtube.com/embed/ZwKhufmMxko
-        // https://tv.naver.com/v/9176888
-        // renderToStaticMarkup(ReactHtmlParser(html, options));
 
         this.setState({
             editorHtml: html
@@ -242,7 +228,6 @@ class QuillEditor extends React.Component {
         });
     };
 
-    // I V F P들을  눌렀을떄 insertImage: this.imageHandler로 가서  거기서 inputOpenImageRef를 클릭 시킨다. 
     imageHandler = () => {
         this.inputOpenImageRef.current.click();
     };
@@ -411,7 +396,7 @@ class QuillEditor extends React.Component {
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />
-                <input type="file" accept="*" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
+                <input type="file" accept="file/" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
             </div>
         )
     }

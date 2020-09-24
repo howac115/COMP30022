@@ -30,7 +30,7 @@ const steps = [
             { value: 1, label: 'What can I do with this web app?', trigger: '3' },
             { value: 2, label: 'I want to create a folio.', trigger: '4' },
             { value: 3, label: 'How can I share my E-portfolio?', trigger: '5' },
-            { value: 4, label: 'Just wanna hang around by myself!', trigger: 'endstep'},
+            { value: 4, label: 'Just wanna hang around by myself!', trigger: 'endstep' },
         ],
     },
     {
@@ -62,8 +62,8 @@ const steps = [
     {
         id: '7',
         options: [
-            { value: 1, label: 'I know what it is', trigger: 'reroute'},
-            { value: 2, label: 'Please tell me about it', trigger: '8'},
+            { value: 1, label: 'I know what it is', trigger: 'reroute' },
+            { value: 2, label: 'Please tell me about it', trigger: '8' },
         ]
     },
     {
@@ -86,14 +86,16 @@ const steps = [
 class HelperBot extends React.Component {
     render() {
         return (
-            <ThemeProvider theme={theme}>
-                <ChatBot
-                    headerTitle = "Exportfolio Virtual Assistant"
-                    floating={true}
-                    floatingStyle={{ background: 'dark' }}
-                    hideSubmitButton={true}
-                    steps={steps} />
-            </ThemeProvider>
+            <div>
+                <ThemeProvider theme={theme}>
+                    <ChatBot
+                        headerTitle="Exportfolio Virtual Assistant"
+                        floating={true}
+                        floatingStyle={{ background: 'dark' }}
+                        hideSubmitButton={true}
+                        steps={steps} />
+                </ThemeProvider>
+            </div>
         );
     }
 }
