@@ -7,10 +7,6 @@ import "./css/app.scss";
 import "./css/style.scss";
 import "./commons/auth.js";
 
-hljs.configure({
-    languages: ['javascript', 'ruby', 'python', 'rust'],
-})
-
 ReactDOM.render(
     <div>
         <ToastContainer
