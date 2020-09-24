@@ -51,7 +51,7 @@ const steps = [
     },
     {
         id: '5',
-        message: 'You can share your folio simply by copying the URL on the address bar',
+        message: 'You can share your folio simply by clicking the share button under your folio',
         trigger: 'reroute'
     },
     {

@@ -24,7 +24,6 @@ class Clipboard extends QuillClipboard {
             urlMatches.forEach(link => {
                 axios.get(link)
                     .then(payload => {
-                        // let title, image, url, description;
                         let title, image, url;
                         for (let node of this.getMetaTagElements(payload)) {
                             if (node.getAttribute("property") === "og:title") {
@@ -49,7 +48,6 @@ class Clipboard extends QuillClipboard {
             });
 
         } else {
-            //console.log('when to use this') 보통 다른 곳에서  paste 한다음에  copy하면 이쪽 걸로 한다. 
             super.onPaste(e);
         }
     }

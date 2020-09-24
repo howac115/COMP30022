@@ -1,17 +1,11 @@
 import React from 'react'
-//import UserProfile from './userProfile.js'
-//import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 class Header extends React.Component {
-    // toProfile =() =>{
-    //     Panel.open({
-    //         component: UserProfile
-    //     })
-    // };
+
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
@@ -23,7 +17,7 @@ class Header extends React.Component {
         this.props.history.push('/' + loggedUserId);
     };
     renderUsernameLink() {
-        const username = this.props.user.id; //this.props.user.username;
+        const username = this.props.user.id;
         if (username) {
             return (
                 <React.Fragment>
@@ -108,7 +102,7 @@ class Header extends React.Component {
                     <Nav className="ml-auto">
                         <div className="navbar-end">
                             <Link className="navbar-item" to="/">Home</Link>
-                            <Link className="navbar-item" to="/">Template</Link>
+                            <Link className="navbar-item" to="https://www.eng.unimelb.edu.au/">Template</Link>
                             {this.renderFolios()}
                             {this.renderCreate()}
                         </div>
