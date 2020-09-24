@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import "react-quill/dist/quill.snow.css";
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
-
-// Quill.register('modules/clipboard', PlainClipboard, true);
 
 const QuillClipboard = Quill.import('modules/clipboard');
 
@@ -27,7 +24,6 @@ class Clipboard extends QuillClipboard {
             urlMatches.forEach(link => {
                 axios.get(link)
                     .then(payload => {
-                        // let title, image, url, description;
                         let title, image, url;
                         for (let node of this.getMetaTagElements(payload)) {
                             if (node.getAttribute("property") === "og:title") {
@@ -39,9 +35,6 @@ class Clipboard extends QuillClipboard {
                             if (node.getAttribute("property") === "og:url") {
                                 url = node.getAttribute("content");
                             }
-                            // if (node.getAttribute("property") === "og:description") {
-                            //     description = node.getAttribute("content");
-                            // }
                         }
 
                         const rendered = `<a href=${url} target="_blank"><div><img src=${image} alt=${title} width="20%"/><span>${title}</span></div></a>`;
@@ -55,7 +48,6 @@ class Clipboard extends QuillClipboard {
             });
 
         } else {
-            //console.log('when to use this') 보통 다른 곳에서  paste 한다음에  copy하면 이쪽 걸로 한다. 
             super.onPaste(e);
         }
     }
@@ -86,7 +78,6 @@ ImageBlot.tagName = 'img';
 Quill.register(ImageBlot);
 
 class VideoBlot extends BlockEmbed {
-
     static create(value) {
         if (value && value.src) {
             const videoTag = super.create();
@@ -94,14 +85,14 @@ class VideoBlot extends BlockEmbed {
             videoTag.setAttribute('title', value.title);
             videoTag.setAttribute('width', '100%');
             videoTag.setAttribute('controls', '');
-
             return videoTag;
         } else {
             const iframeTag = document.createElement('iframe');
             iframeTag.setAttribute('src', value);
             iframeTag.setAttribute('frameborder', '0');
             iframeTag.setAttribute('allowfullscreen', true);
-            iframeTag.setAttribute('width', '100%');
+            iframeTag.setAttribute('width', '86%');
+            iframeTag.setAttribute('height', '550');
             return iframeTag;
         }
     }
@@ -112,7 +103,6 @@ class VideoBlot extends BlockEmbed {
         } else {
             return node.getAttribute('src');
         }
-        // return { src: node.getAttribute('src'), alt: node.getAttribute('title') };
     }
 
 }
@@ -125,10 +115,9 @@ class FileBlot extends BlockEmbed {
 
     static create(value) {
         const prefixTag = document.createElement('span');
-        prefixTag.innerText = "첨부파일 - ";
+        prefixTag.innerText = "File - ";
 
         const bTag = document.createElement('b');
-        //위에 첨부파일 글자 옆에  파일 이름이 b 태그를 사용해서 나온다.
         bTag.innerText = value;
 
         const linkTag = document.createElement('a');
@@ -136,7 +125,6 @@ class FileBlot extends BlockEmbed {
         linkTag.setAttribute("target", "_blank");
         linkTag.setAttribute("className", "file-link-inner-post");
         linkTag.appendChild(bTag);
-        //linkTag 이런식으로 나온다 <a href="btn_editPic@3x.png" target="_blank" classname="file-link-inner-post"><b>btn_editPic@3x.png</b></a>
 
         const node = super.create();
         node.appendChild(prefixTag);
@@ -161,7 +149,7 @@ class PollBlot extends BlockEmbed {
 
     static create(value) {
         const prefixTag = document.createElement('span');
-        prefixTag.innerText = "투표 - ";
+        prefixTag.innerText = "Poll - ";
 
         const bTag = document.createElement('b');
         bTag.innerText = value.title;
@@ -196,7 +184,7 @@ class QuillEditor extends React.Component {
     onFilesChange;
     onPollsChange;
     _isMounted;
-
+    
     constructor(props) {
         super(props);
 
@@ -230,10 +218,6 @@ class QuillEditor extends React.Component {
 
     handleChange = (html) => {
         console.log('html', html)
-        // https://youtu.be/BbR-QCoKngE
-        // https://www.youtube.com/embed/ZwKhufmMxko
-        // https://tv.naver.com/v/9176888
-        // renderToStaticMarkup(ReactHtmlParser(html, options));
 
         this.setState({
             editorHtml: html
@@ -242,7 +226,6 @@ class QuillEditor extends React.Component {
         });
     };
 
-    // I V F P들을  눌렀을떄 insertImage: this.imageHandler로 가서  거기서 inputOpenImageRef를 클릭 시킨다. 
     imageHandler = () => {
         this.inputOpenImageRef.current.click();
     };
@@ -279,8 +262,7 @@ class QuillEditor extends React.Component {
                         let range = quill.getSelection();
                         let position = range ? range.index : 0;
 
-                        //먼저 노드 서버에다가 이미지를 넣은 다음에   여기 아래에 src에다가 그걸 넣으면 그게 
-                        //이미지 블롯으로 가서  크리에이트가 이미지를 형성 하며 그걸 발류에서     src 랑 alt 를 가져간후에  editorHTML에 다가 넣는다.
+
                         quill.insertEmbed(position, "image", { src: "http://localhost:5000/" + response.data.url, alt: response.data.fileName });
                         quill.setSelection(position + 1);
 
@@ -412,7 +394,7 @@ class QuillEditor extends React.Component {
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />
-                <input type="file" accept="*" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
+                <input type="file" accept="file/" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
             </div>
         )
     }
@@ -421,7 +403,6 @@ class QuillEditor extends React.Component {
         //syntax: true,
         toolbar: {
             container: "#toolbar",
-            //id ="toorbar"는  그 위에 B I U S I V F P 이거 있는 곳이다. 
             handlers: {
                 insertImage: this.imageHandler,
                 insertVideo: this.videoHandler,

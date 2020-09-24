@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import Layout from '../layout.js';
-import hljs from 'highlight.js'
 import QuillEditor from '../components/QuillEditor';
-import { Typography, Button, Form, message } from 'antd';
+import { Typography, Button, Form } from 'antd';
 import axios from 'axios';
-// import { useSelector, Provider } from "react-redux";
 import { toast } from "react-toastify";
 
 const { Title } = Typography;
@@ -16,15 +14,15 @@ function Edit(props) {
     var pathArray = history.location.pathname.split('/');
 
     const [content, setContent] = useState("")
-    const [files, setFiles] = useState([])
+    // const [files, setFiles] = useState([])
     const onEditorChange = (value) => {
         setContent(value)
         console.log(content)
     }
 
-    const onFilesChange = (files) => {
-        setFiles(files)
-    }
+    // const onFilesChange = (files) => {
+    //     setFiles(files)
+    // }
     const variables = {
         user: global.auth.getUser().id,
         name: pathArray[2],
@@ -59,7 +57,7 @@ function Edit(props) {
                     name={pathArray[2]}
                     placeholder={"Start Posting Something"}
                     onEditorChange={onEditorChange}
-                    onFilesChange={onFilesChange}
+                // onFilesChange={onFilesChange}
                 />
                 <Form onClick={onSubmit}>
                     <div style={{ textAlign: 'center', margin: '2rem', }}>
@@ -74,7 +72,6 @@ function Edit(props) {
                     </div>
                 </Form>
             </div></div>
-
     )
 }
 

@@ -54,10 +54,4 @@ const logout = () => {
     localStorage.removeItem(Name);
 }
 
-// const logout = () =>{
-//     global.auth.logout();   
-//     props.close('logout');
-//     props.history.push('/');
-// }
-
 global.auth = { setUserToken, getUser, logout, setUserName, getUserName, getUserId };

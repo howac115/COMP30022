@@ -1,15 +1,11 @@
 import React from 'react'
-//import UserProfile from './userProfile.js'
-//import Panel from './panel.js';
 import { Link, withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 class Header extends React.Component {
-    // toProfile =() =>{
-    //     Panel.open({
-    //         component: UserProfile
-    //     })
-    // };
+
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
@@ -21,7 +17,7 @@ class Header extends React.Component {
         this.props.history.push('/' + loggedUserId);
     };
     renderUsernameLink() {
-        const username = this.props.user.id; //this.props.user.username;
+        const username = this.props.user.id;
         if (username) {
             return (
                 <React.Fragment>
@@ -49,61 +45,79 @@ class Header extends React.Component {
     }
 
     renderFolios() {
-        if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
+        // if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
+        //     const loggedUserId = global.auth.getUserId().id;
+        //     const createLink = "/" + loggedUserId + "/folios"
+        //     if (loggedUserId === this.props.match.params.id) {
+        //         return (
+        //             <React.Fragment>
+        //                 <Link className="navbar-item" to={createLink}>Folios</Link>
+        //             </React.Fragment>
+        //         );
+        //     }
+        // }
+        if (this.props.user.id) {
             const loggedUserId = global.auth.getUserId().id;
             const createLink = "/" + loggedUserId + "/folios"
-            if (loggedUserId === this.props.match.params.id) {
-                return (
-                    <React.Fragment>
-                        <Link className="navbar-item" to={createLink}>Folios</Link>
-                    </React.Fragment>
-                );
-            }
+            return (
+                <React.Fragment>
+                    <Link className="navbar-item" to={createLink}>Folios</Link>
+                </React.Fragment>
+            );
         }
     }
 
     renderCreate() {
-        var pathArray = this.props.history.location.pathname.split('/')
-        if (this.props.user.id && !pathArray.includes("create")) {
+        // var pathArray = this.props.history.location.pathname.split('/')
+        // if (this.props.user.id && !pathArray.includes("create")) {
+        //     const loggedUserId = global.auth.getUser().id;
+        //     const createLink = "/" + loggedUserId + "/create"
+        //     if (loggedUserId === pathArray[1]) {
+        //         return (
+        //             <React.Fragment>
+        //                 <Link className="navbar-item" to={createLink}>Create</Link>
+        //             </React.Fragment>
+        //         );
+        //     }
+        // }
+        if (this.props.user.id) {
             const loggedUserId = global.auth.getUser().id;
             const createLink = "/" + loggedUserId + "/create"
-            if (loggedUserId === pathArray[1]) {
-                return (
-                    <React.Fragment>
-                        <Link className="navbar-item" to={createLink}>Create</Link>
-                    </React.Fragment>
-                );
-            }
+            return (
+                <React.Fragment>
+                    <Link className="navbar-item" to={createLink}>Create</Link>
+                </React.Fragment>
+            );
         }
     }
 
     render() {
         return (
-            <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-                <div className="navbar-brand">
-                    <Link className="navbar-item" to="/">
-                        <div className='logo-text'>EXPORTFOLIO</div>
-                    </Link>
-                </div>
-
-                <div className="navbar-menu">
-                    <div className="navbar-start">
-                        <Link className="navbar-item" to="/">Home</Link>
-                        <Link className="navbar-item" to="/">Template</Link>
-                        {this.renderFolios()}
-                        {this.renderCreate()}
-                    </div>
-                </div>
-                <div className="navbar-menu is-active">
-                    <div className="navbar-end">
-                        <div className="navbar-item">
-                            <div className="buttons">
-                                {this.renderUsernameLink()}
+            <Navbar className="border-bottom" bg="transparent" expand="lg">                
+                 <Link className="navbar-item" to="/">
+                    <Navbar.Brand>EXPORTFOLIO</Navbar.Brand>
+                </Link>
+                <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
+                <Navbar.Collapse id="navbar-toggle">
+                    <Nav className="ml-auto">
+                        <div className="navbar-end">
+                            <Link className="navbar-item" to="/">Home</Link>
+                            <Link className="navbar-item" to="https://www.eng.unimelb.edu.au/">Template</Link>
+                            {this.renderFolios()}
+                            {this.renderCreate()}
+                        </div>
+                        <div className="navbar-menu is-active">
+                            <div className="navbar-end">
+                                <div className="navbar-item">
+                                    <div className="buttons">
+                                        {this.renderUsernameLink()}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </nav>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }

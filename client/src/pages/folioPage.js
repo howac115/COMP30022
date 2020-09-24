@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../layout.js';
 import axios from 'axios';
-import { Card, Avatar, Col, Typography, Row } from 'antd';
+import { Typography } from 'antd';
 import { useHistory } from "react-router-dom";
 
 const { Title } = Typography
@@ -21,7 +21,7 @@ function FolioPage(props) {
                     setFolio(response.data)
                 }
             })
-    }, [])
+    })
 
     if (folio.content) {
         return (
