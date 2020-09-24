@@ -71,3 +71,17 @@ exports.folio_edit_post = function (req, res) {
         }
     })
 }
+
+// DELETE to delete on folio
+exports.folio_delete_post =  function (req, res) {
+    Folio.findOneAndRemove({
+        user: req.body.user,
+        name: req.body.name,
+    },function (err, deletedFolio) {
+        if (err) {
+            res.status(400).json({ success: false, err })
+        } else {
+            res.status(200).json({ success: true, deletedFolio })
+        }
+    })
+}

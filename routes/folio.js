@@ -22,4 +22,7 @@ router.post('/create', folio_controller.folio_create_post);
 // POST request to edit a folio
 router.post('/:id/edit', folio_controller.folio_edit_post);
 
+// DELETE request to delete a folio
+router.post('/:id/delete', folio_controller.folio_delete_post);
+
 module.exports = router;

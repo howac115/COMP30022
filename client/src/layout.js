@@ -11,7 +11,7 @@ const Layout = props => {
     }, []);
 
     return (
-        <div className="main">
+        <div>
             <Header user={user} />
             <HelperBot />
         </div>
