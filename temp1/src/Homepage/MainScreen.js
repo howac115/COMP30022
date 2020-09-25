@@ -82,7 +82,7 @@ class Screen extends Component {
               initialValue={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor, eligendi laboriosam. Repellendus officia harum eaque."} 
             />
             </div>
-            <div><a href="/aboutme" className="btn btn-light">About me</a></div>
+            <div><a href="/achivement" className="btn btn-light">About me</a></div>
           </div>
   
           <input id="myInput"
