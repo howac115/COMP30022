@@ -258,11 +258,21 @@ p {
 }
 
 #home-experience .experience-img {
-  background: url('photo-1554415707-6e8cfc93fe23.jpeg') no-repeat center top;
+  /* background: url('photo-1554415707-6e8cfc93fe23.jpeg') no-repeat center top; */
   height: 500px;
   float: left;
   width: 50%;
   padding: 50px;
+}
+
+#home-experience .experience-img img {
+  height: 100%;
+  width: 100%;
+}
+
+#home-experience .experience-img video {
+  height: 100%;
+  width: 100%;
 }
 
 #home-experience .experience-card {
@@ -270,6 +280,23 @@ p {
   float: right;
   width: 50%;
   padding: 50px;
+  text-align: center;
+}
+
+#home-experience .experience-card div .second_title_text {
+  font-size: 24px;
+}
+
+#home-experience .experience-card div {
+  margin-bottom: 30px;
+}
+
+#home-experience .experience-bottom-content div .bottom_title_text {
+  font-size: 24px;
+}
+
+#home-experience .experience-bottom-content div {
+  margin-bottom: 30px;
 }
 
 #home-experience .experience-card .card-item{

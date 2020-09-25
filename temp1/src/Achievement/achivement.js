@@ -77,14 +77,12 @@ class Achivement extends Component {
               >
           </CTE>
           </div>
-          
           <CTE 
               wrapperClass="second_content"
               textClass="second_content_text"
               initialValue={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aliquam dolor alias iste autem, quaerat magni unde accusantium quifuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis, explicabo quisquam dolor placeat praesentium nesciunt mollitia quosnobis natus voluptatum asperiores!"}
               >
           </CTE>
-
         </div>
         <div className="image-slider">
           

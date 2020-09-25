@@ -25,14 +25,17 @@ const toolbar = () => (
       <li>
         <Link to="/contact">Contact me</Link>
       </li>
-
+      <li>
+        <Link to="/edit">Edit</Link>
+      </li>
     </ul>
 
     <Route path='/' exact component={MainScreen} />
+
     <Route path='/contact' component={Contact} />
     <Route path='/achivement' component={Achievement} />
     <Route path='/experience' component={Experience} />
-
+    <Route path='/edit' component={MainScreen} />
 
   </div>
 
