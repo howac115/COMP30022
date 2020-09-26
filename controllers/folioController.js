@@ -1,20 +1,5 @@
 var Folio = require("../models/folio");
 var User = require("../models/user");
-// import decode from 'jwt-decode';
-
-// const JWT = "user_token_id";
-
-// GET one specific folio
-exports.folio_detail_get = function (req, res) {
-    Folio.findById(req.params.id, function (err, folio) {
-        if (err) {
-            res.status(409).json({ error: 'Folio not found' })
-        }
-        else {
-            res.status(200).json(folio);
-        }
-    });
-}
 
 // POST request to get one specific folio
 exports.folio_detail_post = function (req, res) {
@@ -73,11 +58,11 @@ exports.folio_edit_post = function (req, res) {
 }
 
 // DELETE to delete on folio
-exports.folio_delete_post =  function (req, res) {
+exports.folio_delete_post = function (req, res) {
     Folio.findOneAndRemove({
         user: req.body.user,
         name: req.body.name,
-    },function (err, deletedFolio) {
+    }, function (err, deletedFolio) {
         if (err) {
             res.status(400).json({ success: false, err })
         } else {
