@@ -1,15 +1,14 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom';
-import { toast } from "react-toastify";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import React from 'react';
+import {Link, withRouter} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 class Header extends React.Component {
-
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
-        toast.success("You have successfully log out")
+        toast.success('You have successfully log out');
     };
 
     toHome = () => {
@@ -21,24 +20,30 @@ class Header extends React.Component {
         if (username) {
             return (
                 <React.Fragment>
-                    <button className="button is-light" onClick={this.toHome} >
-                        <span className='username'>
-                            <i className="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp;
+                    <button className="button is-light" onClick={this.toHome}>
+                        <span className="username">
+                            <i
+                                className="fa fa-user-circle fa-lg"
+                                aria-hidden="true"
+                            ></i>
+                            &nbsp;
                             {username}
                         </span>
                     </button>
-                    <button className="button is-dark" onClick={this.logout}>Logout</button>
+                    <button className="button is-dark" onClick={this.logout}>
+                        Logout
+                    </button>
                 </React.Fragment>
-
             );
-        }
-        else {
+        } else {
             return (
                 <React.Fragment>
                     <Link className="button is-dark" to="/register">
                         <strong>Sign up</strong>
                     </Link>
-                    <Link className="button is-light" to="/login">Log in</Link>
+                    <Link className="button is-light" to="/login">
+                        Log in
+                    </Link>
                 </React.Fragment>
             );
         }
@@ -58,10 +63,12 @@ class Header extends React.Component {
         // }
         if (this.props.user.id) {
             const loggedUserId = global.auth.getUserId().id;
-            const createLink = "/" + loggedUserId + "/folios"
+            const createLink = '/' + loggedUserId + '/folios';
             return (
                 <React.Fragment>
-                    <Link className="navbar-item" to={createLink}>Folios</Link>
+                    <Link className="navbar-item" to={createLink}>
+                        Folios
+                    </Link>
                 </React.Fragment>
             );
         }
@@ -82,10 +89,12 @@ class Header extends React.Component {
         // }
         if (this.props.user.id) {
             const loggedUserId = global.auth.getUser().id;
-            const createLink = "/" + loggedUserId + "/create"
+            const createLink = '/' + loggedUserId + '/create';
             return (
                 <React.Fragment>
-                    <Link className="navbar-item" to={createLink}>Create</Link>
+                    <Link className="navbar-item" to={createLink}>
+                        Create
+                    </Link>
                 </React.Fragment>
             );
         }
@@ -93,16 +102,23 @@ class Header extends React.Component {
 
     render() {
         return (
-            <Navbar className="border-bottom" bg="transparent" expand="lg">                
-                 <Link className="navbar-item" to="/">
+            <Navbar className="border-bottom" bg="transparent" expand="lg">
+                <Link className="navbar-item" to="/">
                     <Navbar.Brand>EXPORTFOLIO</Navbar.Brand>
                 </Link>
-                <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
+                <Navbar.Toggle
+                    className="border-0"
+                    aria-controls="navbar-toggle"
+                />
                 <Navbar.Collapse id="navbar-toggle">
                     <Nav className="ml-auto">
                         <div className="navbar-end">
-                            <Link className="navbar-item" to="/">Home</Link>
-                            <Link className="navbar-item" to="/">Template</Link>
+                            <Link className="navbar-item" to="/">
+                                Home
+                            </Link>
+                            <Link className="navbar-item" to="/">
+                                Template
+                            </Link>
                             {this.renderFolios()}
                             {this.renderCreate()}
                         </div>

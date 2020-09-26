@@ -1,24 +1,23 @@
-import React, { useState } from 'react'
-import { useHistory } from "react-router-dom";
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Layout from '../layout.js';
 import QuillEditor from '../components/QuillEditor';
-import { Typography, Button, Form } from 'antd';
+import {Typography, Button, Form} from 'antd';
 import axios from 'axios';
-import { toast } from "react-toastify";
+import {toast} from 'react-toastify';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 function Edit(props) {
-
     let history = useHistory();
     var pathArray = history.location.pathname.split('/');
 
-    const [content, setContent] = useState("")
+    const [content, setContent] = useState('');
     // const [files, setFiles] = useState([])
-    const onEditorChange = (value) => {
-        setContent(value)
-        console.log(content)
-    }
+    const onEditorChange = value => {
+        setContent(value);
+        console.log(content);
+    };
 
     // const onFilesChange = (files) => {
     //     setFiles(files)
@@ -26,41 +25,41 @@ function Edit(props) {
     const variables = {
         user: global.auth.getUser().id,
         name: pathArray[2],
-        content: content
-    }
-    const onSubmit = (event) => {
+        content: content,
+    };
+    const onSubmit = event => {
         event.preventDefault();
         console.log('submit');
-        setContent("");
+        setContent('');
 
-        axios.post('/folio/' + variables.user + '/edit', variables)
+        axios
+            .post('/folio/' + variables.user + '/edit', variables)
             .then(response => {
                 if (response) {
                     toast.success('Post Created!');
                     setTimeout(() => {
-                        history.push('/' + variables.user + '/folios')
+                        history.push('/' + variables.user + '/folios');
                     }, 2000);
                 }
-            })
-    }
-
+            });
+    };
 
     return (
-        <div className='Edit'>
+        <div className="Edit">
             <Layout />
-            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-                <div style={{ textAlign: 'center' }}>
-                    <Title level={2} > Editor</Title>
+            <div style={{maxWidth: '700px', margin: '2rem auto'}}>
+                <div style={{textAlign: 'center'}}>
+                    <Title level={2}> Editor</Title>
                 </div>
                 <QuillEditor
                     user={pathArray[1]}
                     name={pathArray[2]}
-                    placeholder={"Start Posting Something"}
+                    placeholder={'Start Posting Something'}
                     onEditorChange={onEditorChange}
-                // onFilesChange={onFilesChange}
+                    // onFilesChange={onFilesChange}
                 />
                 <Form onClick={onSubmit}>
-                    <div style={{ textAlign: 'center', margin: '2rem', }}>
+                    <div style={{textAlign: 'center', margin: '2rem'}}>
                         <Button
                             size="large"
                             htmlType="submit"
@@ -68,11 +67,12 @@ function Edit(props) {
                             onClick={onSubmit}
                         >
                             Submit
-            </Button>
+                        </Button>
                     </div>
                 </Form>
-            </div></div>
-    )
+            </div>
+        </div>
+    );
 }
 
-export default Edit
+export default Edit;
