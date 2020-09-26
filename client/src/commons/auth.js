@@ -1,7 +1,7 @@
 import decode from 'jwt-decode';
 
-const JWT = "user_token_id";
-const Name = "user_name";
+const JWT = 'user_token_id';
+const Name = 'user_name';
 
 const setUserToken = token => {
     localStorage.setItem(JWT, token);
@@ -10,13 +10,14 @@ const setUserToken = token => {
 const setUserName = userName => {
     localStorage.setItem(Name, userName);
 };
+
 const getUserName = () => {
     return localStorage.getItem(Name);
 };
 
 const getUserId = () => {
     return decode(getUserToken());
-}
+};
 
 const getUserToken = () => {
     return localStorage.getItem(JWT);
@@ -27,8 +28,7 @@ const getUser = () => {
     if (isLogin()) {
         const user = decode(userToken);
         return user;
-    }
-    else {
+    } else {
         return null;
     }
 };
@@ -52,6 +52,13 @@ const isLogin = () => {
 const logout = () => {
     localStorage.removeItem(JWT);
     localStorage.removeItem(Name);
-}
+};
 
-global.auth = { setUserToken, getUser, logout, setUserName, getUserName, getUserId };
+global.auth = {
+    setUserToken,
+    getUser,
+    logout,
+    setUserName,
+    getUserName,
+    getUserId,
+};
