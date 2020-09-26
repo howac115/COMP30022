@@ -167,9 +167,9 @@ export default function SignUp(props) {
                                 value={true}
                             />{' '}
                             &nbsp; I agree to the{' '}
-                            <i href="https://www.google.com">
+                            <a href="https://academicintegrity.unimelb.edu.au/">
                                 terms and conditions
-                            </i>
+                            </a>
                         </label>
                         {errors.checkbox && (
                             <i className="helper has-text-danger">
