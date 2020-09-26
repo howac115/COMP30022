@@ -1,19 +1,6 @@
-var Folio = require('../models/folio');
-var User = require('../models/user');
-// import decode from 'jwt-decode';
+var Folio = require("../models/folio");
+var User = require("../models/user");
 
-// const JWT = "user_token_id";
-
-// GET one specific folio
-exports.folio_detail_get = function (req, res) {
-    Folio.findById(req.params.id, function (err, folio) {
-        if (err) {
-            res.status(409).json({error: 'Folio not found'});
-        } else {
-            res.status(200).json(folio);
-        }
-    });
-};
 
 // POST request to get one specific folio
 exports.folio_detail_post = function (req, res) {
