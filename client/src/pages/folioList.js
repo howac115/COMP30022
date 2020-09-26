@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
@@ -31,11 +33,49 @@ export default function FolioList(props) {
             }
         });
     }, []);
+
     const handleDelete = prop => {
         const user = global.auth.getUser().id;
         axios.post('/folio/' + user + '/delete', {user: user, name: prop});
         toast.success(prop + ' succeccful delete');
         history.go(0);
+    };
+    const askDelete = prop => {
+        confirmAlert({
+            //TODO: fix the css type error:
+            // use the domo of https://github.com/GA-MO/react-confirm-alert
+            customUI: ({onClose}) => {
+                return (
+                    <div className="container">
+                        <div>
+                            <h1>Do you want to delete this portfolio?</h1>
+                        </div>
+                        <div className="field is-grouped">
+                            <div className="control">
+                                <button
+                                    className="button is-danger"
+                                    onClick={() => {
+                                        handleDelete(prop);
+                                        onClose(prop);
+                                    }}
+                                >
+                                    Yes, I confirm!
+                                </button>
+                            </div>
+
+                            <div className="control">
+                                <button
+                                    className="button is-light"
+                                    onClick={onClose}
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            },
+        });
     };
     const handleShare = prop => {
         const user = global.auth.getUser().id;
@@ -54,7 +94,7 @@ export default function FolioList(props) {
                         actions={[
                             <button
                                 className="button is-danger"
-                                onClick={handleDelete.bind(this, folio.name)}
+                                onClick={askDelete.bind(this, folio.name)}
                             >
                                 <DeleteOutlined />
                             </button>,
