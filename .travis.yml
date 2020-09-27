@@ -1,17 +1,19 @@
 language: node_js
-node_js: 
-  - "stable"
+node_js:
+    - 'stable'
 
+services:
+    - mongodb
 cache:
-  directories:
-    - node_modules
+    directories:
+        - node_modules
 
 install:
-  - npm install
+    - npm install
 
 script:
-  - npm run test
+    - npm run test
 
 branches:
-  only:
-    - Pipeline_Testing
+    only:
+        - Pipeline_Testing
