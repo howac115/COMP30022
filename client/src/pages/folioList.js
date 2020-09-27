@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
+import React, {useEffect, useState} from 'react';
+import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import { Card, Col, Typography, Row } from 'antd';
+import {Card, Col, Typography, Row} from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
@@ -12,11 +12,11 @@ import {
     EditOutlined,
     EyeOutlined,
 } from '@ant-design/icons';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import {toast} from 'react-toastify';
+import {useHistory} from 'react-router-dom';
 
-const { Title } = Typography;
-const { Meta } = Card;
+const {Title} = Typography;
+const {Meta} = Card;
 
 export default function FolioList(props) {
     let history = useHistory();
@@ -24,7 +24,7 @@ export default function FolioList(props) {
 
     useEffect(() => {
         const user = global.auth.getUser().id;
-        axios.post('/folio/all', { user }).then(response => {
+        axios.post('/folio/all', {user}).then(response => {
             if (response.data.success) {
                 // console.log(response.data.folios)
                 setFolios(response.data.folios);
@@ -34,17 +34,18 @@ export default function FolioList(props) {
         });
     }, []);
 
-    const handleDelete = prop => {
+    const handleDelete = async prop => {
         const user = global.auth.getUser().id;
-        axios.post('/folio/' + user + '/delete', { user: user, name: prop });
+        await axios.post('/folio/' + user + '/delete', {
+            user: user,
+            name: prop,
+        });
         toast.success(prop + ' succeccful delete');
         history.go(0);
     };
     const askDelete = prop => {
         confirmAlert({
-            //TODO: fix the css type error:
-            // use the domo of https://github.com/GA-MO/react-confirm-alert
-            customUI: ({ onClose }) => {
+            customUI: ({onClose}) => {
                 return (
                     <div className="container">
                         <div>
@@ -56,8 +57,8 @@ export default function FolioList(props) {
                                 <button
                                     className="button is-danger"
                                     onClick={() => {
-                                        handleDelete(prop);
                                         onClose(prop);
+                                        handleDelete(prop);
                                     }}
                                 >
                                     Yes, I confirm!
@@ -91,7 +92,7 @@ export default function FolioList(props) {
                 <Draggable>
                     <Card
                         hoverable
-                        style={{ width: 300, marginTop: 16 }}
+                        style={{width: 300, marginTop: 16}}
                         actions={[
                             <button
                                 className="button is-danger"
@@ -145,7 +146,7 @@ export default function FolioList(props) {
     return (
         <div>
             <Layout />
-            <div style={{ width: '85%', margin: '3rem auto' }}>
+            <div style={{width: '85%', margin: '3rem auto'}}>
                 <Title level={2}> Folio Lists </Title>
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>

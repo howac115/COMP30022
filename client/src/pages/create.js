@@ -54,9 +54,9 @@ export default function Create(props) {
                                 ref={register({required: true})}
                             />
                             {errors.name && (
-                                <p className="helper has-text-danger">
-                                    Name is required.
-                                </p>
+                                <i className="helper has-text-danger">
+                                    Name is required
+                                </i>
                             )}
                         </div>
                     </div>
