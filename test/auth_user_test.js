@@ -1,11 +1,16 @@
-// Request API:
+// this test file went through a time-out issue
+// thought to be related to duplicate keys in mongo DB
+// But actually solved by putting the "--timeout 30000" flag in mocha options in packages.json
+// 12:31AM 28/09/2020 --- Yutao Wang and Haoqi Chen
+
+// Request API Docs:
 // https://www.npmjs.com/package/request#requestoptions-callback
 
 // set the upstream test for this test file to be server test
 require('./server_test');
 
 const expect = require('chai').expect;
-const { response } = require('express');
+const {response} = require('express');
 const request = require('request');
 const app = require('../server');
 
@@ -41,16 +46,16 @@ const reqBodyLoginWrongPwd = {
 };
 
 describe('-----------------AUTH AND USER MANAGEMENT----------------', function () {
-
-    describe('Testing if server will disapprove the request to delete a user that does not exist', function () {
+    describe('Deleting an non existing user', function () {
         it('should disapprove the delete request and return a http status code 409', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: userURL + 'delete',
-                    body: { reqBodyLogin },
+                    body: {reqBodyLogin},
                     json: true,
-                }, function (error, response, body) {
+                },
+                function (error, response, body) {
                     expect(response.statusCode).to.equal(409);
                     if (error) done(error);
                     else done();
@@ -59,11 +64,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if register works as intended for a fresh new user', function () {
-        it('registering for a fresh new User should expect the http response status code to be 200', function (done) {
+    describe('Register a new user', function () {
+        it('should succeed and return status code 200', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: authURL + 'register',
                     body: reqBodyRegister,
                     json: true,
@@ -77,11 +82,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if duplicate registers are abandoned', function () {
-        it('registering for a User that already registers in database should be forbidden and return status code 409', function (done) {
+    describe('Duplicate register a user with existing email', function () {
+        it('should reject and return status code 409', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: authURL + 'register',
                     body: reqBodyRegister,
                     json: true,
@@ -95,11 +100,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if login works as intended if a user provide correct email and password', function () {
-        it('a user should be able to login with correct email and password, the server should return http response status code 200', function (done) {
+    describe('Login with correct email and password', function () {
+        it('should succeed and return status code 200', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: authURL + 'login',
                     body: reqBodyLogin,
                     json: true,
@@ -113,11 +118,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if server will reject the login behaviour if email provided is not found in database', function () {
-        it('should reject the login process and return a http status code 409', function (done) {
+    describe('Login with non-registered email', function () {
+        it('should reject and return the http status code 409', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: authURL + 'login',
                     body: reqBodyLoginWrongEmail,
                     json: true,
@@ -131,11 +136,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if server will reject the login behaviour if email found but password is wrong', function () {
-        it('should reject the login process and return a http status code 409', function (done) {
+    describe('Login with password being wrong', function () {
+        it('should reject return a http status code 409', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: authURL + 'login',
                     body: reqBodyLoginWrongPwd,
                     json: true,
@@ -149,29 +154,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if server will reject the request to delete a user if email not found', function () {
+    describe('Delete user but password wrong', function () {
         it('should reject the delete request and return a http status code 409', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
-                    url: userURL + 'delete',
-                    body: reqBodyLoginWrongEmail,
-                    json: true,
-                },
-                function (error, response, body) {
-                    expect(response.statusCode).to.equal(409);
-                    if (error) done(error);
-                    else done();
-                }
-            );
-        });
-    });
-
-    describe('Testing if server will reject the request to delete a user if password and email not match', function () {
-        it('should reject the delete request and return a http status code 409', function (done) {
-            request.post(
-                {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: userURL + 'delete',
                     body: reqBodyLoginWrongPwd,
                     json: true,
@@ -185,11 +172,11 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if server will approve the request to delete a user if password and email match', function () {
+    describe('Delete user and password correct', function () {
         it('should approve the delete request and return a http status code 200', function (done) {
             request.post(
                 {
-                    headers: { 'content-type': 'application/json' },
+                    headers: {'content-type': 'application/json'},
                     url: userURL + 'delete',
                     body: reqBodyLogin,
                     json: true,
