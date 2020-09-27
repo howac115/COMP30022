@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { Link, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -116,7 +116,7 @@ class Header extends React.Component {
                             <Link className="navbar-item" to="/">
                                 Home
                             </Link>
-                            <Link className="navbar-item" to="/">
+                            <Link className="navbar-item" to="/template">
                                 Template
                             </Link>
                             {this.renderFolios()}

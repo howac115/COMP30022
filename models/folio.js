@@ -9,6 +9,12 @@ const FolioSchema = mongoose.Schema({
     content: {
         type: String,
     },
+    visible: {
+        type: Boolean
+    },
+    shareAsTemplate: {
+        type: Boolean
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

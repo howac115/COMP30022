@@ -12,10 +12,8 @@ const app = express();
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
-
-
 // Database config
-const db = require('./config/keys').mongoURL;
+const db = require('./config/key').mongoURL;
 
 // Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {confirmAlert} from 'react-confirm-alert';
+import React, { useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Typography, Row} from 'antd';
+import { Card, Col, Dropdown, Menu, Typography, Row } from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
-    DeleteOutlined,
     EditOutlined,
     EyeOutlined,
+    SettingOutlined
 } from '@ant-design/icons';
-import {toast} from 'react-toastify';
-import {useHistory} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
-const {Meta} = Card;
+const { Title } = Typography;
+const { Meta } = Card;
 
 export default function FolioList(props) {
     let history = useHistory();
@@ -24,7 +24,7 @@ export default function FolioList(props) {
 
     useEffect(() => {
         const user = global.auth.getUser().id;
-        axios.post('/folio/all', {user}).then(response => {
+        axios.post('/folio/all', { user }).then(response => {
             if (response.data.success) {
                 // console.log(response.data.folios)
                 setFolios(response.data.folios);
@@ -33,6 +33,57 @@ export default function FolioList(props) {
             }
         });
     }, []);
+
+    async function handleVisible(folio) {
+        console.log(folio)
+        if (folio.visible === false) {
+            await axios.post('/folio/' + folio.user + '/visible', {
+                user: folio.user,
+                name: folio.name,
+                visible: true,
+                shareAsTemplate: folio.shareAsTemplate
+            });
+        } else {
+            await axios.post('/folio/' + folio.user + '/visible', {
+                user: folio.user,
+                name: folio.name,
+                visible: false,
+                shareAsTemplate: false
+            });
+        }
+        if (folio.visible) {
+            toast.success(folio.name + ' successfully set private');
+            history.go(0);
+        } else {
+            toast.success(folio.name + ' successfully set public');
+            history.go(0);
+        }
+    }
+
+    async function handleTemplate(folio) {
+        console.log(folio)
+        if (folio.shareAsTemplate === false) {
+            await axios.post('/folio/' + folio.user + '/visible', {
+                user: folio.user,
+                name: folio.name,
+                visible: true,
+                shareAsTemplate: true
+            });
+        } else {
+            await axios.post('/folio/' + folio.user + '/visible', {
+                user: folio.user,
+                name: folio.name,
+                visible: folio.visible,
+                shareAsTemplate: false
+            });
+        }
+        if (!folio.shareAsTemplate) {
+            toast.success(folio.name + ' successfully share as template');
+        } else {
+            toast.success(folio.name + ' successfully stop sharing');
+        }
+        setTimeout(history.go(0), 4000);
+    }
 
     const handleDelete = async prop => {
         const user = global.auth.getUser().id;
@@ -43,9 +94,10 @@ export default function FolioList(props) {
         toast.success(prop + ' succeccful delete');
         history.go(0);
     };
+
     const askDelete = prop => {
         confirmAlert({
-            customUI: ({onClose}) => {
+            customUI: ({ onClose }) => {
                 return (
                     <div className="container">
                         <div>
@@ -79,6 +131,7 @@ export default function FolioList(props) {
             },
         });
     };
+
     const handleShare = prop => {
         const user = global.auth.getUser().id;
         navigator.clipboard.writeText(
@@ -86,20 +139,50 @@ export default function FolioList(props) {
         );
         toast.success(prop + ' is succeccful copied to clipboard');
     };
+
+    function visibility(folio) {
+        if (folio.visible !== false) {
+            return <p>Set Private</p>
+        } else {
+            return <p>Set Public</p>
+        }
+    }
+
+    function shareAsTemplate(folio) {
+        if (folio.shareAsTemplate === true) {
+            return <p>Stop Sharing</p>
+        } else {
+            return <p>Share As Template</p>
+        }
+    }
+
+
+
     const renderCards = folios.map((folio, index) => {
         return (
             <Col key={index} lg={8} md={12} xs={24}>
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
+                        style={{ width: 300, marginTop: 16 }}
                         actions={[
-                            <button
-                                className="button is-danger"
-                                onClick={askDelete.bind(this, folio.name)}
-                            >
-                                <DeleteOutlined />
-                            </button>,
+                            <Dropdown overlay={
+                                <Menu>
+                                    <Menu.Item onClick={() => { handleVisible(folio); }}>
+                                        {visibility(folio)}
+                                    </Menu.Item>
+                                    <Menu.Item onClick={() => { handleTemplate(folio); }}>
+                                        {shareAsTemplate(folio)}
+                                    </Menu.Item>
+                                    <Menu.Item danger onClick={askDelete.bind(this, folio.name)}>
+                                        Delete Page
+                                    </Menu.Item>
+                                </Menu>
+                            } arrow>
+                                <button className="button is-light">
+                                    <SettingOutlined />
+                                </button>
+                            </Dropdown>,
                             <button className="button is-light">
                                 <a href={folio.name + '/edit'}>
                                     {' '}
@@ -146,8 +229,8 @@ export default function FolioList(props) {
     return (
         <div>
             <Layout />
-            <div style={{width: '85%', margin: '3rem auto'}}>
-                <Title level={2}> Folio Lists </Title>
+            <div style={{ width: '85%', margin: '3rem auto' }}>
+                <Title level={2}> My Folios </Title>
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>
         </div>
