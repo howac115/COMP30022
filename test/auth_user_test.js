@@ -12,11 +12,11 @@ const app = require('../server');
 const authURL = 'http://localhost:5000/auth/';
 const userURL = 'http://localhost:5000/user/';
 
-const firstName = 'Bei';
-const lastName = 'Liu';
-const email = 'liubei@threekingdoms.com.cn';
-const password = 'guangfuHanshi';
-const wrongPassword = 'woshicaocao';
+const firstName = 'Lv';
+const lastName = 'Bu';
+const email = 'lvbu@threekingdoms.com.cn';
+const password = 'woyaodiaochan';
+const wrongPassword = 'woshiliubei';
 
 const reqBodyRegister = {
     firstName: firstName,
