@@ -12,16 +12,20 @@ const app = express();
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
-
-
 // Database config
 const db = require('./config/keys').mongoURL;
 
 // Connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+    .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 
+
+// Access the base of server using get method
+app.get('/', (req, res) => {
+    res.json('Success access');
+});
 
 // Use Routes
 app.use('/auth', auth);
@@ -41,3 +45,5 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
+
+module.exports = app;
