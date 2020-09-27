@@ -28,5 +28,5 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-run the test cases for the backend, this is automatically done every time before pushing to github.
+run the test cases for the backend, this is automatically done every time right after pushing new code to github.
 this is done by Travis CI, to learn more, see https://travis-ci.com/
