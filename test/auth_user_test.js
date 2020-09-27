@@ -53,7 +53,7 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
                 }, function (error, response, body) {
                     expect(response.statusCode).to.equal(409);
                     if (error) done(error).timeout(30000);
-                    else done();
+                    else done().timeout(30000);
                 }
             );
         });
