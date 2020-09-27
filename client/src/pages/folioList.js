@@ -31,11 +31,51 @@ export default function FolioList(props) {
             }
         });
     }, []);
-    const handleDelete = prop => {
+
+    const handleDelete = async prop => {
         const user = global.auth.getUser().id;
-        axios.post('/folio/' + user + '/delete', {user: user, name: prop});
+        await axios.post('/folio/' + user + '/delete', {
+            user: user,
+            name: prop,
+        });
         toast.success(prop + ' succeccful delete');
         history.go(0);
+    };
+    const askDelete = prop => {
+        confirmAlert({
+            customUI: ({onClose}) => {
+                return (
+                    <div className="container">
+                        <div>
+                            <h1>Do you want to delete this portfolio?</h1>
+                            <br></br>
+                        </div>
+                        <div className="field is-grouped">
+                            <div className="control">
+                                <button
+                                    className="button is-danger"
+                                    onClick={() => {
+                                        onClose(prop);
+                                        handleDelete(prop);
+                                    }}
+                                >
+                                    Yes, I confirm!
+                                </button>
+                            </div>
+
+                            <div className="control">
+                                <button
+                                    className="button is-light"
+                                    onClick={onClose}
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            },
+        });
     };
     const handleShare = prop => {
         const user = global.auth.getUser().id;
