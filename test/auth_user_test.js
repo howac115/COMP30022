@@ -167,7 +167,7 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
         });
     });
 
-    describe('Testing if server will approve the request to delete a user if password and email do match', function () {
+    describe('Testing if server will approve the request to delete a user if password and email match', function () {
         it('should approve the delete request and return a http status code 200', function (done) {
             request.post(
                 {
