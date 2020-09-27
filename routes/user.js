@@ -13,4 +13,7 @@ router.get('/:id', user_controller.user_detail_get);
 // GET request to view one specific folio of one user
 router.get('/:id/:name', user_controller.user_folio_get);
 
+// POST request to delete a user from database
+router.post('/delete', user_controller.user_purge_post);
+
 module.exports = router;
