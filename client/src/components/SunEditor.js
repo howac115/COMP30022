@@ -34,6 +34,10 @@ class sunEditor extends React.Component {
             });
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     handleChange = content => {
         this.setState({editorHtml: content}, () => {
             this.props.onEditorChange(this.state.editorHtml);
