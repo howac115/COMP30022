@@ -2,31 +2,31 @@ import React from 'react';
 import SunEditor from 'suneditor-react';
 import axios from 'axios';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
-import katex from 'katex'
-import 'katex/dist/katex.min.css'
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
 class sunEditor extends React.Component {
-
     onEditorChange;
     _isMounted;
 
     constructor(props) {
-        super(props)
-        this.state = { editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : '' }
+        super(props);
+        this.state = {editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : ''};
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this._isMounted = true;
-        axios
+        await axios
             .post('/folio/' + this.props.name.user + '/one', {
                 user: this.props.user,
                 name: this.props.name,
             })
             .then(response => {
                 if (response.data.content) {
-                    this.setState({ editorHtml: response.data.content });
+                    console.log(response.data.content);
+                    this.handleChange(response.data.content);
                 }
             })
             .catch(error => {
@@ -35,10 +35,10 @@ class sunEditor extends React.Component {
     }
 
     handleChange = content => {
-        this.setState({ editorHtml: content }, () => {
+        this.setState({editorHtml: content}, () => {
             this.props.onEditorChange(this.state.editorHtml);
         });
-    }
+    };
 
     render() {
         return (
@@ -48,7 +48,7 @@ class sunEditor extends React.Component {
                     setContents={this.state.editorHtml}
                     onChange={this.handleChange}
                     setOptions={{
-                        height: "600",
+                        height: '600',
                         imageFileInput: false,
                         katex: katex,
                         // add all functionalities needed
@@ -57,21 +57,37 @@ class sunEditor extends React.Component {
                             ['font', 'fontSize', 'formatBlock'],
                             ['removeFormat'],
                             ['paragraphStyle', 'blockquote'],
-                            ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                            [
+                                'bold',
+                                'underline',
+                                'italic',
+                                'strike',
+                                'subscript',
+                                'superscript',
+                            ],
                             ['fontColor', 'hiliteColor', 'textStyle'],
                             ['outdent', 'indent'],
                             ['align', 'horizontalRule', 'list', 'lineHeight'],
-                            ['table', 'link', 'image', 'video', 'audio', 'math'], // You must add the 'katex' library at options to use the 'math' plugin.
-                            /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
-                            ['fullScreen', 'showBlocks', 'codeView'],
+                            [
+                                'table',
+                                'link',
+                                'image',
+                                'video',
+                                'audio',
+                                'math',
+                            ], // You must add the 'katex' library at options to use the 'math' plugin. // You must add the "imageGalleryUrl".
+                            /** ['imageGallery'] */ [
+                                'fullScreen',
+                                'showBlocks',
+                                'codeView',
+                            ],
                             ['preview', 'print'],
-                            ['save']
-                        ]
+                            ['save'],
+                        ],
                     }}
                 />
-            </div >
+            </div>
         );
     }
-
-};
+}
 export default sunEditor;
