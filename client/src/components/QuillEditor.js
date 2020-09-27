@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactQuill, {Quill} from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
@@ -65,7 +65,7 @@ class ImageBlot extends BlockEmbed {
     }
 
     static value(node) {
-        return {src: node.getAttribute('src'), alt: node.getAttribute('alt')};
+        return { src: node.getAttribute('src'), alt: node.getAttribute('alt') };
     }
 }
 
@@ -161,7 +161,7 @@ class PollBlot extends BlockEmbed {
         const id = node.getAttribute('id');
         const bTag = node.querySelector('b');
         const title = bTag.innerText;
-        return {id, title};
+        return { id, title };
     }
 }
 
@@ -201,7 +201,7 @@ class QuillEditor extends React.Component {
             })
             .then(response => {
                 if (response.data.content) {
-                    this.setState({editorHtml: response.data.content});
+                    this.setState({ editorHtml: response.data.content });
                 }
             })
             .catch(error => {
@@ -216,14 +216,9 @@ class QuillEditor extends React.Component {
     handleChange = html => {
         console.log('html', html);
 
-        this.setState(
-            {
-                editorHtml: html,
-            },
-            () => {
-                this.props.onEditorChange(this.state.editorHtml);
-            }
-        );
+        this.setState({ editorHtml: html }, () => {
+            this.props.onEditorChange(this.state.editorHtml);
+        });
     };
 
     imageHandler = () => {
@@ -251,7 +246,7 @@ class QuillEditor extends React.Component {
 
             let formData = new FormData();
             const config = {
-                header: {'content-type': 'multipart/form-data'},
+                header: { 'content-type': 'multipart/form-data' },
             };
             formData.append('file', file);
 
@@ -301,7 +296,7 @@ class QuillEditor extends React.Component {
 
             let formData = new FormData();
             const config = {
-                header: {'content-type': 'multipart/form-data'},
+                header: { 'content-type': 'multipart/form-data' },
             };
             formData.append('file', file);
 
@@ -351,7 +346,7 @@ class QuillEditor extends React.Component {
 
             let formData = new FormData();
             const config = {
-                header: {'content-type': 'multipart/form-data'},
+                header: { 'content-type': 'multipart/form-data' },
             };
             formData.append('file', file);
 
@@ -428,21 +423,21 @@ class QuillEditor extends React.Component {
                     type="file"
                     accept="image/*"
                     ref={this.inputOpenImageRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     onChange={this.insertImage}
                 />
                 <input
                     type="file"
                     accept="video/*"
                     ref={this.inputOpenVideoRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     onChange={this.insertVideo}
                 />
                 <input
                     type="file"
                     accept="file/"
                     ref={this.inputOpenFileRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     onChange={this.insertFile}
                 />
             </div>

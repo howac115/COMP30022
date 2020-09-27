@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {toast} from 'react-toastify';
 
@@ -21,14 +20,7 @@ export default function SignUp(props) {
                 password2,
             });
             toast.success('Sign Up Success');
-            const res = await axios.post('/auth/login', {email, password});
-            const token = res.data.token;
-            global.auth.setUserToken(token);
-            const _res = await axios.get('/user/' + global.auth.getUser().id);
-            const userName = _res.data.firstName;
-            global.auth.setUserName(userName);
-            props.history.push('/' + res.data.user.id);
-            toast.success('Welcome ' + userName);
+            props.history.push('/login');
         } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
@@ -52,12 +44,7 @@ export default function SignUp(props) {
                         </strong>
                     </center>
                 </label>
-                <div>
-                    Already a Member?{' '}
-                    <Link to="../Login">
-                        <i>Log In</i>
-                    </Link>
-                </div>
+
                 <div className="field">
                     <label className="label">First Name</label>
                     <div className="control">
@@ -70,9 +57,9 @@ export default function SignUp(props) {
                             ref={register({required: true})}
                         />
                         {errors.firstName && (
-                            <i className="helper has-text-danger">
-                                First Name is required
-                            </i>
+                            <p className="helper has-text-danger">
+                                First Name is required.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -89,9 +76,9 @@ export default function SignUp(props) {
                             ref={register({required: true})}
                         />
                         {errors.lastName && (
-                            <i className="helper has-text-danger">
-                                Last Name is required
-                            </i>
+                            <p className="helper has-text-danger">
+                                Last Name is required.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -107,9 +94,9 @@ export default function SignUp(props) {
                             ref={register({required: true})}
                         />
                         {errors.email && (
-                            <i className="helper has-text-danger">
-                                Email is required
-                            </i>
+                            <p className="helper has-text-danger">
+                                Email is required.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -129,9 +116,9 @@ export default function SignUp(props) {
                             })}
                         />
                         {errors.password && (
-                            <i className="helper has-text-danger">
-                                Need to longer than 6 characters
-                            </i>
+                            <p className="helper has-text-danger">
+                                Need to longer than 6 characters.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -150,9 +137,9 @@ export default function SignUp(props) {
                             })}
                         />
                         {errors.password2 && (
-                            <i className="helper has-text-danger">
-                                Not same as before
-                            </i>
+                            <p className="helper has-text-danger">
+                                Not same as before.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -167,14 +154,14 @@ export default function SignUp(props) {
                                 value={true}
                             />{' '}
                             &nbsp; I agree to the{' '}
-                            <a href="https://academicintegrity.unimelb.edu.au/">
+                            <a href="https://www.google.com">
                                 terms and conditions
                             </a>
                         </label>
                         {errors.checkbox && (
-                            <i className="helper has-text-danger">
+                            <p className="helper has-text-danger">
                                 Please agree the terms and conditions
-                            </i>
+                            </p>
                         )}
                     </div>
                 </div>

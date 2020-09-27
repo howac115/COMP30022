@@ -3,55 +3,51 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-
+    
     .login_box {
-        opacity: 0.95;
+        opacity:0.95;
         width: 350px;
         padding: 1.5rem 1.5rem 2rem 1.5rem;
     }
 
     background-image: url('./image/login-background.jpeg');
-    background-repeat: no-repeat;
+    background-repeat:no-repeat;
     background-size: cover;
 }
 
-.folio_list {
-    .conformation_box {
-        height: 100px;
-        width: 350px;
-        padding: 1.5rem 1.5rem 2rem 1.5rem;
-    }
-}
 
 .signUp {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
+    
     .signUp_box {
-        opacity: 0.95;
+        opacity:0.95;
         width: 350px;
         padding: 1.5rem 1.5rem 2rem 1.5rem;
     }
 
     background-image: url('./image/login-background.jpeg');
-    background-repeat: no-repeat;
+    background-repeat:no-repeat;
     background-size: cover;
 }
 
-.panel-wrapper {
+
+
+.panel-wrapper{
     position: relative;
     z-index: 99;
-    .panel {
+    .panel{
         transition: all 0.3s ease-in-out;
         transform: translateX(25rem);
+
     }
-    &.active {
-        .over-layer {
+    &.active{
+        .over-layer{
             display: block;
         }
-        .panel {
+        .panel{
             transform: translateX(0);
         }
     }
@@ -94,3 +90,5 @@
 //         margin-right: 4px;
 //     }
 // }
+
+

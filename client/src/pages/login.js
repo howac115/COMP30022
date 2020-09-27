@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {toast} from 'react-toastify';
 
@@ -52,9 +51,9 @@ export default function Login(props) {
                             ref={register({required: true})}
                         />
                         {errors.email && (
-                            <i className="helper has-text-danger">
-                                Email is required
-                            </i>
+                            <p className="helper has-text-danger">
+                                Email is required.
+                            </p>
                         )}
                     </div>
                 </div>
@@ -71,17 +70,11 @@ export default function Login(props) {
                             ref={register({required: true})}
                         />
                         {errors.password && (
-                            <i className="helper has-text-danger">
-                                Password is required
-                            </i>
+                            <p className="helper has-text-danger">
+                                Password is required.
+                            </p>
                         )}
                     </div>
-                </div>
-                <div>
-                    Not a member?{' '}
-                    <Link to="../Register">
-                        <i>Sign Up</i>
-                    </Link>
                 </div>
                 <div className="field is-grouped">
                     <div className="control">
