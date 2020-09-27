@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Layout from '../layout.js';
-// import QuillEditor from '../components/QuillEditor';
 import SunEditor from '../components/SunEditor';
 import { Typography, Button, Form } from 'antd';
 import axios from 'axios';

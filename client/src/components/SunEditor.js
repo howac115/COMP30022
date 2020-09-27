@@ -2,6 +2,8 @@ import React from 'react';
 import SunEditor from 'suneditor-react';
 import axios from 'axios';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
+import katex from 'katex'
+import 'katex/dist/katex.min.css'
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
 class sunEditor extends React.Component {
@@ -47,6 +49,8 @@ class sunEditor extends React.Component {
                     onChange={this.handleChange}
                     setOptions={{
                         height: "600",
+                        imageFileInput: false,
+                        katex: katex,
                         // add all functionalities needed
                         buttonList: [
                             ['undo', 'redo'],
@@ -57,7 +61,7 @@ class sunEditor extends React.Component {
                             ['fontColor', 'hiliteColor', 'textStyle'],
                             ['outdent', 'indent'],
                             ['align', 'horizontalRule', 'list', 'lineHeight'],
-                            ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+                            ['table', 'link', 'image', 'video', 'audio', 'math'], // You must add the 'katex' library at options to use the 'math' plugin.
                             /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
                             ['fullScreen', 'showBlocks', 'codeView'],
                             ['preview', 'print'],

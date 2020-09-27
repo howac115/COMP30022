@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
@@ -94,7 +96,7 @@ export default function FolioList(props) {
                         actions={[
                             <button
                                 className="button is-danger"
-                                onClick={handleDelete.bind(this, folio.name)}
+                                onClick={askDelete.bind(this, folio.name)}
                             >
                                 <DeleteOutlined />
                             </button>,
