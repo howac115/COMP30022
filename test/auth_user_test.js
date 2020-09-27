@@ -41,6 +41,24 @@ const reqBodyLoginWrongPwd = {
 };
 
 describe('-----------------AUTH AND USER MANAGEMENT----------------', function () {
+    describe('delete the user at the very beginning', function () {
+        it('should return status code 409', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + 'delete',
+                    body: reqBodyLogin,
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
     describe('Testing if register works as intended for a fresh new user', function () {
         it('registering for a fresh new User should expect the http response status code to be 200', function (done) {
             request.post(
