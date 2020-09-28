@@ -1,17 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Typography, Row} from 'antd';
+import { Card, Col, Typography, Row } from 'antd';
 import 'antd/dist/antd.css';
-import {ShareAltOutlined, EyeOutlined} from '@ant-design/icons';
-import {toast} from 'react-toastify';
+import { ShareAltOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const {Title} = Typography;
-const {Meta} = Card;
+const { Title } = Typography;
+const { Meta } = Card;
 
 export default function Template(props) {
+    let history = useHistory();
     const [folios, setFolios] = useState([]);
 
     useEffect(() => {
@@ -26,6 +29,94 @@ export default function Template(props) {
         });
     }, []);
 
+    const handleCreate = async prop => {
+        const user = global.auth.getUser().id;
+        await axios.post('/folio/' + user + '/clone', {
+            user: user,
+            name: prop,
+        });
+        toast.success(prop + ' succeccful cloned');
+        history.push('/folios');
+    };
+
+    const askCreate = prop => {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className="container">
+                        <div>
+                            <h1>Add template to folios</h1>
+                            <br></br>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="My Awesome Portfolio"
+                            name="name"
+                        />
+                        <br></br><br></br>
+                        <div className="field is-grouped">
+                            <div className="control">
+                                <button
+                                    className="button is-info"
+                                    onClick={() => {
+                                        onClose(prop);
+                                        handleCreate(prop);
+                                    }}
+                                >
+                                    OK
+                                </button>
+                            </div>
+                            <div className="control">
+                                <button
+                                    className="button is-light"
+                                    onClick={onClose}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            },
+        });
+    };
+
+    function renderOptions(folio) {
+        if (global.auth.getUser().id !== folio.user) {
+            return [
+                <button className="button is-light">
+                    <a href={'/' + folio.user + '/' + folio.name}>
+                        {' '}
+                        <EyeOutlined />
+                    </a>
+                </button>,
+                <button
+                    className="button is-light"
+                    onClick={handleShare.bind(this, folio)}
+                >
+                    <ShareAltOutlined />
+                </button>, <button
+                    className="button is-light"
+                    onClick={askCreate.bind(this, folio)}
+                >
+                    <PlusOutlined />
+                </button>]
+        } else {
+            return [<button className="button is-light">
+                <a href={'/' + folio.user + '/' + folio.name}>
+                    {' '}
+                    <EyeOutlined />
+                </a>
+            </button>,
+            <button
+                className="button is-light"
+                onClick={handleShare.bind(this, folio)}
+            >
+                <ShareAltOutlined />
+            </button>]
+        }
+    }
+
     const handleShare = prop => {
         navigator.clipboard.writeText(
             'https://exportfolio.herokuapp.com/' + prop.user + '/' + prop.name
@@ -39,21 +130,8 @@ export default function Template(props) {
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
-                        actions={[
-                            <button className="button is-light">
-                                <a href={'/' + folio.user + '/' + folio.name}>
-                                    {' '}
-                                    <EyeOutlined />
-                                </a>
-                            </button>,
-                            <button
-                                className="button is-light"
-                                onClick={handleShare.bind(this, folio)}
-                            >
-                                <ShareAltOutlined />
-                            </button>,
-                        ]}
+                        style={{ width: 300, marginTop: 16 }}
+                        actions={renderOptions(folio)}
                     >
                         <Meta
                             title={folio.name}
@@ -81,7 +159,7 @@ export default function Template(props) {
     return (
         <div>
             <Layout />
-            <div style={{width: '85%', margin: '3rem auto'}}>
+            <div style={{ width: '85%', margin: '3rem auto' }}>
                 <Title level={2}> Templates </Title>
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>

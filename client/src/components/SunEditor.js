@@ -25,7 +25,9 @@ class sunEditor extends React.Component {
             })
             .then(response => {
                 if (response.data.content) {
-                    this.handleChange(response.data.content);
+                    this.setState({editorHtml: response.data.content}, () => {
+                        console.log(this.state.editorHtml);
+                    });
                 }
             })
             .catch(error => {

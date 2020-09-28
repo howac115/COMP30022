@@ -20,6 +20,9 @@ router.get('/templates', folio_controller.folio_templates_get);
 // POST request to create a folio
 router.post('/create', folio_controller.folio_create_post);
 
+// POST request to clone a folio
+router.post('/clone', folio_controller.folio_clone_post);
+
 // POST request to edit a folio
 router.post('/:id/edit', folio_controller.folio_edit_post);
 
