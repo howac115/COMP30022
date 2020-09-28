@@ -6,6 +6,12 @@
 // Request API Docs:
 // https://www.npmjs.com/package/request#requestoptions-callback
 
+// To avoid the database fullfilled with test cases
+// this file follows the idea of
+// 1. create a new user
+// 2. do a few tests on that user
+// 3. delete that user
+
 // set the upstream test for this test file to be server test
 require('./server_test');
 
@@ -52,7 +58,7 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
                 {
                     headers: {'content-type': 'application/json'},
                     url: userURL + 'delete',
-                    body: {reqBodyLogin},
+                    body: reqBodyLogin,
                     json: true,
                 },
                 function (error, response, body) {

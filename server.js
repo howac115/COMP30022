@@ -20,7 +20,10 @@ mongoose
     .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('MongoDB Connected...'))
     .catch((err) => console.log(err));
-
+    
+// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set('useFindAndModify', false);
 
 // Access the base of server using get method
 app.get('/', (req, res) => {
