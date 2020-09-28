@@ -16,22 +16,23 @@ function FolioPage(props) {
         axios
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
-                if (response.data.content) {
-                    if (response.data.visiable === true) {
+                if (
+                    response.data.visiable === true ||
+                    (global.auth.getUser() !== null &&
+                        global.auth.getUser().id === response.data.user)
+                ) {
+                    if (response.data.content) {
                         setFolio(response.data);
-                    } else if (global.auth.getUser() !== null) {
-                        if (global.auth.getUser().id === response.data.user) {
-                            setFolio(response.data);
-                        }
                     } else {
                         setFolio({
                             content:
-                                '<p>This portfolio has been set private by the portfolio owner.</p>',
+                                '<p>This portfolio is currently empty.</p>',
                         });
                     }
                 } else {
                     setFolio({
-                        content: '<p>This portfolio is currently empty.</p>',
+                        content:
+                            '<p>This portfolio has been set private by the portfolio owner.</p>',
                     });
                 }
             });
