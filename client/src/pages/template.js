@@ -87,7 +87,10 @@ export default function Template(props) {
     };
 
     function renderOptions(folio) {
-        if (global.auth.getUser().id !== folio.user) {
+        if (
+            global.auth.getUser() !== null &&
+            global.auth.getUser().id !== folio.user
+        ) {
             return [
                 <button className="button is-light">
                     <a href={'/' + folio.user + '/' + folio.name}>

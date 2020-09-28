@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import {Link, withRouter} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -12,11 +12,11 @@ class Header extends React.Component {
     };
 
     toHome = () => {
-        const loggedUserId = global.auth.getUserId().id;
+        const loggedUserId = global.auth.getUser().id;
         this.props.history.push('/' + loggedUserId);
     };
     renderUsernameLink() {
-        const username = this.props.user.id;
+        const username = global.auth.getUser();
         if (username) {
             return (
                 <React.Fragment>
@@ -27,7 +27,7 @@ class Header extends React.Component {
                                 aria-hidden="true"
                             ></i>
                             &nbsp;
-                            {username}
+                            {global.auth.getUserName()}
                         </span>
                     </button>
                     <button className="button is-dark" onClick={this.logout}>
@@ -50,19 +50,8 @@ class Header extends React.Component {
     }
 
     renderFolios() {
-        // if (this.props.user.id && this.props.match.path.replace("/:id", "") !== "/create") {
-        //     const loggedUserId = global.auth.getUserId().id;
-        //     const createLink = "/" + loggedUserId + "/folios"
-        //     if (loggedUserId === this.props.match.params.id) {
-        //         return (
-        //             <React.Fragment>
-        //                 <Link className="navbar-item" to={createLink}>Folios</Link>
-        //             </React.Fragment>
-        //         );
-        //     }
-        // }
-        if (this.props.user.id) {
-            const loggedUserId = global.auth.getUserId().id;
+        if (global.auth.getUser()) {
+            const loggedUserId = global.auth.getUser().id;
             const createLink = '/' + loggedUserId + '/folios';
             return (
                 <React.Fragment>
@@ -75,19 +64,7 @@ class Header extends React.Component {
     }
 
     renderCreate() {
-        // var pathArray = this.props.history.location.pathname.split('/')
-        // if (this.props.user.id && !pathArray.includes("create")) {
-        //     const loggedUserId = global.auth.getUser().id;
-        //     const createLink = "/" + loggedUserId + "/create"
-        //     if (loggedUserId === pathArray[1]) {
-        //         return (
-        //             <React.Fragment>
-        //                 <Link className="navbar-item" to={createLink}>Create</Link>
-        //             </React.Fragment>
-        //         );
-        //     }
-        // }
-        if (this.props.user.id) {
+        if (global.auth.getUser()) {
             const loggedUserId = global.auth.getUser().id;
             const createLink = '/' + loggedUserId + '/create';
             return (
