@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import {Link, withRouter} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -12,11 +12,11 @@ class Header extends React.Component {
     };
 
     toHome = () => {
-        const loggedUserId = global.auth.getUserId().id;
+        const loggedUserId = global.auth.getUser().id;
         this.props.history.push('/' + loggedUserId);
     };
     renderUsernameLink() {
-        const username = this.props.user.id;
+        const username = global.auth.getUser();
         if (username) {
             return (
                 <React.Fragment>
@@ -27,7 +27,7 @@ class Header extends React.Component {
                                 aria-hidden="true"
                             ></i>
                             &nbsp;
-                            {username}
+                            {global.auth.getUserName()}
                         </span>
                     </button>
                     <button className="button is-dark" onClick={this.logout}>
@@ -61,8 +61,8 @@ class Header extends React.Component {
         //         );
         //     }
         // }
-        if (this.props.user.id) {
-            const loggedUserId = global.auth.getUserId().id;
+        if (global.auth.getUser()) {
+            const loggedUserId = global.auth.getUser().id;
             const createLink = '/' + loggedUserId + '/folios';
             return (
                 <React.Fragment>
@@ -87,7 +87,7 @@ class Header extends React.Component {
         //         );
         //     }
         // }
-        if (this.props.user.id) {
+        if (global.auth.getUser()) {
             const loggedUserId = global.auth.getUser().id;
             const createLink = '/' + loggedUserId + '/create';
             return (

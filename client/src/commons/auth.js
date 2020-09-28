@@ -15,14 +15,10 @@ const getUserName = () => {
     return localStorage.getItem(Name);
 };
 
-const getUserId = () => {
-    return decode(getUserToken());
-};
-
 const getUserToken = () => {
     return localStorage.getItem(JWT);
 };
-//decode here
+
 const getUser = () => {
     const userToken = getUserToken();
     if (isLogin()) {
@@ -35,19 +31,22 @@ const getUser = () => {
 
 const isLogin = () => {
     const token = getUserToken();
-    return !!token;
+    return !!token && !isTokenExpired(token);
 };
 
-// const isTokenExpried = token => {
-//     try {
-//         const info = decode(token);
-//         if (info.exp < Date.now) {
-//             return true;
-//         } else return false;
-//     } catch (error) {
-//         return false;
-//     }
-// }
+const isTokenExpired = token => {
+    try {
+        const info = decode(token);
+        const expirationTime = info.exp;
+        console.log(Date.now() / 1000);
+        console.log(expirationTime);
+        if (Date.now() / 1000 >= expirationTime - 60) {
+            return true;
+        } else return false;
+    } catch (error) {
+        return false;
+    }
+};
 
 const logout = () => {
     localStorage.removeItem(JWT);
@@ -60,5 +59,4 @@ global.auth = {
     logout,
     setUserName,
     getUserName,
-    getUserId,
 };
