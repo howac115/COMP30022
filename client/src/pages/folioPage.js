@@ -16,44 +16,40 @@ function FolioPage(props) {
         axios
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
-                if (response.data.content && response.data.visiable === true) {
-                    setFolio(response.data);
-                } else if (
-                    response.data.content &&
-                    global.auth.getUser() !== null
-                ) {
-                    if (global.auth.getUser().id === response.data.user) {
+                if (response.data.content) {
+                    if (response.data.visiable === true) {
                         setFolio(response.data);
+                    } else if (global.auth.getUser() !== null) {
+                        if (global.auth.getUser().id === response.data.user) {
+                            setFolio(response.data);
+                        }
+                    } else {
+                        setFolio({
+                            content:
+                                '<p>This portfolio has been set private by the portfolio owner.</p>',
+                        });
                     }
+                } else {
+                    setFolio({
+                        content: '<p>This portfolio is currently empty.</p>',
+                    });
                 }
             });
     }, []);
 
-    if (folio.content) {
-        return (
-            <div>
-                <Layout />
-                <div
-                    className="folioPage"
-                    style={{width: '80%', margin: '3rem auto'}}
-                >
-                    <Title level={2}>{pathArray[2]}</Title>
-                    <br />
-                    <div dangerouslySetInnerHTML={{__html: folio.content}} />
-                </div>
+    return (
+        <div>
+            <Layout />
+            <div
+                className="folioPage"
+                style={{width: '80%', margin: '3rem auto'}}
+            >
+                <Title level={2}>{pathArray[2]}</Title>
+                <br />
+                <div dangerouslySetInnerHTML={{__html: folio.content}} />
             </div>
-        );
-    } else {
-        return (
-            <div>
-                <Layout />
-                <div style={{width: '85%', margin: '3rem auto'}}>
-                    <Title level={2}>{pathArray[2]}</Title>
-                    <p>This Folio is currently empty</p>
-                </div>
-            </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default FolioPage;
