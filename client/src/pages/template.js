@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
+import React, {useEffect, useState} from 'react';
+import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import { Card, Col, Typography, Row } from 'antd';
+import {Card, Col, Typography, Row} from 'antd';
 import 'antd/dist/antd.css';
-import { ShareAltOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import {ShareAltOutlined, EyeOutlined, PlusOutlined} from '@ant-design/icons';
+import {useHistory} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {toast} from 'react-toastify';
 
-const { Title } = Typography;
-const { Meta } = Card;
+const {Title} = Typography;
+const {Meta} = Card;
 
 export default function Template(props) {
-
     let history = useHistory();
-    const { handleSubmit } = useForm();
+    const {handleSubmit, register} = useForm();
     const [folios, setFolios] = useState([]);
-    const [name, setName] = useState('');
 
     useEffect(() => {
         document.title = 'ExPortfolio | Template';
@@ -33,59 +31,57 @@ export default function Template(props) {
         });
     }, []);
 
-    const handleCreate = async prop => {
+    const handleCreate = async (data, prop) => {
         const user = global.auth.getUser().id;
-        console.log(prop)
         await axios.post('/folio/clone', {
             user: user,
-            name: name,
-            content: prop.content
+            name: prop.clonedName,
+            content: data.content,
         });
-        toast.success(prop + ' succeccful cloned');
+        toast.success(prop.clonedName + ' succeccful cloned');
         history.push('/folios');
     };
 
-    const handleChange = e => {
-        setName({ name: e.target.value });
-    }
-
     const askCreate = prop => {
         confirmAlert({
-            customUI: ({ onClose }) => {
+            customUI: ({onClose}) => {
                 return (
                     <div className="container">
-                    <form onSubmit={handleSubmit(handleCreate.bind(this, prop))}>
-            <div>
-                <h1>Add template to folios</h1>
-                <br></br>
-                </div>
-                <input
-                type="text"
-                placeholder="My Awesome Portfolio"
-                name="clonedName"
-                onChange={handleChange}
-                />
-                <br></br><br></br>
-                <div className="field is-grouped">
-                    <div className="control">
-                    <button
-                className="button is-info"
-                    >
-                    OK
-                    </button>
+                        <form
+                            onSubmit={handleSubmit(
+                                handleCreate.bind(this, prop)
+                            )}
+                        >
+                            <div>
+                                <h1>Add template to folios</h1>
+                                <br></br>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="My Awesome Portfolio"
+                                name="clonedName"
+                                ref={register}
+                            />
+                            <br></br>
+                            <br></br>
+                            <div className="field is-grouped">
+                                <div className="control">
+                                    <button className="button is-info">
+                                        OK
+                                    </button>
+                                </div>
+                                <div className="control">
+                                    <button
+                                        className="button is-light"
+                                        onClick={onClose}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div className="control">
-                    <button
-                className="button is-light"
-                onClick={onClose}
-                    >
-                    Cancel
-                    </button>
-                    </div>
-                    </div>
-                    </form>
-                    </div>
-            );
+                );
             },
         });
     };
@@ -94,35 +90,39 @@ export default function Template(props) {
         if (global.auth.getUser().id !== folio.user) {
             return [
                 <button className="button is-light">
-                <a href={'/' + folio.user + '/' + folio.name}>
-                {' '}
-                <EyeOutlined />
-                </a>
+                    <a href={'/' + folio.user + '/' + folio.name}>
+                        {' '}
+                        <EyeOutlined />
+                    </a>
                 </button>,
                 <button
-            className="button is-light"
-            onClick={handleShare.bind(this, folio)}
+                    className="button is-light"
+                    onClick={handleShare.bind(this, folio)}
                 >
-                <ShareAltOutlined />
-                </button>, <button
-            className="button is-light"
-            onClick={askCreate.bind(this, folio)}
+                    <ShareAltOutlined />
+                </button>,
+                <button
+                    className="button is-light"
+                    onClick={askCreate.bind(this, folio)}
                 >
-                <PlusOutlined />
-                </button>]
+                    <PlusOutlined />
+                </button>,
+            ];
         } else {
-            return [<button className="button is-light">
-                <a href={'/' + folio.user + '/' + folio.name}>
-                {' '}
-                <EyeOutlined />
-                </a>
+            return [
+                <button className="button is-light">
+                    <a href={'/' + folio.user + '/' + folio.name}>
+                        {' '}
+                        <EyeOutlined />
+                    </a>
                 </button>,
                 <button
-            className="button is-light"
-            onClick={handleShare.bind(this, folio)}
+                    className="button is-light"
+                    onClick={handleShare.bind(this, folio)}
                 >
-                <ShareAltOutlined />
-                </button>]
+                    <ShareAltOutlined />
+                </button>,
+            ];
         }
     }
 
@@ -136,42 +136,42 @@ export default function Template(props) {
     const renderCards = folios.map((folio, index) => {
         return (
             <Col key={index} lg={8} md={12} xs={24}>
-            <Draggable>
-            <Card
-        hoverable
-        style={{ width: 300, marginTop: 16 }}
-        actions={renderOptions(folio)}
-            >
-            <Meta
-        title={folio.name}
-        description="This is the description"
-            />
-            <div
-        style={{
-            height: 150,
-                overflowY: 'scroll',
-                marginTop: 10,
-        }}
-    >
-    <div
-        dangerouslySetInnerHTML={{
-            __html: folio.content,
-        }}
-        />
-        </div>
-        </Card>
-        </Draggable>
-        </Col>
-    );
+                <Draggable>
+                    <Card
+                        hoverable
+                        style={{width: 300, marginTop: 16}}
+                        actions={renderOptions(folio)}
+                    >
+                        <Meta
+                            title={folio.name}
+                            description="This is the description"
+                        />
+                        <div
+                            style={{
+                                height: 150,
+                                overflowY: 'scroll',
+                                marginTop: 10,
+                            }}
+                        >
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: folio.content,
+                                }}
+                            />
+                        </div>
+                    </Card>
+                </Draggable>
+            </Col>
+        );
     });
 
     return (
         <div>
-        <Layout />
-        <div style={{ width: '85%', margin: '3rem auto' }}>
-<Title level={2}> Templates </Title>
-        <Row gutter={[32, 16]}>{renderCards}</Row>
-    </div>
-    </div>
-);
+            <Layout />
+            <div style={{width: '85%', margin: '3rem auto'}}>
+                <Title level={2}> Templates </Title>
+                <Row gutter={[32, 16]}>{renderCards}</Row>
+            </div>
+        </div>
+    );
 }
