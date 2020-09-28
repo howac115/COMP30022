@@ -27,11 +27,10 @@ export default function Template(props) {
     }, []);
 
     const handleShare = prop => {
-        const user = global.auth.getUser().id;
         navigator.clipboard.writeText(
-            'https://exportfolio.herokuapp.com/' + user + '/' + prop
+            'https://exportfolio.herokuapp.com/' + prop.user + '/' + prop.name
         );
-        toast.success(prop + ' is succeccful copied to clipboard');
+        toast.success(prop.name + ' is succeccful copied to clipboard');
     };
 
     const renderCards = folios.map((folio, index) => {
@@ -50,7 +49,7 @@ export default function Template(props) {
                             </button>,
                             <button
                                 className="button is-light"
-                                onClick={handleShare.bind(this, folio.name)}
+                                onClick={handleShare.bind(this, folio)}
                             >
                                 <ShareAltOutlined />
                             </button>,
