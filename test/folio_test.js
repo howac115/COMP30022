@@ -16,6 +16,7 @@ const request = require('request');
 const folio = require('../models/folio');
 const app = require('../server');
 
+// The below section defines the data we will be using in this test file
 const authURL = 'http://localhost:5000/auth/';
 const userURL = 'http://localhost:5000/user/';
 const folioURL = 'http://localhost:5000/folio/';
@@ -61,6 +62,10 @@ var wrongFolioIdentifier = {
 };
 
 describe('-----------------FOLIO MANAGEMENT----------------', function () {
+    // the user section is tested expilicitily in the auth_user_test
+    // the only purpose of testing creating a user here is to
+    // help our test cases integrated to this user,
+    // this user will be destroyed in the end of this file
     describe('Register a new user for our folio testing purpose', function () {
         it('should approve the registeration and return status code 200', function (done) {
             request.post(
@@ -88,6 +93,7 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
         });
     });
 
+    // create a folio that is attached to the user
     describe('Create a folio for that user with correct userID and fresh new folio name', function () {
         it('should approve the request and return status code 200', function (done) {
             request.post(
@@ -260,6 +266,7 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
         });
     });
 
+    // In this step we delete the folio that created by our imaginary user
     describe('Delete a folio for that user with correct userID and correct folio name', function () {
         it('should approve the request and return status code 200', function (done) {
             request.post(
@@ -278,6 +285,7 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
         });
     });
 
+    // In this step we delete the user we created for testing purpose to avoid the database fullfilled
     describe('Delete the user created for folio testing purpose', function () {
         it('should approve the deletion and return status code 200', function (done) {
             request.post(
