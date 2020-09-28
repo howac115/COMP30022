@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Layout from '../layout.js';
 import SunEditor from '../components/SunEditor';
@@ -11,6 +11,10 @@ const {Title} = Typography;
 function Edit(props) {
     let history = useHistory();
     var pathArray = history.location.pathname.split('/');
+
+    useEffect(() => {
+        document.title = 'ExPortfolio | Edit';
+    }, []);
 
     const [value, setValue] = useState('');
 

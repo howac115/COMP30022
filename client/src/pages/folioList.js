@@ -23,6 +23,7 @@ export default function FolioList(props) {
     const [folios, setFolios] = useState([]);
 
     useEffect(() => {
+        document.title = 'ExPortfolio | My Portfolios';
         let mounted = true;
         if (mounted) {
             const user = global.auth.getUser().id;

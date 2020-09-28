@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -8,6 +8,10 @@ export default function SignUp(props) {
     const {register, handleSubmit, errors, watch} = useForm();
     const password = useRef({});
     password.current = watch('password', '');
+
+    useEffect(() => {
+        document.title = 'ExPortfolio ｜ Sign up';
+    }, []);
 
     const handleSignUp = async data => {
         try {

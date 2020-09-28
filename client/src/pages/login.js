@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -6,6 +6,10 @@ import {toast} from 'react-toastify';
 
 export default function Login(props) {
     const {register, handleSubmit, errors} = useForm();
+
+    useEffect(() => {
+        document.title = 'ExPortfolio | Login';
+    }, []);
 
     const handleLogin = async data => {
         try {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import Layout from '../layout.js';
 import {useHistory} from 'react-router-dom';
@@ -8,6 +8,9 @@ import {toast} from 'react-toastify';
 export default function Create(props) {
     let history = useHistory();
     const {register, handleSubmit, errors} = useForm();
+    useEffect(() => {
+        document.title = 'ExPortfolio | Create';
+    }, []);
 
     const handleCreate = async data => {
         try {

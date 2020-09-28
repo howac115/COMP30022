@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../layout.js';
 import axios from 'axios';
 import {Typography} from 'antd';
@@ -12,6 +12,7 @@ function FolioPage(props) {
     const [folio, setFolio] = useState([]);
 
     useEffect(() => {
+        document.title = 'ExPortfolio | View';
         const variable = {user: pathArray[1], name: pathArray[2]};
         axios
             .post('/folio/' + variable.user + '/one', variable)
@@ -36,7 +37,7 @@ function FolioPage(props) {
                     });
                 }
             });
-    }, []);
+    }, [pathArray]);
 
     return (
         <div>

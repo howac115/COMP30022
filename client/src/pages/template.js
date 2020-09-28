@@ -7,7 +7,6 @@ import {Card, Col, Typography, Row} from 'antd';
 import 'antd/dist/antd.css';
 import {ShareAltOutlined, EyeOutlined} from '@ant-design/icons';
 import {toast} from 'react-toastify';
-import {useHistory} from 'react-router-dom';
 
 const {Title} = Typography;
 const {Meta} = Card;
@@ -16,6 +15,7 @@ export default function Template(props) {
     const [folios, setFolios] = useState([]);
 
     useEffect(() => {
+        document.title = 'ExPortfolio | Template';
         axios.get('/folio/templates').then(response => {
             if (response.data.success) {
                 console.log(response.data.folios);
