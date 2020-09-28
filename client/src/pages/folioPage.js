@@ -18,7 +18,7 @@ function FolioPage(props) {
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
                 if (
-                    response.data.visiable === true ||
+                    response.data.visible === true ||
                     (global.auth.getUser() !== null &&
                         global.auth.getUser().id === response.data.user)
                 ) {
