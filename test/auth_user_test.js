@@ -1,7 +1,7 @@
-// this test file went through a time-out issue
+// This file includes test cases for authentication and user management
+// This test file went through a time-out issue
 // thought to be related to duplicate keys in mongo DB
 // But actually solved by putting the "--timeout 30000" flag in mocha options in packages.json
-// 12:31AM 28/09/2020 --- Yutao Wang and Haoqi Chen
 
 // Request API Docs:
 // https://www.npmjs.com/package/request#requestoptions-callback
@@ -9,10 +9,10 @@
 // To avoid the database fullfilled with test cases
 // this file follows the idea of
 // 1. create a new user
-// 2. do a few tests on that user
+// 2. do a few tests on that user including corner test cases
 // 3. delete that user
 
-// set the upstream test for this test file to be server test
+// set this file runs after server test
 require('./server_test');
 
 const expect = require('chai').expect;

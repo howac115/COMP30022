@@ -1,3 +1,4 @@
+// This file includes the test cases for folios functionalities
 // to avoid the database fullfilled with testcases
 // this file use the basic idea of
 // 1. create a user for our testing purpose
@@ -7,7 +8,7 @@
 //     iiV). delete the folios created on that user
 // 3. delete that user and all the user's created folios
 
-// set the upstream test file to be auth_user_test.js
+// ensure this file runs after auth_user_test
 require('./auth_user_test');
 
 const expect = require('chai').expect;

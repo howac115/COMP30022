@@ -1,3 +1,7 @@
+// This file includes the test case for basic server request and response scheme
+// This tests  the server by basically send a get request to server
+// and test the http response and status code to be as expected
+
 // Request API:
 // https://www.npmjs.com/package/request#requestoptions-callback
 
