@@ -12,19 +12,22 @@ function FolioPage(props) {
     const [folio, setFolio] = useState([]);
 
     useEffect(() => {
-        let mount = true;
-        if (mount) {
-            const variable = {user: pathArray[1], name: pathArray[2]};
-            axios
-                .post('/folio/' + variable.user + '/one', variable)
-                .then(response => {
-                    if (response.data.content) {
+        const variable = {user: pathArray[1], name: pathArray[2]};
+        axios
+            .post('/folio/' + variable.user + '/one', variable)
+            .then(response => {
+                if (response.data.content && response.data.visiable === true) {
+                    setFolio(response.data);
+                } else if (
+                    response.data.content &&
+                    global.auth.getUser() !== null
+                ) {
+                    if (global.auth.getUser().id === response.data.user) {
                         setFolio(response.data);
                     }
-                });
-        }
-        return () => (mount = false);
-    });
+                }
+            });
+    }, []);
 
     if (folio.content) {
         return (
