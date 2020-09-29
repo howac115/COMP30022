@@ -1,0 +1,33 @@
+{
+  "name": "eportfolio",
+  "version": "1.0.0",
+  "description": "eportfolio",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Bounty Programmers",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "config": "^3.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "react-toastify": "^6.0.8",
+    "session": "^0.1.0",
+    "use-react-router": "^1.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
