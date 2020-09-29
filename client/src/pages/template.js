@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {confirmAlert} from 'react-confirm-alert';
+import React, { useEffect, useState } from 'react';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Typography, Row} from 'antd';
+import { Card, Col, Input, Modal, message, Row, Typography } from 'antd';
 import 'antd/dist/antd.css';
-import {ShareAltOutlined, EyeOutlined, PlusOutlined} from '@ant-design/icons';
-import {useHistory} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
+import { ShareAltOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const {Title} = Typography;
-const {Meta} = Card;
+const { Title } = Typography;
+const { Meta } = Card;
 
 export default function Template(props) {
     let history = useHistory();
-    const {handleSubmit, register} = useForm();
     const [folios, setFolios] = useState([]);
+    const [visible, setVisible] = useState();
+    const [name, setName] = useState('');
+    const [clonedFolio, setClonedFolio] = useState();
 
     useEffect(() => {
         document.title = 'ExPortfolio | Template';
@@ -31,60 +31,37 @@ export default function Template(props) {
         });
     }, []);
 
-    const handleCreate = async (data, prop) => {
+    const handleCreate = async () => {
         const user = global.auth.getUser().id;
-        await axios.post('/folio/clone', {
-            user: user,
-            name: prop.clonedName,
-            content: data.content,
-        });
-        toast.success(prop.clonedName + ' succeccful cloned');
-        history.push('/folios');
+        try {
+            await axios.post('/folio/clone', {
+                user: user,
+                name: name,
+                content: clonedFolio.content,
+            });
+            message.success(name + 'successfully cloned!');
+            history.push(user + '/folios');
+        } catch (error) {
+            message.error('You already have that name');
+        }
     };
 
-    const askCreate = prop => {
-        confirmAlert({
-            customUI: ({onClose}) => {
-                return (
-                    <div className="container">
-                        <form
-                            onSubmit={handleSubmit(
-                                handleCreate.bind(this, prop)
-                            )}
-                        >
-                            <div>
-                                <h1>Add template to folios</h1>
-                                <br></br>
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="My Awesome Portfolio"
-                                name="clonedName"
-                                ref={register}
-                            />
-                            <br></br>
-                            <br></br>
-                            <div className="field is-grouped">
-                                <div className="control">
-                                    <button className="button is-info">
-                                        OK
-                                    </button>
-                                </div>
-                                <div className="control">
-                                    <button
-                                        className="button is-light"
-                                        onClick={onClose}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                );
-            },
-        });
+    const onChange = (event) => {
+        setName(event.target.value);
+    }
+
+    const showModal = (folio) => {
+        setClonedFolio(folio);
+        setVisible(true);
     };
+
+    const handleOk = () => {
+        setVisible(false);
+    }
+
+    const handleCancel = () => {
+        setVisible(false);
+    }
 
     function renderOptions(folio) {
         if (
@@ -104,12 +81,10 @@ export default function Template(props) {
                 >
                     <ShareAltOutlined />
                 </button>,
-                <button
-                    className="button is-light"
-                    onClick={askCreate.bind(this, folio)}
-                >
+                <button className="button is-light"
+                    onClick={showModal.bind(this, folio)}>
                     <PlusOutlined />
-                </button>,
+                </button>
             ];
         } else {
             return [
@@ -142,7 +117,7 @@ export default function Template(props) {
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
+                        style={{ width: 300, marginTop: 16 }}
                         actions={renderOptions(folio)}
                     >
                         <Meta
@@ -171,10 +146,24 @@ export default function Template(props) {
     return (
         <div>
             <Layout />
-            <div style={{width: '85%', margin: '3rem auto'}}>
+            <div style={{ width: '85%', margin: '3rem auto' }}>
                 <Title level={2}> Templates </Title>
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>
+            <Modal
+                title="Clone to folios"
+                visible={visible}
+                closable={false}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Input addonAfter="Enter"
+                    placeholder="My Awesome Folio"
+                    allowClear={true}
+                    onChange={onChange}
+                    onPressEnter={handleCreate}></Input>
+            </Modal>
         </div>
     );
 }

@@ -38,8 +38,6 @@ const isTokenExpired = token => {
     try {
         const info = decode(token);
         const expirationTime = info.exp;
-        console.log(Date.now() / 1000);
-        console.log(expirationTime);
         if (Date.now() / 1000 >= expirationTime - 60) {
             return true;
         } else return false;
