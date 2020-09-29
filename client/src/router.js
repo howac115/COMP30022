@@ -5,10 +5,9 @@ import Login from './pages/login.js';
 import NotFound from './pages/notFound.js';
 import Register from './pages/register.js';
 import Template from './pages/template.js';
+import Settings from './pages/settings.js';
 import User from './pages/user.js';
-import FolioList from './pages/folioList.js';
 import FolioPage from './pages/folioPage.js';
-import Create from './pages/create.js';
 import Edit from './pages/edit.js';
 import ProtectedRoute from './pages/protected.js';
 
@@ -21,15 +20,11 @@ class Router extends React.Component {
                     <Route path="/login" component={Login}></Route>
                     <Route path="/register" component={Register}></Route>
                     <Route path="/template" component={Template}></Route>
+                    <ProtectedRoute
+                        Route
+                        path="/settings" component={Settings}>
+                    </ProtectedRoute>
                     <Route path="/:id" exact component={User}></Route>
-                    <ProtectedRoute
-                        path="/:id/folios"
-                        component={FolioList}
-                    ></ProtectedRoute>
-                    <ProtectedRoute
-                        path="/:id/create"
-                        component={Create}
-                    ></ProtectedRoute>
                     <ProtectedRoute
                         Route
                         path="/:id/:name/edit"

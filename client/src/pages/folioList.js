@@ -1,22 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {confirmAlert} from 'react-confirm-alert';
+import React, { useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Dropdown, Menu, Typography, Row} from 'antd';
+import { Card, Col, Collapse, Dropdown, Menu, Typography, Row } from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
     EditOutlined,
     EyeOutlined,
     SettingOutlined,
+    FolderOpenOutlined
 } from '@ant-design/icons';
-import {toast} from 'react-toastify';
-import {useHistory} from 'react-router-dom';
+import { message } from 'antd';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
-const {Meta} = Card;
+const { Title } = Typography;
+const { Meta } = Card;
+const { Panel } = Collapse;
 
 export default function FolioList(props) {
     let history = useHistory();
@@ -27,11 +29,11 @@ export default function FolioList(props) {
         let mounted = true;
         if (mounted) {
             const user = global.auth.getUser().id;
-            axios.post('/folio/all', {user}).then(response => {
+            axios.post('/folio/all', { user }).then(response => {
                 if (response.data.success) {
                     setFolios(response.data.folios);
                 } else {
-                    toast.error('Couldnt get folio`s lists');
+                    message.error('Couldnt get folio`s lists');
                 }
             });
         }
@@ -56,10 +58,10 @@ export default function FolioList(props) {
             });
         }
         if (folio.visible) {
-            toast.success(folio.name + ' successfully set private');
+            message.success(folio.name + ' successfully set private');
             history.go(0);
         } else {
-            toast.success(folio.name + ' successfully set public');
+            message.success(folio.name + ' successfully set public');
             history.go(0);
         }
     }
@@ -82,9 +84,9 @@ export default function FolioList(props) {
             });
         }
         if (!folio.shareAsTemplate) {
-            toast.success(folio.name + ' successfully share as template');
+            message.success(folio.name + ' successfully share as template');
         } else {
-            toast.success(folio.name + ' successfully stop sharing');
+            message.success(folio.name + ' successfully stop sharing');
         }
         setTimeout(history.go(0), 4000);
     }
@@ -95,13 +97,13 @@ export default function FolioList(props) {
             user: user,
             name: prop,
         });
-        toast.success(prop + ' succeccful delete');
+        message.success(prop + ' succeccful delete');
         history.go(0);
     };
 
     const askDelete = prop => {
         confirmAlert({
-            customUI: ({onClose}) => {
+            customUI: ({ onClose }) => {
                 return (
                     <div className="container">
                         <div>
@@ -141,7 +143,7 @@ export default function FolioList(props) {
         navigator.clipboard.writeText(
             'https://exportfolio.herokuapp.com/' + user + '/' + prop
         );
-        toast.success(prop + ' is succeccful copied to clipboard');
+        message.success(prop + ' is succeccful copied to clipboard');
     };
 
     function visibility(folio) {
@@ -162,11 +164,11 @@ export default function FolioList(props) {
 
     const renderCards = folios.map((folio, index) => {
         return (
-            <Col key={index} lg={8} md={12} xs={24}>
+            <Col key={index + 1} lg={8} md={12} xs={24}>
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
+                        style={{ width: 300, marginTop: 16 }}
                         actions={[
                             <Dropdown
                                 overlay={
@@ -203,13 +205,13 @@ export default function FolioList(props) {
                                 </button>
                             </Dropdown>,
                             <button className="button is-light">
-                                <a href={folio.name + '/edit'}>
+                                <a href={'/' + folio.user._id + '/' + folio.name + '/edit'}>
                                     {' '}
                                     <EditOutlined />
                                 </a>
                             </button>,
                             <button className="button is-light">
-                                <a href={folio.name}>
+                                <a href={'/' + folio.user._id + '/' + folio.name}>
                                     {' '}
                                     <EyeOutlined />
                                 </a>
@@ -241,17 +243,18 @@ export default function FolioList(props) {
                         </div>
                     </Card>
                 </Draggable>
+
             </Col>
         );
     });
 
     return (
-        <div>
-            <Layout />
-            <div style={{width: '85%', margin: '3rem auto'}}>
-                <Title level={2}> My Folios </Title>
-                <Row gutter={[32, 16]}>{renderCards}</Row>
-            </div>
+        <div style={{ width: '60%', marginLeft: '10%', marginTop: '3%' }}>
+            <Collapse defaultActiveKey={['1']} ghost>
+                <Panel header={<Title level={3}> My Folios </Title>} key="1">
+                    <Row gutter={[32, 16]}>{renderCards}</Row>
+                </Panel>
+            </Collapse>
         </div>
     );
 }

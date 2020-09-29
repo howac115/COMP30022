@@ -18,7 +18,7 @@ export default function Create(props) {
             const user = global.auth.getUser().id;
             await axios.post('/folio/create', { name, user });
             message.success(name + ' successfully created!');
-            history.push('/' + global.auth.getUser().id + '/folios');
+            history.push('/' + global.auth.getUser().id);
         } catch (error) {
             const errorMessage = error.response.data.error;
             message.error(errorMessage);

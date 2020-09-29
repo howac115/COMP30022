@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { message } from 'antd';
 
 export default function Login(props) {
-    const {register, handleSubmit, errors} = useForm();
+    const { register, handleSubmit, errors } = useForm();
 
     useEffect(() => {
         document.title = 'ExPortfolio | Login';
@@ -13,18 +13,18 @@ export default function Login(props) {
 
     const handleLogin = async data => {
         try {
-            const {email, password} = data;
-            const res = await axios.post('/auth/login', {email, password});
+            const { email, password } = data;
+            const res = await axios.post('/auth/login', { email, password });
             const token = res.data.token;
             global.auth.setUserToken(token);
             const _res = await axios.get('/user/' + global.auth.getUser().id);
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
-            toast.success('Welcome ' + userName);
+            message.success('Welcome ' + userName);
             props.history.push('/' + global.auth.getUser().id);
         } catch (error) {
             const errorMessage = error.response.data.error;
-            toast.error(errorMessage);
+            message.error(errorMessage);
         }
     };
     const handleBack = () => {
@@ -53,7 +53,7 @@ export default function Login(props) {
                             type="email"
                             placeholder="Email"
                             name="email"
-                            ref={register({required: true})}
+                            ref={register({ required: true })}
                         />
                         {errors.email && (
                             <i className="helper has-text-danger">
@@ -72,7 +72,7 @@ export default function Login(props) {
                             type="password"
                             placeholder="Password"
                             name="password"
-                            ref={register({required: true})}
+                            ref={register({ required: true })}
                         />
                         {errors.password && (
                             <i className="helper has-text-danger">

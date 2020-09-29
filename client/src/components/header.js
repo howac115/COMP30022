@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { Link, withRouter } from 'react-router-dom';
+import { message } from 'antd';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -8,7 +8,7 @@ class Header extends React.Component {
     logout = () => {
         global.auth.logout();
         this.props.history.push('/');
-        toast.success('You have successfully log out');
+        message.success('You have successfully log out');
     };
 
     toHome = () => {
@@ -49,34 +49,6 @@ class Header extends React.Component {
         }
     }
 
-    renderFolios() {
-        if (global.auth.getUser()) {
-            const loggedUserId = global.auth.getUser().id;
-            const createLink = '/' + loggedUserId + '/folios';
-            return (
-                <React.Fragment>
-                    <Link className="navbar-item" to={createLink}>
-                        Folios
-                    </Link>
-                </React.Fragment>
-            );
-        }
-    }
-
-    renderCreate() {
-        if (global.auth.getUser()) {
-            const loggedUserId = global.auth.getUser().id;
-            const createLink = '/' + loggedUserId + '/create';
-            return (
-                <React.Fragment>
-                    <Link className="navbar-item" to={createLink}>
-                        Create
-                    </Link>
-                </React.Fragment>
-            );
-        }
-    }
-
     render() {
         return (
             <Navbar className="border-bottom" bg="transparent" expand="lg">
@@ -96,8 +68,6 @@ class Header extends React.Component {
                             <Link className="navbar-item" to="/template">
                                 Template
                             </Link>
-                            {this.renderFolios()}
-                            {this.renderCreate()}
                         </div>
                         <div className="navbar-menu is-active">
                             <div className="navbar-end">

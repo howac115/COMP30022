@@ -4,7 +4,7 @@ import Layout from '../layout.js';
 import SunEditor from '../components/SunEditor';
 import { Button, Form, Typography } from 'antd';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { message } from 'antd';
 
 const { Title } = Typography;
 
@@ -38,7 +38,7 @@ function Edit(props) {
             .post('/folio/' + variables.user + '/edit', variables)
             .then(response => {
                 if (response) {
-                    toast.success('Portfolio Created!');
+                    message.success(variables.name + ' updated!');
                     setTimeout(() => {
                         history.push('/' + variables.user + '/folios');
                     }, 2000);

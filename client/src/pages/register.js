@@ -1,11 +1,11 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { message } from 'antd';
 
 export default function SignUp(props) {
-    const {register, handleSubmit, errors, watch} = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
     const password = useRef({});
     password.current = watch('password', '');
 
@@ -16,7 +16,7 @@ export default function SignUp(props) {
     const handleSignUp = async data => {
         try {
             console.log('here');
-            const {firstName, lastName, email, password, password2} = data;
+            const { firstName, lastName, email, password, password2 } = data;
             await axios.post('/auth/register', {
                 firstName,
                 lastName,
@@ -24,18 +24,18 @@ export default function SignUp(props) {
                 password,
                 password2,
             });
-            toast.success('Sign Up Success');
-            const res = await axios.post('/auth/login', {email, password});
+            message.success('Sign Up Success');
+            const res = await axios.post('/auth/login', { email, password });
             const token = res.data.token;
             global.auth.setUserToken(token);
             const _res = await axios.get('/user/' + global.auth.getUser().id);
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
             props.history.push('/' + res.data.user.id);
-            toast.success('Welcome ' + userName);
+            message.success('Welcome ' + userName);
         } catch (error) {
             const errorMessage = error.response.data.error;
-            toast.error(errorMessage);
+            message.error(errorMessage);
         }
     };
 
@@ -71,7 +71,7 @@ export default function SignUp(props) {
                             type="text"
                             placeholder="Enter Your First Name"
                             name="firstName"
-                            ref={register({required: true})}
+                            ref={register({ required: true })}
                         />
                         {errors.firstName && (
                             <i className="helper has-text-danger">
@@ -90,7 +90,7 @@ export default function SignUp(props) {
                             type="text"
                             placeholder="Enter Your Last Name"
                             name="lastName"
-                            ref={register({required: true})}
+                            ref={register({ required: true })}
                         />
                         {errors.lastName && (
                             <i className="helper has-text-danger">
@@ -108,7 +108,7 @@ export default function SignUp(props) {
                             type="email"
                             placeholder="123@abc.com"
                             name="email"
-                            ref={register({required: true})}
+                            ref={register({ required: true })}
                         />
                         {errors.email && (
                             <i className="helper has-text-danger">
@@ -167,7 +167,7 @@ export default function SignUp(props) {
                             <input
                                 type="checkbox"
                                 name="checkbox"
-                                ref={register({required: true})}
+                                ref={register({ required: true })}
                                 value={true}
                             />{' '}
                             &nbsp; I agree to the{' '}

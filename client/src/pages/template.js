@@ -7,7 +7,6 @@ import { Card, Col, Input, Modal, message, Row, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { ShareAltOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -26,7 +25,7 @@ export default function Template(props) {
                 console.log(response.data.folios);
                 setFolios(response.data.folios);
             } else {
-                toast.error('Couldnt get folio`s lists');
+                message.error('Couldnt get folio`s lists');
             }
         });
     }, []);
@@ -40,7 +39,7 @@ export default function Template(props) {
                 content: clonedFolio.content,
             });
             message.success(name + 'successfully cloned!');
-            history.push(user + '/folios');
+            history.push(user);
         } catch (error) {
             message.error('You already have that name');
         }
@@ -108,7 +107,7 @@ export default function Template(props) {
         navigator.clipboard.writeText(
             'https://exportfolio.herokuapp.com/' + prop.user + '/' + prop.name
         );
-        toast.success(prop.name + ' is succeccful copied to clipboard');
+        message.success(prop.name + ' is succeccful copied to clipboard');
     };
 
     const renderCards = folios.map((folio, index) => {
