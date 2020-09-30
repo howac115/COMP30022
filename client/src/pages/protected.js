@@ -1,6 +1,6 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { Redirect } from 'react-router-dom';
+import { message } from 'antd';
 const JWT = 'user_token_id';
 
 class ProtectedRoute extends React.Component {
@@ -9,17 +9,17 @@ class ProtectedRoute extends React.Component {
         var isAuthenticated = false;
         if (localStorage.getItem(JWT) != null) {
             isAuthenticated =
-                this.props.computedMatch.params.id ===
-                global.auth.getUserId().id;
+                this.props.computedMatch.params.id === global.auth.getUser().id;
         }
         if (isAuthenticated !== true) {
-            toast.error("You could not edit others's portfolio!");
+            console.log(isAuthenticated);
+            message.error("Sorry You have no permission to view this page.");
         }
         return isAuthenticated ? (
             <Component />
         ) : (
-            <Redirect to={{pathname: '/login'}} />
-        );
+                <Redirect to={{ pathname: '/login' }} />
+            );
     }
 }
 

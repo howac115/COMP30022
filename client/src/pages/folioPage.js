@@ -8,49 +8,55 @@ const {Title} = Typography;
 
 function FolioPage(props) {
     let history = useHistory();
-    var pathArray = history.location.pathname.split('/');
 
     const [folio, setFolio] = useState([]);
 
     useEffect(() => {
-        const variable = {user: pathArray[1], name: pathArray[2]};
+        document.title = 'ExPortfolio | View';
+        const variable = {
+            user: history.location.pathname.split('/')[1],
+            name: history.location.pathname.split('/')[2],
+        };
         axios
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
-                if (response.data.content) {
-                    setFolio(response.data);
+                if (
+                    response.data.visible === true ||
+                    (global.auth.getUser() !== null &&
+                        global.auth.getUser().id === response.data.user)
+                ) {
+                    if (response.data.content) {
+                        setFolio(response.data);
+                    } else {
+                        setFolio({
+                            content:
+                                '<p>This portfolio is currently empty.</p>',
+                        });
+                    }
+                } else {
+                    setFolio({
+                        content:
+                            '<p>This portfolio has been set private by the portfolio owner.</p>',
+                    });
                 }
             });
-    });
+    }, [history.location.pathname]);
 
-    if (folio.content) {
-        return (
-            <div>
-                <Layout />
-                <div
-                    className="folioPage"
-                    style={{width: '80%', margin: '3rem auto'}}
-                >
-                    <Title level={2}>{pathArray[2]}</Title>
-                    <br />
-                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <Title level={4}>{folio.createdAt}</Title>
-                    </div>
-                    <div dangerouslySetInnerHTML={{__html: folio.content}} />
-                </div>
+    return (
+        <div>
+            <Layout />
+            <div
+                className="folioPage"
+                style={{width: '80%', margin: '3rem auto'}}
+            >
+                <Title level={2}>
+                    {history.location.pathname.split('/')[2]}
+                </Title>
+                <br />
+                <div dangerouslySetInnerHTML={{__html: folio.content}} />
             </div>
-        );
-    } else {
-        return (
-            <div>
-                <Layout />
-                <div style={{width: '85%', margin: '3rem auto'}}>
-                    <Title level={2}>{pathArray[2]}</Title>
-                    <p>This Folio is currently empty</p>
-                </div>
-            </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default FolioPage;

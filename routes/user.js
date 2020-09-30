@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,7 +11,7 @@ var user_controller = require('../controllers/userController');
 // GET request for one user
 router.get('/:id', user_controller.user_detail_get);
 
-// GET request to view one specific folio of one user
-router.get('/:id/:name', user_controller.user_folio_get);
+// POST request for update user's detail 
+router.post('/:id/update', user_controller.user_update_post);
 
 module.exports = router;

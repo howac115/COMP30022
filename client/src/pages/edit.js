@@ -1,44 +1,46 @@
-import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Layout from '../layout.js';
-import QuillEditor from '../components/QuillEditor';
-import {Typography, Button, Form} from 'antd';
+import SunEditor from '../components/SunEditor';
+import { Button, Form, Typography } from 'antd';
 import axios from 'axios';
-import {toast} from 'react-toastify';
+import { message } from 'antd';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 function Edit(props) {
     let history = useHistory();
     var pathArray = history.location.pathname.split('/');
 
-    const [content, setContent] = useState('');
-    // const [files, setFiles] = useState([])
-    const onEditorChange = value => {
-        setContent(value);
+    useEffect(() => {
+        document.title = 'ExPortfolio | Edit';
+    }, []);
+
+    const [value, setValue] = useState('');
+
+    const onEditorChange = content => {
         console.log(content);
+        setValue(content);
     };
 
-    // const onFilesChange = (files) => {
-    //     setFiles(files)
-    // }
     const variables = {
         user: global.auth.getUser().id,
         name: pathArray[2],
-        content: content,
+        content: value,
     };
+
     const onSubmit = event => {
         event.preventDefault();
         console.log('submit');
-        setContent('');
+        console.log(variables);
 
         axios
             .post('/folio/' + variables.user + '/edit', variables)
             .then(response => {
                 if (response) {
-                    toast.success('Post Created!');
+                    message.success(variables.name + ' updated!');
                     setTimeout(() => {
-                        history.push('/' + variables.user + '/folios');
+                        history.push('/' + variables.user);
                     }, 2000);
                 }
             });
@@ -47,25 +49,19 @@ function Edit(props) {
     return (
         <div className="Edit">
             <Layout />
-            <div style={{maxWidth: '700px', margin: '2rem auto'}}>
-                <div style={{textAlign: 'center'}}>
-                    <Title level={2}> Editor</Title>
+            <div style={{ maxWidth: '90%', margin: '2rem auto' }}>
+                <div style={{ maxWidth: '20%', margin: '2rem auto' }}>
+                    <Title> {pathArray[2]}</Title>
                 </div>
-                <QuillEditor
+                <div style={{ textAlign: 'center' }}></div>
+                <SunEditor
                     user={pathArray[1]}
                     name={pathArray[2]}
-                    placeholder={'Start Posting Something'}
                     onEditorChange={onEditorChange}
-                    // onFilesChange={onFilesChange}
                 />
                 <Form onClick={onSubmit}>
-                    <div style={{textAlign: 'center', margin: '2rem'}}>
-                        <Button
-                            size="large"
-                            htmlType="submit"
-                            className=""
-                            onClick={onSubmit}
-                        >
+                    <div style={{ textAlign: 'center', margin: '2rem' }}>
+                        <Button size="large" htmlType="submit" className="">
                             Submit
                         </Button>
                     </div>
