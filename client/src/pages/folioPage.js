@@ -8,7 +8,6 @@ const {Title} = Typography;
 
 function FolioPage(props) {
     let history = useHistory();
-
     const [folio, setFolio] = useState([]);
 
     useEffect(() => {

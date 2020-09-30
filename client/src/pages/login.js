@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { message } from 'antd';
+import {Link} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {message} from 'antd';
 
 export default function Login(props) {
-    const { register, handleSubmit, errors } = useForm();
+    const {register, handleSubmit, errors} = useForm();
 
     useEffect(() => {
         document.title = 'ExPortfolio | Login';
@@ -13,8 +13,8 @@ export default function Login(props) {
 
     const handleLogin = async data => {
         try {
-            const { email, password } = data;
-            const res = await axios.post('/auth/login', { email, password });
+            const {email, password} = data;
+            const res = await axios.post('/auth/login', {email, password});
             const token = res.data.token;
             global.auth.setUserToken(token);
             const _res = await axios.get('/user/' + global.auth.getUser().id);
@@ -28,7 +28,6 @@ export default function Login(props) {
         }
     };
     const handleBack = () => {
-        console.log(props);
         props.history.push('/');
     };
 
@@ -53,7 +52,7 @@ export default function Login(props) {
                             type="email"
                             placeholder="Email"
                             name="email"
-                            ref={register({ required: true })}
+                            ref={register({required: true})}
                         />
                         {errors.email && (
                             <i className="helper has-text-danger">
@@ -72,7 +71,7 @@ export default function Login(props) {
                             type="password"
                             placeholder="Password"
                             name="password"
-                            ref={register({ required: true })}
+                            ref={register({required: true})}
                         />
                         {errors.password && (
                             <i className="helper has-text-danger">

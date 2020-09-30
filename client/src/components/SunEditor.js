@@ -25,9 +25,10 @@ class sunEditor extends React.Component {
             })
             .then(response => {
                 if (response.data.content) {
-                    this.setState({editorHtml: response.data.content}, () => {
-                        console.log(this.state.editorHtml);
-                    });
+                    this.setState(
+                        {editorHtml: response.data.content},
+                        () => {}
+                    );
                 }
             })
             .catch(error => {
@@ -49,7 +50,6 @@ class sunEditor extends React.Component {
         return (
             <div>
                 <SunEditor
-                    autoFocus={true}
                     setContents={this.state.editorHtml}
                     onChange={this.handleChange}
                     setOptions={{

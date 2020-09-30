@@ -1,6 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { message } from 'antd';
+import {Redirect} from 'react-router-dom';
+import {message} from 'antd';
 const JWT = 'user_token_id';
 
 class ProtectedRoute extends React.Component {
@@ -12,14 +12,13 @@ class ProtectedRoute extends React.Component {
                 this.props.computedMatch.params.id === global.auth.getUser().id;
         }
         if (isAuthenticated !== true) {
-            console.log(isAuthenticated);
-            message.error("Sorry You have no permission to view this page.");
+            message.error('Sorry You have no permission to view this page.');
         }
         return isAuthenticated ? (
             <Component />
         ) : (
-                <Redirect to={{ pathname: '/login' }} />
-            );
+            <Redirect to={{pathname: '/login'}} />
+        );
     }
 }
 
