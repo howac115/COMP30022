@@ -15,32 +15,32 @@ exports.login_post = function (req, res) {
     }).then((user) => {
         if (!user) {
             res.status(409).json({error: 'Email not registered'});
+        } else {
+            // Match password
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if (isMatch) {
+                    jwt.sign(
+                        {id: user.id},
+                        config.get('jwtSecret'),
+                        {expiresIn: 3600},
+                        (err, token) => {
+                            if (err) throw err;
+                            res.status(200).json({
+                                token,
+                                user: {
+                                    id: user.id,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName,
+                                    email: user.email,
+                                },
+                            });
+                        }
+                    );
+                } else {
+                    res.status(409).json({error: 'Password incorrect'});
+                }
+            });
         }
-
-        // Match password
-        bcrypt.compare(password, user.password, (err, isMatch) => {
-            if (isMatch) {
-                jwt.sign(
-                    {id: user.id},
-                    config.get('jwtSecret'),
-                    {expiresIn: 3600},
-                    (err, token) => {
-                        if (err) throw err;
-                        res.status(200).json({
-                            token,
-                            user: {
-                                id: user.id,
-                                firstName: user.firstName,
-                                lastName: user.lastName,
-                                email: user.email,
-                            },
-                        });
-                    }
-                );
-            } else {
-                res.status(409).json({error: 'Password incorrect'});
-            }
-        });
     });
 };
 

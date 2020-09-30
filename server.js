@@ -17,9 +17,18 @@ const db = require("./config/keys").mongoURL;
 
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((err) => console.log(err));
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB Connected...'))
+    .catch((err) => console.log(err));
+
+// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set('useFindAndModify', false);
+
+// Access the base of server using get method
+app.get('/', (req, res) => {
+    res.json('Success access');
+});
 
 // Use Routes
 app.use("/auth", auth);
@@ -28,14 +37,16 @@ app.use("/folio", folio);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("client/build"));
+    // Set static folder
+    app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
 }
 
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
+
+module.exports = app;
