@@ -88,7 +88,7 @@ export default function User(props) {
     }
 
     const SettingsRedirect = () => {
-        history.push('/settings')
+        history.push(user._id + '/settings')
     }
 
     return (
@@ -96,7 +96,7 @@ export default function User(props) {
             <Layout />
             <Row>
                 <Menu
-                    style={{ width: "20%", marginLeft: "2%", marginTop: "2%" }}
+                    style={{ width: "15%", marginLeft: "2%", marginTop: "2%" }}
                     mode="inline"
                 >
                     <Menu.Item key="1" icon={<PlusOutlined />}

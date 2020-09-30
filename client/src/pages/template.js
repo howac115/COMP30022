@@ -69,7 +69,7 @@ export default function Template(props) {
         ) {
             return [
                 <button className="button is-light">
-                    <a href={'/' + folio.user + '/' + folio.name}>
+                    <a href={'/' + folio.user + '/' + folio.name + '/view'}>
                         {' '}
                         <EyeOutlined />
                     </a>
@@ -88,7 +88,7 @@ export default function Template(props) {
         } else {
             return [
                 <button className="button is-light">
-                    <a href={'/' + folio.user + '/' + folio.name}>
+                    <a href={'/' + folio.user + '/' + folio.name + '/view'}>
                         {' '}
                         <EyeOutlined />
                     </a>

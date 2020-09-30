@@ -199,6 +199,7 @@ export default function FolioList(props) {
                                     </Menu>
                                 }
                                 arrow
+                                trigger={"hover", "click"}
                             >
                                 <button className="button is-light">
                                     <SettingOutlined />
@@ -211,7 +212,7 @@ export default function FolioList(props) {
                                 </a>
                             </button>,
                             <button className="button is-light">
-                                <a href={'/' + folio.user._id + '/' + folio.name}>
+                                <a href={'/' + folio.user._id + '/' + folio.name + '/view'}>
                                     {' '}
                                     <EyeOutlined />
                                 </a>
@@ -249,7 +250,7 @@ export default function FolioList(props) {
     });
 
     return (
-        <div style={{ width: '60%', marginLeft: '10%', marginTop: '3%' }}>
+        <div style={{ width: '70%', marginLeft: '5%', marginTop: '3%' }}>
             <Collapse defaultActiveKey={['1']} ghost>
                 <Panel header={<Title level={3}> My Folios </Title>} key="1">
                     <Row gutter={[32, 16]}>{renderCards}</Row>
