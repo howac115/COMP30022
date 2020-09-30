@@ -12,9 +12,6 @@
 // 2. do a few tests on that user including corner test cases
 // 3. delete that user
 
-// set this file runs after server test
-require('./server_test');
-
 const expect = require('chai').expect;
 const {response} = require('express');
 const request = require('request');
