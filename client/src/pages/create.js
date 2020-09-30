@@ -1,29 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import Layout from '../layout.js';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import {toast} from 'react-toastify';
+import {message} from 'antd';
 
 export default function Create(props) {
     let history = useHistory();
     const {register, handleSubmit, errors} = useForm();
+    useEffect(() => {
+        document.title = 'ExPortfolio | Create';
+    }, []);
 
     const handleCreate = async data => {
         try {
             const {name} = data;
             const user = global.auth.getUser().id;
             await axios.post('/folio/create', {name, user});
-            toast.success(name + ' successfully created!');
-            history.push('/' + global.auth.getUser().id + '/folios');
+            message.success(name + ' successfully created!');
+            history.push('/' + global.auth.getUser().id);
         } catch (error) {
             const errorMessage = error.response.data.error;
-            toast.error(errorMessage);
+            message.error(errorMessage);
         }
     };
 
     const handleCancel = () => {
-        console.log(history);
         history.push('/' + global.auth.getUser().id);
     };
 
@@ -54,9 +56,9 @@ export default function Create(props) {
                                 ref={register({required: true})}
                             />
                             {errors.name && (
-                                <p className="helper has-text-danger">
-                                    Name is required.
-                                </p>
+                                <i className="helper has-text-danger">
+                                    Name is required
+                                </i>
                             )}
                         </div>
                     </div>
