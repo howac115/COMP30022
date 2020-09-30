@@ -1,14 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../layout.js';
 import axios from 'axios';
-import {Typography} from 'antd';
-import {useHistory} from 'react-router-dom';
+import { Typography } from 'antd';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
+
+const { Title } = Typography;
 
 function FolioPage(props) {
     let history = useHistory();
-    const [folio, setFolio] = useState([]);
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         document.title = 'ExPortfolio | View';
@@ -25,18 +30,14 @@ function FolioPage(props) {
                         global.auth.getUser().id === response.data.user)
                 ) {
                     if (response.data.content) {
-                        setFolio(response.data);
+                        setContent(response.data.content);
+                        console.log(content)
                     } else {
-                        setFolio({
-                            content:
-                                '<p>This portfolio is currently empty.</p>',
-                        });
+                        setContent('<p>This portfolio is currently empty.</p>')
                     }
                 } else {
-                    setFolio({
-                        content:
-                            '<p>This portfolio has been set private by the portfolio owner.</p>',
-                    });
+                    setContent('<p>This portfolio has been set private by the portfolio owner.</p>')
+
                 }
             });
     }, [history.location.pathname]);
@@ -46,13 +47,23 @@ function FolioPage(props) {
             <Layout />
             <div
                 className="folioPage"
-                style={{width: '80%', margin: '3rem auto'}}
+                style={{ width: '90%', margin: '3rem auto' }}
             >
                 <Title level={2}>
                     {history.location.pathname.split('/')[2]}
                 </Title>
-                <br />
-                <div dangerouslySetInnerHTML={{__html: folio.content}} />
+                <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
+                    <div style={{ textAlign: 'center' }}></div>
+                    <SunEditor
+                        setContents={content}
+                        showToolbar={false}
+                        enable={false}
+                        setOptions={{
+                            height: '100%',
+                            va
+                        }}
+                    />
+                </div>
             </div>
         </div>
     );

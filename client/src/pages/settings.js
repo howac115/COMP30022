@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
-import {Button, Divider, Form, Input, Menu, Modal, Row, Typography} from 'antd';
+import { Button, Divider, Form, Input, Menu, Modal, Row, Typography } from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
     SnippetsOutlined,
     SettingOutlined,
-    UserOutlined,
 } from '@ant-design/icons';
-import {useHistory} from 'react-router-dom';
-import {message} from 'antd';
+import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 export default function User(props) {
     let history = useHistory();
@@ -42,7 +41,7 @@ export default function User(props) {
     const handleCreate = async () => {
         try {
             const user = global.auth.getUser().id;
-            await axios.post('/folio/create', {name, user});
+            await axios.post('/folio/create', { name, user });
             message.success(name + ' successfully created!');
             history.go(0);
         } catch (error) {
@@ -137,7 +136,7 @@ export default function User(props) {
             <Layout />
             <Row>
                 <Menu
-                    style={{width: '15%', marginLeft: '2%', marginTop: '2%'}}
+                    style={{ width: '15%', marginLeft: '2%', marginTop: '2%' }}
                     mode="inline"
                     defaultSelectedKeys="4"
                 >
@@ -170,7 +169,7 @@ export default function User(props) {
                         Settings
                     </Menu.Item>
                 </Menu>
-                <div style={{width: '70%', marginLeft: '7%', marginTop: '4%'}}>
+                <div style={{ width: '70%', marginLeft: '7%', marginTop: '4%' }}>
                     <Title level={3}> Settings </Title>
                     <div
                         style={{

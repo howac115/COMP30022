@@ -1,7 +1,7 @@
 import React from 'react';
-import SunEditor from 'suneditor-react';
 import axios from 'axios';
-import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
@@ -12,7 +12,7 @@ class sunEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : ''};
+        this.state = { editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : '' };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -26,8 +26,8 @@ class sunEditor extends React.Component {
             .then(response => {
                 if (response.data.content) {
                     this.setState(
-                        {editorHtml: response.data.content},
-                        () => {}
+                        { editorHtml: response.data.content },
+                        () => { }
                     );
                 }
             })
@@ -41,8 +41,9 @@ class sunEditor extends React.Component {
     }
 
     handleChange = content => {
-        this.setState({editorHtml: content}, () => {
+        this.setState({ editorHtml: content }, () => {
             this.props.onEditorChange(this.state.editorHtml);
+            console.log(this.props.disable)
         });
     };
 
@@ -52,6 +53,7 @@ class sunEditor extends React.Component {
                 <SunEditor
                     setContents={this.state.editorHtml}
                     onChange={this.handleChange}
+                    disable={this.props.disable}
                     setOptions={{
                         height: '600',
                         imageFileInput: false,
@@ -81,7 +83,7 @@ class sunEditor extends React.Component {
                                 'audio',
                                 'math',
                             ], // You must add the 'katex' library at options to use the 'math' plugin. // You must add the "imageGalleryUrl".
-                            /** ['imageGallery'] */ [
+                            /** ['imageGallery'] */[
                                 'fullScreen',
                                 'showBlocks',
                                 'codeView',

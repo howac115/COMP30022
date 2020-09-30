@@ -1,23 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {confirmAlert} from 'react-confirm-alert';
+import React, { useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Collapse, Dropdown, Menu, Typography, Row} from 'antd';
+import { Card, Col, Collapse, Dropdown, Menu, Typography, Row } from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
     EditOutlined,
     EyeOutlined,
     SettingOutlined,
-    FolderOpenOutlined,
 } from '@ant-design/icons';
-import {message} from 'antd';
-import {useHistory} from 'react-router-dom';
+import { message } from 'antd';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
-const {Meta} = Card;
-const {Panel} = Collapse;
+const { Title } = Typography;
+const { Meta } = Card;
+const { Panel } = Collapse;
 
 export default function FolioList(props) {
     let history = useHistory();
@@ -28,7 +27,7 @@ export default function FolioList(props) {
         let mounted = true;
         if (mounted) {
             const user = global.auth.getUser().id;
-            axios.post('/folio/all', {user}).then(response => {
+            axios.post('/folio/all', { user }).then(response => {
                 if (response.data.success) {
                     setFolios(response.data.folios);
                 } else {
@@ -100,7 +99,7 @@ export default function FolioList(props) {
 
     const askDelete = prop => {
         confirmAlert({
-            customUI: ({onClose}) => {
+            customUI: ({ onClose }) => {
                 return (
                     <div className="container">
                         <div>
@@ -165,7 +164,7 @@ export default function FolioList(props) {
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
+                        style={{ width: 300, marginTop: 16 }}
                         actions={[
                             <Dropdown
                                 overlay={
@@ -261,7 +260,7 @@ export default function FolioList(props) {
     });
 
     return (
-        <div style={{width: '70%', marginLeft: '5%', marginTop: '3%'}}>
+        <div style={{ width: '70%', marginLeft: '5%', marginTop: '3%' }}>
             <Collapse defaultActiveKey={['1']} ghost>
                 <Panel header={<Title level={3}> My Folios </Title>} key="1">
                     <Row gutter={[32, 16]}>{renderCards}</Row>
