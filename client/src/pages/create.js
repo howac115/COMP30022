@@ -30,11 +30,16 @@ export default function Create(props) {
 
     const handleCreate = async data => {
         try {
-            const {name} = data;
-            const user = global.auth.getUser().id;
-            await axios.post('/folio/create', {name, user});
-            toast.success(name + ' successfully created!');
-            history.push('/' + global.auth.getUser().id + '/folios');
+            if (type == "Folios") {
+                const {name} = data;
+                const user = global.auth.getUser().id;
+                await axios.post('/folio/create', {name, user});
+                toast.success(name + ' successfully created!');
+                history.push('/' + global.auth.getUser().id + '/folios');
+            } else if(type == "Template"){
+                history.push('/' + global.auth.getUser().id + '/templatemain');
+            }
+            
         } catch (error) {
             const errorMessage = error.response.data.error;
             toast.error(errorMessage);
@@ -81,7 +86,7 @@ export default function Create(props) {
                                     Name is required.
                                 </p>
                             )}
-                            <FormControl variant="outlined" className={classes.formControl}>
+                            <FormControl variant="outlined" className={classes.formControl} style={{marginTop:"15px"}}>
                                 <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
                                 <Select
                                 labelId="demo-simple-select-outlined-label"
