@@ -9,7 +9,8 @@ import {
     ShareAltOutlined,
     EditOutlined,
     EyeOutlined,
-    SettingOutlined
+    SettingOutlined,
+    FolderOpenOutlined
 } from '@ant-design/icons';
 import { message } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -19,6 +20,7 @@ const { Meta } = Card;
 const { Panel } = Collapse;
 
 export default function FolioList(props) {
+
     let history = useHistory();
     const [folios, setFolios] = useState([]);
 
@@ -197,7 +199,7 @@ export default function FolioList(props) {
                                     </Menu>
                                 }
                                 arrow
-                                trigger={"hover" | "click"}
+                                trigger={"hover", "click"}
                             >
                                 <button className="button is-light">
                                     <SettingOutlined />
@@ -242,7 +244,6 @@ export default function FolioList(props) {
                         </div>
                     </Card>
                 </Draggable>
-
             </Col>
         );
     });
