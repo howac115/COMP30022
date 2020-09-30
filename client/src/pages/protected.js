@@ -13,7 +13,7 @@ class ProtectedRoute extends React.Component {
         }
         if (isAuthenticated !== true) {
             console.log(isAuthenticated);
-            message.error("You can not edit others's portfolio!");
+            message.error("Sorry You have no permission to view this page.");
         }
         return isAuthenticated ? (
             <Component />
