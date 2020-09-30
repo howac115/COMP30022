@@ -51,11 +51,12 @@ class sunEditor extends React.Component {
         return (
             <div>
                 <SunEditor
+                    height='100%'
                     setContents={this.state.editorHtml}
                     onChange={this.handleChange}
                     disable={this.props.disable}
+                    showToolbar={!this.props.disable}
                     setOptions={{
-                        height: '600',
                         imageFileInput: false,
                         katex: katex,
                         // add all functionalities needed

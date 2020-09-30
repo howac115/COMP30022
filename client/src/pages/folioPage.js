@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../layout.js';
+import SunEditor from '../components/SunEditor';
 import axios from 'axios';
 import { Typography } from 'antd';
 import { useHistory } from 'react-router-dom';
-
-import SunEditor from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
 
 const { Title } = Typography;
 
@@ -42,6 +38,11 @@ function FolioPage(props) {
             });
     }, [history.location.pathname]);
 
+    const [value, setValue] = useState('');
+    const onEditorChange = content => {
+        setValue(content);
+    };
+
     return (
         <div>
             <Layout />
@@ -55,12 +56,10 @@ function FolioPage(props) {
                 <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
                     <div style={{ textAlign: 'center' }}></div>
                     <SunEditor
-                        setContents={content}
-                        showToolbar={false}
-                        enable={false}
-                        setOptions={{
-                            height: '100%',
-                        }}
+                        user={history.location.pathname.split('/')[1]}
+                        name={history.location.pathname.split('/')[2]}
+                        disable={true}
+                        onEditorChange={onEditorChange}
                     />
                 </div>
             </div>
