@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import { Button, Divider, Form, Input, Menu, Modal, Row, Typography } from 'antd';
 import { PlusOutlined, FolderOpenOutlined, SnippetsOutlined, SettingOutlined } from '@ant-design/icons';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
@@ -13,7 +12,6 @@ const { Title } = Typography;
 export default function User(props) {
 
     let history = useHistory();
-    const { register, handleSubmit, errors, watch } = useForm();
     const [user, setUser] = useState([]);
     const [visible, setVisible] = useState();
     const [passwordDisable, setPasswordDisable] = useState(true);
@@ -23,26 +21,7 @@ export default function User(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirm] = useState('');
-    const [validate, setValidate] = useState(true);
 
-    const handleUpdate = async () => {
-        try {
-            const id = user._id;
-            await axios.post('/user/' + id + '/update', {
-                id: user._id,
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password,
-                password2: confirmPassword
-            });
-            message.success('Update personal detail Success');
-            history.go(0);
-        } catch (error) {
-            const errorMessage = error.response.data.error;
-            message.error(errorMessage);
-        }
-    };
 
     useEffect(() => {
         (async () => {
@@ -61,6 +40,25 @@ export default function User(props) {
             const user = global.auth.getUser().id;
             await axios.post('/folio/create', { name, user });
             message.success(name + ' successfully created!');
+            history.go(0);
+        } catch (error) {
+            const errorMessage = error.response.data.error;
+            message.error(errorMessage);
+        }
+    };
+
+    const handleUpdate = async () => {
+        try {
+            const id = user._id;
+            await axios.post('/user/' + id + '/update', {
+                id: user._id,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                password2: confirmPassword
+            });
+            message.success('Update personal detail Success');
             history.go(0);
         } catch (error) {
             const errorMessage = error.response.data.error;
@@ -93,7 +91,7 @@ export default function User(props) {
     }
 
     const SettingsRedirect = () => {
-        if (history.location.pathname == ('/' + user._id + '/settings')) {
+        if (history.location.pathname === ('/' + user._id + '/settings')) {
             history.push('#')
         } else {
             history.push(history.location.pathname)
@@ -134,25 +132,6 @@ export default function User(props) {
         setConfirm(event.target.value);
         console.log(password)
         console.log(confirmPassword)
-        if (confirmPassword != password) {
-            setValidate("error")
-        } else if (confirmPassword == password) {
-            setValidate("success")
-        }
-    }
-
-    const onHelp = () => {
-        if (validate) {
-            return "Password doesn't match"
-        }
-    }
-
-    const handleValidate = () => {
-        if (validate) {
-            return "success"
-        } else {
-            return "error"
-        }
     }
 
     return (

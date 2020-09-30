@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
 import { Card, Col, Collapse, Dropdown, Menu, Typography, Row } from 'antd';
@@ -10,8 +9,7 @@ import {
     ShareAltOutlined,
     EditOutlined,
     EyeOutlined,
-    SettingOutlined,
-    FolderOpenOutlined
+    SettingOutlined
 } from '@ant-design/icons';
 import { message } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -199,7 +197,7 @@ export default function FolioList(props) {
                                     </Menu>
                                 }
                                 arrow
-                                trigger={"hover", "click"}
+                                trigger={"hover" | "click"}
                             >
                                 <button className="button is-light">
                                     <SettingOutlined />

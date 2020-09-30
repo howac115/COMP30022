@@ -45,6 +45,13 @@ export default function Template(props) {
         }
     };
 
+    const handleShare = prop => {
+        navigator.clipboard.writeText(
+            'https://exportfolio.herokuapp.com/' + prop.user + '/' + prop.name
+        );
+        message.success(prop.name + ' is succeccful copied to clipboard');
+    };
+
     const onChange = (event) => {
         setName(event.target.value);
     }
@@ -102,13 +109,6 @@ export default function Template(props) {
             ];
         }
     }
-
-    const handleShare = prop => {
-        navigator.clipboard.writeText(
-            'https://exportfolio.herokuapp.com/' + prop.user + '/' + prop.name
-        );
-        message.success(prop.name + ' is succeccful copied to clipboard');
-    };
 
     const renderCards = folios.map((folio, index) => {
         return (

@@ -14,7 +14,4 @@ router.get('/:id', user_controller.user_detail_get);
 // POST request for update user's detail 
 router.post('/:id/update', user_controller.user_update_post);
 
-// POST request for update user's password 
-router.post('/:id/updatePassword', user_controller.user_password_update);
-
 module.exports = router;

@@ -1,41 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import FolioList from './folioList.js'
 import { Input, Menu, Modal, Row } from 'antd';
 import { PlusOutlined, FolderOpenOutlined, SnippetsOutlined, SettingOutlined } from '@ant-design/icons';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
 export default function User(props) {
 
     let history = useHistory();
-    const { register, handleSubmit, errors, watch } = useForm();
     const [user, setUser] = useState([]);
     const [visible, setVisible] = useState();
     const [name, setName] = useState('');
-    // use user.firstName to get userName
-    // also have user.LastName, user._id, user.email
-    // example below
-    const handleUpdate = async data => {
-        try {
-            const id = user._id;
-            const { firstName, lastName, email } = data;
-            await axios.post('/user/' + id + '/update', {
-                id,
-                firstName,
-                lastName,
-                email,
-            });
-            message.success('Update personal detail Success');
-            history.go(0);
-        } catch (error) {
-            const errorMessage = error.response.data.error;
-            message.error(errorMessage);
-        }
-    };
 
     useEffect(() => {
         (async () => {
@@ -63,7 +41,7 @@ export default function User(props) {
         setName(event.target.value);
     }
 
-    const showModal = (folio) => {
+    const showModal = () => {
         setVisible(true);
     };
 
@@ -80,7 +58,7 @@ export default function User(props) {
     }
 
     const FoliosRedirect = () => {
-        if (history.location.pathname == ('/' + user._id)) {
+        if (history.location.pathname === ('/' + user._id)) {
             history.push('#')
         } else {
             history.go(0);

@@ -66,22 +66,3 @@ exports.user_update_post = function (req, res) {
         }
     });
 }
-
-// POST request for update user's password 
-exports.user_password_update = function (req, res) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            User.findOneAndUpdate(
-                { _id: req.body.id },
-                { password: hash },
-                function (err, updatedUser) {
-                    if (err) {
-                        res.status(400).json({ success: false, err });
-                    } else {
-                        res.status(200).json({ success: true, updatedUser });
-                    }
-                }
-            );
-        });
-    });
-}
