@@ -60,7 +60,6 @@ function FolioPage(props) {
                         enable={false}
                         setOptions={{
                             height: '100%',
-                            va
                         }}
                     />
                 </div>
