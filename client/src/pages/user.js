@@ -76,6 +76,7 @@ export default function User(props) {
                 <Menu
                     style={{ width: "15%", marginLeft: "2%", marginTop: "2%" }}
                     mode="inline"
+                    defaultSelectedKeys='3'
                 >
                     <Menu.Item key="1" icon={<PlusOutlined />}
                         onClick={showModal}>

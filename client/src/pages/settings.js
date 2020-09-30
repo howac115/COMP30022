@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import { Button, Divider, Form, Input, Menu, Modal, Row, Typography } from 'antd';
-import { PlusOutlined, FolderOpenOutlined, SnippetsOutlined, SettingOutlined } from '@ant-design/icons';
+import { PlusOutlined, FolderOpenOutlined, SnippetsOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
@@ -141,6 +141,7 @@ export default function User(props) {
                 <Menu
                     style={{ width: "15%", marginLeft: "2%", marginTop: "2%" }}
                     mode="inline"
+                    defaultSelectedKeys='4'
                 >
                     <Menu.Item key="1" icon={<PlusOutlined />}
                         onClick={showModal}>
