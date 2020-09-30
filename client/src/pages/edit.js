@@ -40,7 +40,7 @@ function Edit(props) {
                 if (response) {
                     message.success(variables.name + ' updated!');
                     setTimeout(() => {
-                        history.push('/' + variables.user + '/folios');
+                        history.push('/' + variables.user);
                     }, 2000);
                 }
             });

@@ -199,7 +199,6 @@ export default function FolioList(props) {
                                     </Menu>
                                 }
                                 arrow
-                                trigger={"hover", "click"}
                             >
                                 <button className="button is-light">
                                     <SettingOutlined />
