@@ -6,11 +6,16 @@ import "react-multi-carousel/lib/styles.css";
 import Image from "../components/image";
 import CTE from "react-click-to-edit";
 import Layout from '../../../layout.js';
+import {withRouter} from 'react-router-dom';
 
 class Achivement extends Component {
 
   clickImge(){
     console.log("test");
+  }
+
+  nextPath(path) {
+    this.props.history.push(path);
   }
 
   render() {
@@ -29,6 +34,7 @@ class Achivement extends Component {
       "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
       "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
     ];
+
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
@@ -55,8 +61,9 @@ class Achivement extends Component {
         };
       });
 
+   
     return (
-      <div id="home-achivement" className="bg-dark">
+      <div id="home-achivement">
         <Layout></Layout>
         <div className="achivement-top-img"></div>
         <div className="achivement-top-content">
@@ -99,7 +106,10 @@ class Achivement extends Component {
           >
               {fakerData.slice(0, 5).map((card, index) => {
               return <Image url={card.image} alt={card.headline} onClick={() => {
-                this.props.history.push("/experience");
+                const loggedUserId = global.auth.getUser().id;
+                const createLink = '/' + loggedUserId + '/temexperience';
+                this.nextPath.bind(this);
+                this.nextPath(createLink);
               }}/>;
               })}     
           </Carousel>
@@ -109,4 +119,4 @@ class Achivement extends Component {
   }
 }
 
-export default Achivement;
+export default withRouter(Achivement);

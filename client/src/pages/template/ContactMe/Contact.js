@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import CTE from "react-click-to-edit";
 import faker from "faker";
 import Layout from '../../../layout.js';
+import "../Homepage/style.css";
 
 class Contact extends Component {
 
@@ -66,7 +67,7 @@ class Contact extends Component {
             onChange={this.onChangeFile.bind(this)}
           />
           {/* <img class="ui medium circular image" src={faker.image.people()} alt="./facepic.jpeg" /> */}
-          <img onClick={()=>{this.upload.click()}} class="ui medium circular image" src={this.state.bottomImgUrl} alt="./facepic.jpeg"></img>
+          <img id="contact image" onClick={()=>{this.upload.click()}} class="ui medium circular image" src={this.state.bottomImgUrl} alt="./facepic.jpeg"></img>
           <h4 class="ui horizontal divider header">
             <i class="address card outline icon"></i>
                   Contact Detail

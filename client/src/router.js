@@ -15,7 +15,6 @@ import MainScreen from "./pages/template/Homepage/MainScreen.js";
 import Contact from "./pages/template/ContactMe/Contact";
 import Achievement from "./pages/template/Achievement/achivement"
 import Experience from "./pages/template/Experience/experience"
-import Test from "./pages/template/Test"
 
 class Router extends React.Component {
     render() {

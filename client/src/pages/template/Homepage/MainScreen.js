@@ -58,7 +58,7 @@ class Screen extends Component {
     return (
       <div id="showcase">
         <Layout></Layout>
-        <div className="container">
+        <div className="showcase-container">
   
           <div className="showcase-content">
             {/* <div className="showcase-wel"><span className="text-primary">Nice</span> to meet you</div> */}

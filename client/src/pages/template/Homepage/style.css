@@ -50,8 +50,8 @@ p {
 .btn {
   display: inline-block;
   font-size: 18px;
-  color: #fff;
-  background: #333;
+  /* color: #fff; */
+  /* background: #333; */
   padding: 13px 20px;
   border: none;
   cursor: pointer;
@@ -59,16 +59,16 @@ p {
 
 .btn:hover {
   background: #f7c08a;
-  color: #333;
+  /* color: #333; */
 }
 
 .btn-light {
   background: #f7c08a;
-  color: #333;
+  /* color: #333; */
 }
 
 .bg-dark {
-  background: #333;
+  /* background: #333; */
   color: #fff;
 }
 
@@ -79,7 +79,7 @@ p {
 
 .bg-primary {
   background: #f7c08a;
-  color: #333;
+  /* color: #333; */
 }
 
 .clr {
@@ -97,7 +97,7 @@ p {
 
 /* Navbar */
 #navbar {
-  background: #333;
+  /* background: #333; */
   color: #fff;
   overflow: auto;
   height: 100%;
@@ -136,6 +136,11 @@ p {
 /* Showcase */
 #showcase {
   height: 100%;
+  width: 100%;
+}
+
+#showcase .showcase-container {
+  width: 100%;
 }
 
 #showcase .showcase-content {
@@ -464,7 +469,7 @@ p {
 /* Footer */
 #main-footer {
   text-align: center;
-  background: #444;
+  /* background: #444; */
   color: #fff;
   padding: 20px;
   position: absolute;
@@ -473,6 +478,10 @@ p {
 }
 
 #contact {
-  margin-top: 100px;
   height: 700px;
+}
+
+#contact image {
+  width: 300px;
+  border-radius: 50%;
 }

@@ -87,7 +87,8 @@ class Experience extends Component {
       },
     };
     return (
-      <div id="home-experience" className="bg-dark">
+      <div id="home-experience">
+          <Layout></Layout>
           <input id="myInput"
             type="file"
             ref={(ref) => this.upload = ref}
