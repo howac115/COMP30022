@@ -8,25 +8,22 @@ import '../css/stylesheets.css';
 const Carousel = props => {
     const slides = [
         {
-            title: 'Collection of your works',
+            title: 'What can you do on ExPortfolio ?',
             description:
-                'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis.',
-            button: 'Read More',
+                'We could provide a wonderful opportunity for you to create your first awsone e-Portfolio, or you could also have totoal different experience from before to create your own e-Portfolio. Besides if you have no idear how to start, Do not worry ! You could find many excellent template designed by other people on ExPortfolio!',
             image: 'https://i.imgur.com/YYEM6z9.jpg',
         },
         {
-            title: 'Mark moments of highlight',
+            title: 'How could you organise your Portfolio ?',
             description:
-                'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui.',
-            button: 'Discover',
+                '1. Convey necessary details like your skills and abilities; 2. Affirm the above with relevant experience; 3. Display examples of work in each area of importance like photos, illustrations and videos; 4. Show your personality and style. Be creative!',
             image:
                 'https://images.unsplash.com/photo-1514996937319-344454492b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
         },
         {
-            title: 'Your online gallery',
+            title: 'Why do we need a Portfolio ?',
             description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
-            button: 'Explore now',
+                'Opportunities are reserved for those who are prepared ! Portfolios are a great way to demonstrate your competencies, to show yourselft, let other people to know your ability. ',
             image:
                 'https://images.unsplash.com/photo-1515169974372-0a322886d279?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1288&q=80',
         },
@@ -46,7 +43,6 @@ const Carousel = props => {
                         <div className="inner">
                             <h1>{item.title}</h1>
                             <p>{item.description}</p>
-                            <button>{item.button}</button>
                         </div>
                     </div>
                 ))}
