@@ -48,6 +48,9 @@ const reqBodyLoginWrongPwd = {
     password: wrongPassword,
 };
 
+var userID;
+const fakeUserID = 'probablyWrong435342adsf';
+
 describe('-----------------AUTH AND USER MANAGEMENT----------------', function () {
     describe('Deleting an non existing user', function () {
         it('should disapprove the delete request and return a http status code 409', function (done) {
@@ -113,6 +116,8 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
                     json: true,
                 },
                 function (error, response, body) {
+                    userID = body.user.id;
+                    console.log(body.user.id);
                     expect(response.statusCode).to.equal(200);
                     if (error) done(error);
                     else done();
@@ -150,6 +155,140 @@ describe('-----------------AUTH AND USER MANAGEMENT----------------', function (
                 },
                 function (error, response, body) {
                     expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // try to get user info with non-existing userID
+    describe('Get user info with non-existing userID', function () {
+        it('should reject the get request and return a http status code 409', function (done) {
+            request.get(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + fakeUserID,
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // try to get user info with correct userID
+    describe('Get user info with correct userID', function () {
+        it('should approve the get request and return a http status code 200', function (done) {
+            request.get(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + userID,
+                    json: true,
+                },
+                function (error, response, body) {
+                    console.log(userID);
+
+                    expect(response.statusCode).to.equal(200);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // update user's detail but user email and user ID does not match
+    describe('Update user info with non-existing userID', function () {
+        it('should reject the request and return a http status code 409', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + fakeUserID + '/update',
+                    body: {email: email},
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // update user's detail if authentication correct and user not request to update password
+    describe('Update user info with correct authentication but user not request updating password ', function () {
+        it('should approve the request and return a http status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + userID + '/update',
+                    body: {
+                        id: userID,
+                        firstname: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: '',
+                    },
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(200);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // update user's detail if authentication correct and user requests to update password but password repeatition check fails
+    describe('Update user info including password, all good but password repetition check fails', function () {
+        it('should disapprove the request and return a http status code 409', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + userID + '/update',
+                    body: {
+                        id: userID,
+                        firstname: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        password2: 'justSomeRandomPassword',
+                    },
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // update user's detail if authentication correct and user requests to update password
+    describe('Update user info with correct authentication and user requests to update password ', function () {
+        it('should approve the request and return a http status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: userURL + userID + '/update',
+                    body: {
+                        id: userID,
+                        firstname: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        password2: password,
+                    },
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(200);
                     if (error) done(error);
                     else done();
                 }

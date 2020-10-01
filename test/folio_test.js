@@ -204,7 +204,7 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
     });
 
     describe('Edit a folio with wrong userID or wrong folio name', function () {
-        it('should disapprove the request and return status code 400', function (done) {
+        it('should disapprove the request and return status code 409', function (done) {
             const postBody = {
                 user: wrongFolioIdentifier.user,
                 name: wrongFolioIdentifier.name,
@@ -227,7 +227,7 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
     });
 
     describe('Edit a folio with correct userID and correct folio name', function () {
-        it('should disapprove the request and return status code 400', function (done) {
+        it('should approve the request and return status code 200', function (done) {
             const postBody = {
                 user: userID,
                 name: folioName,
@@ -238,6 +238,94 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
                     headers: {'content-type': 'application/json'},
                     url: folioURL + userID + '/edit',
                     body: postBody,
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(200);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // clone a folio with correct userID and existing folio name
+    describe('Clone a folio with correct userID and already existing folio name', function () {
+        it('should approve the request and return status code 409', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: folioURL + '/clone',
+                    body: folioIdentifier,
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(409);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // clone a folio with correct userID and fresh new folio name
+    describe('Clone a folio with correct userID and fresh new folio name', function () {
+        it('should approve the request and return status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: folioURL + '/clone',
+                    body: {user: userID, name: 'newFolioFromTesting'},
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(200);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // change the visibility of a folio with correct userID and not matched folio name
+    describe('Change the vilibility of a folio with correct userID and not matched folio name', function () {
+        it('should approve the request and return status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: folioURL + userID + '/visible',
+                    body: {
+                        user: userID,
+                        name: 'ahaUGuessWhoAmI',
+                        // make it private
+                        visible: false,
+                        shareAsTemplate: false,
+                    },
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(400);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // change the visibility of a folio with correct userID and matched folio name
+    describe('Change the vilibility of a folio with correct userID and matched folio name', function () {
+        it('should approve the request and return status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: folioURL + userID + '/visible',
+                    body: {
+                        user: userID,
+                        name: folioIdentifier.name,
+                        // make it private
+                        visible: false,
+                        shareAsTemplate: false,
+                    },
                     json: true,
                 },
                 function (error, response, body) {
@@ -275,6 +363,25 @@ describe('-----------------FOLIO MANAGEMENT----------------', function () {
                     headers: {'content-type': 'application/json'},
                     url: folioURL + userID + '/delete',
                     body: folioIdentifier,
+                    json: true,
+                },
+                function (error, response, body) {
+                    expect(response.statusCode).to.equal(200);
+                    if (error) done(error);
+                    else done();
+                }
+            );
+        });
+    });
+
+    // In this step we delete the folio that cloned by our imaginary user
+    describe('Delete a folio for that user with correct userID and correct folio name', function () {
+        it('should approve the request and return status code 200', function (done) {
+            request.post(
+                {
+                    headers: {'content-type': 'application/json'},
+                    url: folioURL + userID + '/delete',
+                    body: {user: userID, name: 'newFolioFromTesting'},
                     json: true,
                 },
                 function (error, response, body) {
