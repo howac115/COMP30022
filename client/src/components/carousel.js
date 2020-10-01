@@ -16,7 +16,7 @@ const Carousel = props => {
         {
             title: 'How could you organise your Portfolio ?',
             description:
-                '1. Convey necessary details like your skills and abilities; 2. Affirm the above with relevant experience; 3. Display examples of work in each area of importance like photos, illustrations and videos; 4. Show your personality and style. Be creative!',
+                '1. Convey necessary details like your skills and abilities; 2. Affirm the above with relevant experience; 3. Display examples of work in each area of importance like photos, illustrations and videos; 4. Show your personality and style. Be creative! (Ps: If you want to know more about how to use our website, there is a chat box AI on the right corner， try to play with that!)',
             image:
                 'https://images.unsplash.com/photo-1514996937319-344454492b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
         },
