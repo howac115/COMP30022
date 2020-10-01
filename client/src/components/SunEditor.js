@@ -12,7 +12,7 @@ class sunEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : '' };
+        this.state = {editorHtml: __ISMSIE__ ? '<p>&nbsp;</p>' : ''};
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -26,8 +26,8 @@ class sunEditor extends React.Component {
             .then(response => {
                 if (response.data.content) {
                     this.setState(
-                        { editorHtml: response.data.content },
-                        () => { }
+                        {editorHtml: response.data.content},
+                        () => {}
                     );
                 }
             })
@@ -41,9 +41,8 @@ class sunEditor extends React.Component {
     }
 
     handleChange = content => {
-        this.setState({ editorHtml: content }, () => {
+        this.setState({editorHtml: content}, () => {
             this.props.onEditorChange(this.state.editorHtml);
-            console.log(this.props.disable)
         });
     };
 
@@ -51,11 +50,9 @@ class sunEditor extends React.Component {
         return (
             <div>
                 <SunEditor
-                    height='100%'
+                    height="100%"
                     setContents={this.state.editorHtml}
                     onChange={this.handleChange}
-                    disable={this.props.disable}
-                    showToolbar={!this.props.disable}
                     setOptions={{
                         imageFileInput: false,
                         katex: katex,
@@ -84,7 +81,7 @@ class sunEditor extends React.Component {
                                 'audio',
                                 'math',
                             ], // You must add the 'katex' library at options to use the 'math' plugin. // You must add the "imageGalleryUrl".
-                            /** ['imageGallery'] */[
+                            /** ['imageGallery'] */ [
                                 'fullScreen',
                                 'showBlocks',
                                 'codeView',
