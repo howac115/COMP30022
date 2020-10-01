@@ -1,14 +1,14 @@
-var User = require("../models/user");
-var Folio = require("../models/folio");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
+var User = require('../models/user');
+var Folio = require('../models/folio');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 // GET one specific user
 exports.user_detail_get = function (req, res) {
     User.findById(req.params.id, function (err, user) {
         if (err) {
-            res.status(409).json({ error: "User not found" });
+            res.status(409).json({error: 'User not found'});
         } else {
             res.status(200).json(user);
         }
@@ -24,7 +24,7 @@ exports.user_folio_get = function (req, res) {
         },
         function (err, folio) {
             if (err) {
-                res.status(409).json({ error: "Folio not found" });
+                res.status(409).json({error: 'Folio not found'});
             } else {
                 res.status(200).json(folio);
             }
@@ -34,21 +34,21 @@ exports.user_folio_get = function (req, res) {
 
 // delete the user data, this should only be allowed when user is verified
 exports.user_purge_post = function (req, res) {
-    const { email, password } = req.body;
-    User.findOne({ email: email }).then((user) => {
+    const {email, password} = req.body;
+    User.findOne({email: email}).then((user) => {
         if (!user) {
-            res.status(409).json("User not found in DB");
+            res.status(409).json('User not found in DB');
         } else {
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (isMatch) {
-                    User.findOneAndDelete({ email: email }, function (err) {
+                    User.findOneAndDelete({email: email}, function (err) {
                         if (err)
-                            res.status(409).json("Delete user not succeed.");
-                        res.status(200).json("Delete user succeed");
+                            res.status(409).json('Delete user not succeed.');
+                        res.status(200).json('Delete user succeed');
                     });
                 } else {
                     res.status(409).json(
-                        "Password incorrect, cannot delete user"
+                        'Password incorrect, cannot delete user'
                     );
                 }
             });
@@ -58,13 +58,13 @@ exports.user_purge_post = function (req, res) {
 
 // POST request for update user's detail
 exports.user_update_post = function (req, res) {
-    User.findOne({ email: req.body.email }).then((user) => {
+    User.findOne({email: req.body.email}).then((user) => {
         if (user && req.body.id != user.id) {
-            res.status(409).json({ error: "Email already exists" });
+            res.status(409).json({error: 'Email already exists'});
         } else {
-            if (req.body.password == "") {
+            if (req.body.password == '') {
                 User.findOneAndUpdate(
-                    { _id: req.body.id },
+                    {_id: req.body.id},
                     {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
@@ -72,7 +72,7 @@ exports.user_update_post = function (req, res) {
                     },
                     function (err, updatedUser) {
                         if (err) {
-                            res.status(400).json({ success: false, err });
+                            res.status(400).json({success: false, err});
                         } else {
                             res.status(200).json({
                                 success: true,
@@ -82,12 +82,12 @@ exports.user_update_post = function (req, res) {
                     }
                 );
             } else if (req.body.password != req.body.password2) {
-                res.status(409).json({ error: "Password doesn`t match" });
+                res.status(409).json({error: 'Password doesn`t match'});
             } else {
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(req.body.password, salt, (err, hash) => {
                         User.findOneAndUpdate(
-                            { _id: req.body.id },
+                            {_id: req.body.id},
                             {
                                 firstName: req.body.firstName,
                                 lastName: req.body.lastName,
