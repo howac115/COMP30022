@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../layout.js';
+import SunEditor from '../components/SunEditor';
 import axios from 'axios';
-import {Typography} from 'antd';
-import {useHistory} from 'react-router-dom';
+import { Typography } from 'antd';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 function FolioPage(props) {
     let history = useHistory();
-    const [folio, setFolio] = useState([]);
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         document.title = 'ExPortfolio | View';
@@ -25,34 +26,42 @@ function FolioPage(props) {
                         global.auth.getUser().id === response.data.user)
                 ) {
                     if (response.data.content) {
-                        setFolio(response.data);
+                        setContent(response.data.content);
+                        console.log(content)
                     } else {
-                        setFolio({
-                            content:
-                                '<p>This portfolio is currently empty.</p>',
-                        });
+                        setContent('<p>This portfolio is currently empty.</p>')
                     }
                 } else {
-                    setFolio({
-                        content:
-                            '<p>This portfolio has been set private by the portfolio owner.</p>',
-                    });
+                    setContent('<p>This portfolio has been set private by the portfolio owner.</p>')
+
                 }
             });
     }, [history.location.pathname]);
+
+    const [value, setValue] = useState('');
+    const onEditorChange = content => {
+        setValue(content);
+    };
 
     return (
         <div>
             <Layout />
             <div
                 className="folioPage"
-                style={{width: '80%', margin: '3rem auto'}}
+                style={{ width: '90%', margin: '3rem auto' }}
             >
                 <Title level={2}>
                     {history.location.pathname.split('/')[2]}
                 </Title>
-                <br />
-                <div dangerouslySetInnerHTML={{__html: folio.content}} />
+                <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
+                    <div style={{ textAlign: 'center' }}></div>
+                    <SunEditor
+                        user={history.location.pathname.split('/')[1]}
+                        name={history.location.pathname.split('/')[2]}
+                        disable={true}
+                        onEditorChange={onEditorChange}
+                    />
+                </div>
             </div>
         </div>
     );
