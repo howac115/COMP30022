@@ -1,17 +1,20 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
+import {message} from 'antd';
 
 export default function SignUp(props) {
     const {register, handleSubmit, errors, watch} = useForm();
     const password = useRef({});
     password.current = watch('password', '');
 
+    useEffect(() => {
+        document.title = 'ExPortfolio ｜ Sign up';
+    }, []);
+
     const handleSignUp = async data => {
         try {
-            console.log('here');
             const {firstName, lastName, email, password, password2} = data;
             await axios.post('/auth/register', {
                 firstName,
@@ -20,7 +23,7 @@ export default function SignUp(props) {
                 password,
                 password2,
             });
-            toast.success('Sign Up Success');
+            message.success('Sign Up Success');
             const res = await axios.post('/auth/login', {email, password});
             const token = res.data.token;
             global.auth.setUserToken(token);
@@ -28,10 +31,10 @@ export default function SignUp(props) {
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
             props.history.push('/' + res.data.user.id);
-            toast.success('Welcome ' + userName);
+            message.success('Welcome ' + userName);
         } catch (error) {
             const errorMessage = error.response.data.error;
-            toast.error(errorMessage);
+            message.error(errorMessage);
         }
     };
 
@@ -167,9 +170,9 @@ export default function SignUp(props) {
                                 value={true}
                             />{' '}
                             &nbsp; I agree to the{' '}
-                            <i href="https://www.google.com">
+                            <a href="https://academicintegrity.unimelb.edu.au/">
                                 terms and conditions
-                            </i>
+                            </a>
                         </label>
                         {errors.checkbox && (
                             <i className="helper has-text-danger">

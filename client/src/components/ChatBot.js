@@ -1,5 +1,3 @@
-// The idea of this chat bot is learned from
-// https://lucasbassetti.com.br/react-simple-chatbot/#/docs/options
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {ThemeProvider} from 'styled-components';

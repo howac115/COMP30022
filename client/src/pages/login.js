@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
+import {message} from 'antd';
 
 export default function Login(props) {
     const {register, handleSubmit, errors} = useForm();
+
+    useEffect(() => {
+        document.title = 'ExPortfolio | Login';
+    }, []);
 
     const handleLogin = async data => {
         try {
@@ -16,15 +20,14 @@ export default function Login(props) {
             const _res = await axios.get('/user/' + global.auth.getUser().id);
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
-            toast.success('Welcome ' + userName);
-            props.history.push('/' + res.data.user.id);
+            message.success('Welcome ' + userName);
+            props.history.push('/' + global.auth.getUser().id);
         } catch (error) {
             const errorMessage = error.response.data.error;
-            toast.error(errorMessage);
+            message.error(errorMessage);
         }
     };
     const handleBack = () => {
-        console.log(props);
         props.history.push('/');
     };
 
