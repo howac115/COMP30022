@@ -59,6 +59,9 @@ export default function Template(props) {
         if (global.auth.getUser() !== null) {
             history.push('/' + global.auth.getUser().id);
         }
+        else {
+            history.push('/');
+        }
     };
 
     const onChange = event => {
