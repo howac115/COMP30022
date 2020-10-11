@@ -55,9 +55,12 @@ export default function Template(props) {
         message.success(prop.name + ' is succeccful copied to clipboard');
     };
 
-    const handleBack = () => {
+   const handleBack = () => {
         if (global.auth.getUser() !== null) {
             history.push('/' + global.auth.getUser().id);
+        }
+        else {
+            <Link to="/"></Link>
         }
     };
 
