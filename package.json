@@ -15,6 +15,7 @@
   "author": "Bounty Programmers",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
@@ -24,6 +25,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
+    "nodemailer": "^6.4.14",
     "session": "^0.1.0",
     "use-react-router": "^1.0.7"
   },
