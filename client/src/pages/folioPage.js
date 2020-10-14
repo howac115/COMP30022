@@ -14,6 +14,7 @@ function FolioPage(props) {
     let history = useHistory();
     const [visible, setVisible] = useState();
     const [content, setContent] = useState('');
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [contentState, setContentState] = useState(false);
 
@@ -27,6 +28,7 @@ function FolioPage(props) {
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
                 setUsername(response.data.user.firstName + ' ' + response.data.user.lastName);
+                setEmail(response.data.user.email);
                 if (
                     response.data.folio.visible === true ||
                     (global.auth.getUser() !== null &&
@@ -61,7 +63,7 @@ function FolioPage(props) {
     const onFinish = (values) => {
         console.log(values.sender.email)
         axios.post('/user/' + history.location.pathname.split('/')[1] + '/email', {
-            email: values.sender.email,
+            email: email,
             body: values.sender.body
         }).then(message.success("Email sent successfully!"));
         console.log(values);
