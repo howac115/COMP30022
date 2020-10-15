@@ -119,10 +119,9 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: url('https://image.flaticon.com/icons/svg/126/126490.svg')
-        no-repeat center center / 16px;
+    background: url('image/next.svg') no-repeat center center / 32px;
     width: 32px;
-    height: 32px;
+    height: 16px;
     text-indent: -9999px;
     cursor: pointer;
 }
@@ -164,8 +163,8 @@ button:hover {
 .slider-content .inner h1 {
     font-weight: 900;
     margin: 0 auto;
-    max-width: 840px;
-    color: #ffffff;
+    max-width: 1000px;
+    color: #e2e2e2;
     font-size: 64px;
     line-height: 1;
 }

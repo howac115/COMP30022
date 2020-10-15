@@ -14,6 +14,9 @@ router.get('/:id', user_controller.user_detail_get);
 // POST request for update user's detail 
 router.post('/:id/update', user_controller.user_update_post);
 
+// POST request for update user's detail 
+router.post('/:id/email', user_controller.user_email_post);
+
 // POST request to delete a user from database
 router.post('/delete', user_controller.user_purge_post);
 

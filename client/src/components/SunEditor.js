@@ -24,9 +24,9 @@ class sunEditor extends React.Component {
                 name: this.props.name,
             })
             .then(response => {
-                if (response.data.content) {
+                if (response.data.folio.content) {
                     this.setState(
-                        {editorHtml: response.data.content},
+                        {editorHtml: response.data.folio.content},
                         () => {}
                     );
                 }

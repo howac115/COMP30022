@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
-import { Button, Divider, Form, Input, Menu, Modal, Row, Typography } from 'antd';
+import { Button, Divider, Form, Input, Menu, Modal, Row, Typography, Radio} from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
@@ -23,6 +23,7 @@ export default function User(props) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    const [notify, setNotify] = useState(true);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirm] = useState('');
 
@@ -35,6 +36,7 @@ export default function User(props) {
             setFirstName(_res.data.firstName);
             setLastName(_res.data.lastName);
             setEmail(_res.data.email);
+            setNotify(_res.data.emailConsent);
         })();
     }, []);
 
@@ -60,6 +62,7 @@ export default function User(props) {
                 email: email,
                 password: password,
                 password2: confirmPassword,
+                emailConsent: notify,
             });
             message.success('Update personal detail Success');
             history.go(0);
@@ -123,6 +126,9 @@ export default function User(props) {
         setEmail(event.target.value);
     };
 
+    const onChangeNotifySetting = event =>{
+        setNotify(event.target.value);
+    }
     const onChangePassword = event => {
         setPassword(event.target.value);
     };
@@ -208,6 +214,18 @@ export default function User(props) {
                                 ></Input>
                             </Form.Item>
                             <Divider orientation="left">
+                                Notification Settings
+                            </Divider>
+                            <Form.Item
+                                label="Email Notification"
+                            >
+                                <Radio.Group onChange={onChangeNotifySetting} value={notify}>
+                                    <Radio value={true}>On</Radio>
+                                    <Radio value={false}>Off</Radio>
+                                </Radio.Group>
+
+                            </Form.Item>
+                            <Divider orientation="left">
                                 Security Settings{' '}
                                 <Button
                                     type="link"
@@ -238,6 +256,8 @@ export default function User(props) {
                                 Update Details
                             </Button>
                         </Form>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
             </Row>
@@ -260,3 +280,8 @@ export default function User(props) {
         </div>
     );
 }
+
+
+
+
+
