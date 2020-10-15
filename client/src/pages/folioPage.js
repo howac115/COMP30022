@@ -18,6 +18,8 @@ function FolioPage(props) {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [contentState, setContentState] = useState(false);
+    const [emailConsent, setEmailConsent] = useState();
+
 
     useEffect(() => {
         document.title = 'ExPortfolio | View';
@@ -28,8 +30,15 @@ function FolioPage(props) {
         axios
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
+
                 setUsername(response.data.user.firstName + ' ' + response.data.user.lastName);
                 setEmail(response.data.user.email);
+                if (global.auth.getUser() !== null && global.auth.getUser().id === response.data.user._id){
+                    setEmailConsent(false);
+                }
+                else {
+                    setEmailConsent(response.data.user.emailConsent);
+                }
                 if (
                     response.data.folio.visible === true ||
                     (global.auth.getUser() !== null &&
@@ -65,7 +74,8 @@ function FolioPage(props) {
     const onFinish = (values) => {
         console.log(values.sender.email)
         axios.post('/user/' + history.location.pathname.split('/')[1] + '/email', {
-            email: email,
+            sender: values.sender.email,
+            receiver: email,
             body: values.sender.body
         }).then(message.success("Email sent successfully!"));
         console.log(values);
@@ -85,10 +95,26 @@ function FolioPage(props) {
         } else return content;
     };
 
+    const RenderEmail = () => {
+        if (emailConsent){
+            return(
+                <Title level={4}>
+                    <div style={ {textAlign: 'right', display:'in-line'}}  >
+                        <Button type="text" onClick={showModal}>
+                            <MailOutlined style={{ fontSize: '24px' }}/>
+                            { " Email Me" }
+                        </Button>
+                    </div>
+                </Title>
+            )
+        }
+        return (<div></div>);
+    }
+
+
     return (
         <div>
             <Layout />
-
             <div
                 className="folioPage"
                 style={{ width: '90%', margin: '3rem auto' }}
@@ -132,23 +158,12 @@ function FolioPage(props) {
                         {"Made By: " + username}
                     </Title>
                 </div>
-
-                <Title level={4}>
-                    <div style={ {textAlign: 'right', display:'in-line'}}  >
-                        <Button type="text" onClick={showModal}>
-                            <MailOutlined style={{ fontSize: '24px' }}/>
-                            { " Email Me" }
-                        </Button>
-                    </div>
-                </Title>
-
-
+                <RenderEmail />
                 <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
                     <div style={{ textAlign: 'center' }}></div>
                     <RenderContent />
                 </div>
             </div>
-
         </div>
     );
 }
