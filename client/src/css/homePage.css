@@ -1,17 +1,16 @@
 .grid-wrapper{
     display: grid;
-    grid-template-columns: [col] 400rpx [col] 400rpx [col] 400rpx [col] 400rpx  ;
-    grid-template-rows: [row] auto [row] auto;
+    grid-template-columns: [col] 400rpx [col] 400rpx [col] 400rpx [col] 400rpx;
+    grid-template-rows: [row] auto [row] auto [row] auto [row] auto; 
     margin-top: 50px;
     grid-gap: 15px;
+    text-align: center
 }
 
 .section-1-top{
     display: inline;
     grid-column: col 2/ span 2;
     grid-row: row 1;
-    text-align: center;
-
 }
 
 .title{
@@ -27,25 +26,98 @@
     font-weight: bold;
 }
 
-
-.section-2-left{
-    grid-column: col 1/ span 2;
+.section-2{
+    grid-column: col 1/ span 4;
     grid-row: row 2;
-    text-align: center;
 }
 
-.section-2-right{
+
+.section-3-left{
+    grid-column: col 1/ span 2;
+    grid-row: row 3;
+}
+
+.section-3-right{
     grid-column: col 3/ span 2;
-    grid-row: row 2;
-    text-align: center;
+    grid-row: row 3;
  
 }
 
-.bottom{
-    margin-top: 10px;
+.section-4{
+    grid-column: col 1/ span 4;
+    grid-row: row 4;
+}
+
+.step-wrapper{
+    display: grid;
+    grid-template-columns: [col] 450rpx [col] 450rpx [col] 450rpx;
+    grid-template-rows: [row] auto [row] auto;
     text-align: center;
-    font-size: x-large;
+    grid-gap: 15px;
     font-weight: bold;
+    margin-top: 80px;
+    background-color: rgb(74, 232, 253);
+    height: 350px;
+}
+
+.step-1{
+    grid-column: col 1/ span 1;
+    grid-row: row 2;
+}
+
+.step-2{
+    grid-column: col 2/ span 1;
+    grid-row: row 2;
+}
+
+.step-3{
+    grid-column: col 3/ span 1;
+    grid-row: row 2;
+}
+
+.step-main-title{
+    grid-column: col 1/ span 3;
+    grid-row: row 1;
+    font-size: xx-large;
+    margin-top: 20px;
+}
+
+.step-title{
+    font-size: x-large;
+    margin-bottom: 10px;
+}
+
+.step-content{
+    margin-top: 50px;
+}
+
+.text-bottom{
+    margin-top: 80px;
+    text-align: center;
+}
+
+.text-bottom-title{
+    font-weight: bold;
+    font-size: large;
+}
+
+.text-bottom-content{
+    margin-top: 20px;
+}
+
+.bottom{
+    
+    margin-top: 80px;
+    text-align: center;
+    background-color: rgb(98, 100, 100);
+    color: aliceblue;
     height: 100px;
-    background-color: antiquewhite;
+    width: 100%;
+    bottom: 0;
+}
+
+
+img{
+    height: 450px;
+    width: 500px;
 }
