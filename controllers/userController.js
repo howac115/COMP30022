@@ -75,9 +75,9 @@ exports.user_update_post = function (req, res) {
                     {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
+                        emailConsent: req.body.emailConsent,
                         email: req.body.email,
-                    },
-                    function (err, updatedUser) {
+                    }, function (err, updatedUser) {
                         if (err) {
                             res.status(400).json({ success: false, err });
                         } else {
@@ -98,6 +98,7 @@ exports.user_update_post = function (req, res) {
                             {
                                 firstName: req.body.firstName,
                                 lastName: req.body.lastName,
+                                emailConsent: req.body.emailConsent,
                                 email: req.body.email,
                                 password: hash,
                             },
