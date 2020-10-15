@@ -1,8 +1,11 @@
 const nodemailer = require("nodemailer");
 
 var methods = {
-  userNotification: function (receiver, message) {
-    const output = `<p>${message}</p>`;
+  userNotification: function (receiver, sender, message) {
+    const output = `<p>${message}</p>
+                    <br></br>
+                    <br></br>
+                    <p>Sent by: ${sender}</p>`;
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
