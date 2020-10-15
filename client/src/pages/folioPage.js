@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Typography, Button, Modal, Form, Input } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
+import { MailOutlined} from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -32,7 +33,7 @@ function FolioPage(props) {
                 if (
                     response.data.folio.visible === true ||
                     (global.auth.getUser() !== null &&
-                        global.auth.getUser().id === response.data.user)
+                        global.auth.getUser().id === response.data.user._id)
                 ) {
                     if (response.data.folio) {
                         setContentState(true);
@@ -41,6 +42,7 @@ function FolioPage(props) {
                         setContent('This portfolio is currently empty.');
                     }
                 } else {
+                    console.log(response.data.user);
                     setContent(
                         'This portfolio has been set private by the portfolio owner.'
                     );
@@ -122,14 +124,25 @@ function FolioPage(props) {
                         </Form.Item>
                     </Form>
                 </Modal>
-                <Title level={2}>
+                <Title level={1} >
                     {history.location.pathname.split('/')[2]}
                 </Title>
+                <div style={ {textAlign: 'right'} }>
+                    <Title level={3}>
+                        {"Made By: " + username}
+                    </Title>
+                </div>
+
                 <Title level={4}>
-                    <Button type="text" onClick={showModal}>
-                        {username}
-                    </Button>
+                    <div style={ {textAlign: 'right', display:'in-line'}}  >
+                        <Button type="text" onClick={showModal}>
+                            <MailOutlined style={{ fontSize: '24px' }}/>
+                            { " Email Me" }
+                        </Button>
+                    </div>
                 </Title>
+
+
                 <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
                     <div style={{ textAlign: 'center' }}></div>
                     <RenderContent />
