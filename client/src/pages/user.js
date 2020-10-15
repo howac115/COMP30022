@@ -1,23 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import FolioList from './folioList.js';
-import {Input, Menu, Modal, Row} from 'antd';
+import { Input, Menu, Modal, Row, Select } from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
     SnippetsOutlined,
     SettingOutlined,
 } from '@ant-design/icons';
-import {useHistory} from 'react-router-dom';
-import {message} from 'antd';
+import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
+
+const { Option } = Select;
 
 export default function User(props) {
     let history = useHistory();
     const [user, setUser] = useState([]);
     const [visible, setVisible] = useState();
     const [name, setName] = useState('');
+    const [type, setType] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -29,19 +32,20 @@ export default function User(props) {
 
     const handleCreate = async () => {
         try {
-            const user = global.auth.getUser().id;
-            await axios.post('/folio/create', {name, user});
-            message.success(name + ' successfully created!');
-            history.go(0);
+            if (type === "customize") {
+                const user = global.auth.getUser().id;
+                await axios.post('/folio/create', { name, user });
+                message.success(name + ' successfully created!');
+                history.go(0);
+            } else {
+                TemplateRedirect();
+            }
         } catch (error) {
             const errorMessage = error.response.data.error;
             message.error(errorMessage);
         }
     };
 
-    const onChange = event => {
-        setName(event.target.value);
-    };
 
     const showModal = () => {
         setVisible(true);
@@ -57,6 +61,14 @@ export default function User(props) {
 
     const TemplateRedirect = () => {
         history.push('/template');
+    };
+
+    const onChange = event => {
+        setName(event.target.value);
+    };
+
+    const onChangeType = value => {
+        setType(value);
     };
 
     const FoliosRedirect = () => {
@@ -76,7 +88,7 @@ export default function User(props) {
             <Layout />
             <Row>
                 <Menu
-                    style={{width: '15%', marginLeft: '2%', marginTop: '2%'}}
+                    style={{ width: '15%', marginLeft: '2%', marginTop: '2%' }}
                     mode="inline"
                     defaultSelectedKeys="3"
                 >
@@ -119,6 +131,16 @@ export default function User(props) {
                 onCancel={handleCancel}
                 footer={null}
             >
+                <Select
+                    style={{ marginBottom: 10, width: "100%" }}
+                    placeholder="Select type"
+                    optionFilterProp="children"
+                    onChange={onChangeType}
+                >
+                    <Option value="template">Tempalte</Option>
+                    <Option value="customize">Customize</Option>
+                </Select>
+
                 <Input
                     addonAfter="Enter"
                     placeholder="My Awesome Folio"

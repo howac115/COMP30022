@@ -48,11 +48,9 @@ button {
     -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
     filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
     -webkit-transition: all 0.5s ease;
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
-    -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     border: none;
-    background: #ffd800;
+    background:#ffffff;
     border-radius: 30px;
     box-sizing: border-box;
     padding: 15px 40px;
@@ -61,12 +59,50 @@ button {
     cursor: cursor;
 }
 
+
 button:hover {
     color: #ffffff;
-    background: #222222;
+    background: #464d4e;
     -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
 }
+
+.icon {
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    border: none;
+    background: #00b0ff;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 30px 80px;
+    font-weight: 400;
+    font-size: 20px;
+    cursor: cursor;
+}
+
+
+.iocn:hover {
+    color: #ffffff;
+    background: #464d4e;
+    -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+/*
+.letter{
+    color: #ffffff;
+}
+
+
+.letter:hover {
+    color: #464d4e;
+    -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+
+}*/
 
 .wrapper {
     max-width: 1335px;
@@ -236,3 +272,5 @@ button:hover {
         font-size: 32px;
     }
 }
+
+

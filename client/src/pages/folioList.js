@@ -3,7 +3,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import { Card, Col, Collapse, Dropdown, Menu, Typography, Row } from 'antd';
+import { Card, Col, Collapse, Dropdown, Menu, Typography, Row, Input } from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
@@ -17,10 +17,12 @@ import { useHistory } from 'react-router-dom';
 const { Title } = Typography;
 const { Meta } = Card;
 const { Panel } = Collapse;
+const { Search } = Input;
 
 export default function FolioList(props) {
     let history = useHistory();
     const [folios, setFolios] = useState([]);
+    const [searhText, setSearchText] = useState('');
 
     useEffect(() => {
         document.title = 'ExPortfolio | My Portfolios';
@@ -133,6 +135,12 @@ export default function FolioList(props) {
             },
         });
     };
+
+
+    const handleSearch = value => {
+        setSearchText(value);
+    }
+
 
     const handleShare = prop => {
         const user = global.auth.getUser().id;
@@ -261,6 +269,11 @@ export default function FolioList(props) {
 
     return (
         <div style={{ width: '70%', marginLeft: '5%', marginTop: '3%' }}>
+            <Search
+                placeholder="input search text"
+                enterButton="Search"
+                onSearch={value => handleSearch(value)}
+            />
             <Collapse defaultActiveKey={['1']} ghost>
                 <Panel header={<Title level={3}> My Folios </Title>} key="1">
                     <Row gutter={[32, 16]}>{renderCards}</Row>

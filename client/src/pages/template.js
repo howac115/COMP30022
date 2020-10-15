@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Input, Modal, message, Row, Typography} from 'antd';
+import { Card, Col, Input, Modal, message, Row, Typography } from 'antd';
 import 'antd/dist/antd.css';
-import {ShareAltOutlined, EyeOutlined, PlusOutlined} from '@ant-design/icons';
-import {useHistory} from 'react-router-dom';
+import { ShareAltOutlined, EyeOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
-const {Title} = Typography;
-const {Meta} = Card;
+
+const { Title } = Typography;
+const { Meta } = Card;
 
 export default function Template(props) {
     let history = useHistory();
@@ -29,6 +30,17 @@ export default function Template(props) {
         });
     }, []);
 
+
+    const handleBack = () => {
+        if (global.auth.getUser() !== null) {
+            history.push('/' + global.auth.getUser().id);
+        }
+        else {
+            history.push('/');
+        }
+    };
+
+
     const handleCreate = async () => {
         const user = global.auth.getUser().id;
         try {
@@ -47,10 +59,10 @@ export default function Template(props) {
     const handleShare = prop => {
         navigator.clipboard.writeText(
             'https://exportfolio.herokuapp.com/' +
-                prop.user +
-                '/' +
-                prop.name +
-                '/view'
+            prop.user +
+            '/' +
+            prop.name +
+            '/view'
         );
         message.success(prop.name + ' is succeccful copied to clipboard');
     };
@@ -121,7 +133,7 @@ export default function Template(props) {
                 <Draggable>
                     <Card
                         hoverable
-                        style={{width: 300, marginTop: 16}}
+                        style={{ width: 300, marginTop: 16 }}
                         actions={renderOptions(folio)}
                     >
                         <Meta
@@ -150,8 +162,19 @@ export default function Template(props) {
     return (
         <div>
             <Layout />
-            <div style={{width: '85%', margin: '3rem auto'}}>
-                <Title level={2}> Templates </Title>
+            <div style={{ width: '85%', margin: '3rem auto' }}>
+                <Row>
+                    <button
+                        className="button is-light"
+                        onClick={handleBack.bind(this)}
+                    >
+                        <LeftCircleOutlined>
+
+                        </LeftCircleOutlined>
+
+                    </button>
+                    <Title level={2}> Templates </Title>
+                </Row>
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>
             <Modal

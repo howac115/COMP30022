@@ -11,6 +11,7 @@
     display: inline;
     grid-column: col 2/ span 2;
     grid-row: row 1;
+    text-align: center;
 }
 
 .title{
@@ -19,6 +20,7 @@
 }
 
 .content{
+    text-align: center;
     margin-top: 100px;
 }
 
@@ -56,7 +58,7 @@
     grid-gap: 15px;
     font-weight: bold;
     margin-top: 80px;
-    background-color: rgb(74, 232, 253);
+    background-color: #00b0ff;
     height: 350px;
 }
 
@@ -121,3 +123,5 @@ img{
     height: 450px;
     width: 500px;
 }
+
+
