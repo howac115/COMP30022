@@ -134,7 +134,7 @@ class App extends React.Component {
 
                 <div className="bottom">
                     <br />
-                    <br />© 2020, Bounty Programmers
+                    <br />© 2020, Bounty Programmers.
                 </div>
             </div>
         );
