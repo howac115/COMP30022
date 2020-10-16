@@ -7,22 +7,22 @@ var User = require('../models/user');
 
 // POST request to handle login
 exports.login_post = function (req, res) {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     // Match user
     User.findOne({
         email: email,
     }).then((user) => {
         if (!user) {
-            res.status(409).json({error: 'Email not registered'});
+            res.status(409).json({ error: 'Email not registered' });
         } else {
             // Match password
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (isMatch) {
                     jwt.sign(
-                        {id: user.id},
+                        { id: user.id },
                         config.get('jwtSecret'),
-                        {expiresIn: 3600},
+                        { expiresIn: 3600 },
                         (err, token) => {
                             if (err) throw err;
                             res.status(200).json({
@@ -37,7 +37,7 @@ exports.login_post = function (req, res) {
                         }
                     );
                 } else {
-                    res.status(409).json({error: 'Password incorrect'});
+                    res.status(409).json({ error: 'Password incorrect' });
                 }
             });
         }
@@ -46,16 +46,17 @@ exports.login_post = function (req, res) {
 
 // POST request to handle register
 exports.register_post = function (req, res) {
-    const {firstName, lastName, email, password} = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    User.findOne({email: email}).then((user) => {
+    User.findOne({ email: email }).then((user) => {
         if (user) {
-            res.status(409).json({error: 'Email already exists'});
+            res.status(409).json({ error: 'Email already exists' });
         } else {
             const newUser = new User({
                 firstName,
                 lastName,
                 email,
+                emailConsent: true,
                 password,
             });
             bcrypt.genSalt(10, (err, salt) => {
@@ -64,9 +65,9 @@ exports.register_post = function (req, res) {
                     newUser.password = hash;
                     newUser.save().then((user) => {
                         jwt.sign(
-                            {id: user.id},
+                            { id: user.id },
                             config.get('jwtSecret'),
-                            {expiresIn: 3600},
+                            { expiresIn: 3600 },
                             (err, token) => {
                                 if (err) throw err;
                                 res.json({
@@ -76,6 +77,7 @@ exports.register_post = function (req, res) {
                                         firstName: user.firstName,
                                         lastName: user.lastName,
                                         email: user.email,
+                                        emailConsent: user.emailConsent
                                     },
                                 });
                             }
