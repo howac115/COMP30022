@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { message } from 'antd';
+import {Link, withRouter} from 'react-router-dom';
+import {message} from 'antd';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 

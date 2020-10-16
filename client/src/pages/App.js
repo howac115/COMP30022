@@ -4,9 +4,11 @@ import Carousel from '../components/carousel.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/homePage.css';
 import '../css/stylesheets.css';
-import { EditOutlined } from '@ant-design/icons';
-import { ShareAltOutlined } from '@ant-design/icons';
-import { ProfileOutlined } from '@ant-design/icons';
+import {
+    ProfileOutlined,
+    EditOutlined,
+    ShareAltOutlined,
+} from '@ant-design/icons';
 
 class App extends React.Component {
     componentDidMount() {
@@ -44,12 +46,8 @@ class App extends React.Component {
                             See some examples below.
                         </div>
                         <br />
-                        <button
-                            className="icon"
-                            onClick={this.handleClick}
-                        >
+                        <button className="icon" onClick={this.handleClick}>
                             Start
-
                         </button>
                     </div>
                     <div className="section-2">
@@ -91,7 +89,7 @@ class App extends React.Component {
                         Show your work in minutes
                     </div>
                     <div className="step-1">
-                        <EditOutlined style={{ fontSize: '40px' }} />
+                        <EditOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Create</div>
                         <div className="step-content">
                             Whether you want to showcase your work in a
@@ -100,7 +98,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     <div className="step-2">
-                        <ProfileOutlined style={{ fontSize: '40px' }} />
+                        <ProfileOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Template</div>
                         <div className="step-content">
                             Don’t know HTML or CSS? No problem. With
@@ -109,7 +107,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     <div className="step-3">
-                        <ShareAltOutlined style={{ fontSize: '40px' }} />
+                        <ShareAltOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Share</div>
                         <div className="step-content">
                             Share your portfolio to the world. Click share to

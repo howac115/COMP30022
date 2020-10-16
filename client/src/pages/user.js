@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import FolioList from './folioList.js';
-import { Input, Menu, Modal, Row, Select } from 'antd';
+import {Input, Menu, Modal, Row, Select, Button} from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
     SnippetsOutlined,
     SettingOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
+import {useHistory} from 'react-router-dom';
+import {message} from 'antd';
 
-const { Option } = Select;
+const {Option} = Select;
 
 export default function User(props) {
     let history = useHistory();
@@ -32,9 +32,9 @@ export default function User(props) {
 
     const handleCreate = async () => {
         try {
-            if (type === "customize") {
+            if (type === 'customize') {
                 const user = global.auth.getUser().id;
-                await axios.post('/folio/create', { name, user });
+                await axios.post('/folio/create', {name, user});
                 message.success(name + ' successfully created!');
                 history.go(0);
             } else {
@@ -45,7 +45,6 @@ export default function User(props) {
             message.error(errorMessage);
         }
     };
-
 
     const showModal = () => {
         setVisible(true);
@@ -88,7 +87,7 @@ export default function User(props) {
             <Layout />
             <Row>
                 <Menu
-                    style={{ width: '15%', marginLeft: '2%', marginTop: '2%' }}
+                    style={{width: '15%', marginLeft: '2%', marginTop: '2%'}}
                     mode="inline"
                     defaultSelectedKeys="3"
                 >
@@ -97,7 +96,7 @@ export default function User(props) {
                         icon={<PlusOutlined />}
                         onClick={showModal}
                     >
-                        Create
+                        Create Your Own
                     </Menu.Item>
                     <Menu.Item
                         key="2"
@@ -129,10 +128,14 @@ export default function User(props) {
                 closable={false}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={null}
+                footer={
+                    <Button type="primary" onClick={handleCreate}>
+                        Create
+                    </Button>
+                }
             >
                 <Select
-                    style={{ marginBottom: 10, width: "100%" }}
+                    style={{marginBottom: 10, width: '100%'}}
                     placeholder="Select type"
                     optionFilterProp="children"
                     onChange={onChangeType}
@@ -142,7 +145,6 @@ export default function User(props) {
                 </Select>
 
                 <Input
-                    addonAfter="Enter"
                     placeholder="My Awesome Folio"
                     allowClear={true}
                     onChange={onChange}

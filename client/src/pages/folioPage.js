@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../layout.js';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import axios from 'axios';
-import { Typography, Button, Modal, Form, Input } from 'antd';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
-import { MailOutlined} from '@ant-design/icons';
+import {Typography, Button, Modal, Form, Input} from 'antd';
+import {useHistory} from 'react-router-dom';
+import {message} from 'antd';
+import {MailOutlined} from '@ant-design/icons';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 function FolioPage(props) {
-
     let history = useHistory();
     const [visible, setVisible] = useState();
     const [content, setContent] = useState('');
@@ -28,7 +27,11 @@ function FolioPage(props) {
         axios
             .post('/folio/' + variable.user + '/one', variable)
             .then(response => {
-                setUsername(response.data.user.firstName + ' ' + response.data.user.lastName);
+                setUsername(
+                    response.data.user.firstName +
+                        ' ' +
+                        response.data.user.lastName
+                );
                 setEmail(response.data.user.email);
                 if (
                     response.data.folio.visible === true ||
@@ -62,13 +65,17 @@ function FolioPage(props) {
         setVisible(false);
     };
 
-    const onFinish = (values) => {
-        console.log(values.sender.email)
-        axios.post('/user/' + history.location.pathname.split('/')[1] + '/email', {
-            email: email,
-            body: values.sender.body
-        }).then(message.success("Email sent successfully!"));
-        console.log(values);
+    const onFinish = values => {
+        console.log(values.sender.email);
+        axios
+            .post(
+                '/user/' + history.location.pathname.split('/')[1] + '/email',
+                {
+                    email: email,
+                    body: values.sender.body,
+                }
+            )
+            .then(message.success('Email sent successfully!'));
         setVisible(false);
     };
 
@@ -91,7 +98,7 @@ function FolioPage(props) {
 
             <div
                 className="folioPage"
-                style={{ width: '90%', margin: '3rem auto' }}
+                style={{width: '90%', margin: '3rem auto'}}
             >
                 <Modal
                     title="Contact Author"
@@ -102,53 +109,48 @@ function FolioPage(props) {
                     footer={null}
                 >
                     <Form layout="vertical" onFinish={onFinish}>
-                        <Form.Item label="Email"
+                        <Form.Item
+                            label="Email"
                             name={['sender', 'email']}
                             rules={[
                                 {
                                     type: 'email',
                                 },
-                            ]}>
-                            <Input
-                                allowClear={true}
-                            ></Input>
+                            ]}
+                        >
+                            <Input allowClear={true}></Input>
                         </Form.Item>
-                        <Form.Item label="Body"
-                            name={['sender', 'body']}>
+                        <Form.Item label="Body" name={['sender', 'body']}>
                             <Input.TextArea allowClear={true} />
                         </Form.Item>
-                        <Form.Item >
+                        <Form.Item>
                             <Button type="primary" htmlType="submit">
                                 Submit
                             </Button>
                         </Form.Item>
                     </Form>
                 </Modal>
-                <Title level={1} >
+                <Title level={1}>
                     {history.location.pathname.split('/')[2]}
                 </Title>
-                <div style={ {textAlign: 'right'} }>
-                    <Title level={3}>
-                        {"Made By: " + username}
-                    </Title>
+                <div style={{textAlign: 'right'}}>
+                    <Title level={3}>{'Made By: ' + username}</Title>
                 </div>
 
                 <Title level={4}>
-                    <div style={ {textAlign: 'right', display:'in-line'}}  >
+                    <div style={{textAlign: 'right', display: 'in-line'}}>
                         <Button type="text" onClick={showModal}>
-                            <MailOutlined style={{ fontSize: '24px' }}/>
-                            { " Email Me" }
+                            <MailOutlined style={{fontSize: '24px'}} />
+                            {' Email Me'}
                         </Button>
                     </div>
                 </Title>
 
-
-                <div style={{ maxWidth: '100%', margin: '2rem auto' }}>
-                    <div style={{ textAlign: 'center' }}></div>
+                <div style={{maxWidth: '100%', margin: '2rem auto'}}>
+                    <div style={{textAlign: 'center'}}></div>
                     <RenderContent />
                 </div>
             </div>
-
         </div>
     );
 }

@@ -85,7 +85,7 @@ button:hover {
 }
 
 
-.iocn:hover {
+.icon:hover {
     color: #ffffff;
     background: #464d4e;
     -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
