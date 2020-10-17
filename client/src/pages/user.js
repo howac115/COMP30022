@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import FolioList from './folioList.js';
-import {Input, Menu, Modal, Row, Select, Button} from 'antd';
+import {Input, Menu, Modal, Row, Button} from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
@@ -13,14 +13,11 @@ import {
 import {useHistory} from 'react-router-dom';
 import {message} from 'antd';
 
-const {Option} = Select;
-
 export default function User(props) {
     let history = useHistory();
     const [user, setUser] = useState([]);
     const [visible, setVisible] = useState();
     const [name, setName] = useState('');
-    const [type, setType] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -32,14 +29,10 @@ export default function User(props) {
 
     const handleCreate = async () => {
         try {
-            if (type === 'customize') {
-                const user = global.auth.getUser().id;
-                await axios.post('/folio/create', {name, user});
-                message.success(name + ' successfully created!');
-                history.go(0);
-            } else {
-                TemplateRedirect();
-            }
+            const user = global.auth.getUser().id;
+            await axios.post('/folio/create', {name, user});
+            message.success(name + ' successfully created!');
+            history.go(0);
         } catch (error) {
             const errorMessage = error.response.data.error;
             message.error(errorMessage);
@@ -64,10 +57,6 @@ export default function User(props) {
 
     const onChange = event => {
         setName(event.target.value);
-    };
-
-    const onChangeType = value => {
-        setType(value);
     };
 
     const FoliosRedirect = () => {
@@ -134,16 +123,14 @@ export default function User(props) {
                     </Button>
                 }
             >
-                <Select
-                    style={{marginBottom: 10, width: '100%'}}
-                    placeholder="Select type"
-                    optionFilterProp="children"
-                    onChange={onChangeType}
-                >
-                    <Option value="template">Tempalte</Option>
-                    <Option value="customize">Customize</Option>
-                </Select>
-
+                <div>
+                    Want to use a tamplate?
+                    <Button type="link" onClick={TemplateRedirect}>
+                        Click here to Explore
+                    </Button>
+                    <br />
+                </div>
+                <div>Enter your own portfolio name:</div>
                 <Input
                     placeholder="My Awesome Folio"
                     allowClear={true}

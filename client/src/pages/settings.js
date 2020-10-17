@@ -145,7 +145,7 @@ export default function User(props) {
                         icon={<PlusOutlined />}
                         onClick={showModal}
                     >
-                        Create
+                        Create Your Own
                     </Menu.Item>
                     <Menu.Item
                         key="2"
@@ -247,10 +247,21 @@ export default function User(props) {
                 closable={false}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={null}
+                footer={
+                    <Button type="primary" onClick={handleCreate}>
+                        Create
+                    </Button>
+                }
             >
+                <div>
+                    Want to use a tamplate?
+                    <Button type="link" onClick={TemplateRedirect}>
+                        Click here to Explore
+                    </Button>
+                    <br />
+                </div>
+                <div>Enter your own portfolio name:</div>
                 <Input
-                    addonAfter="Enter"
                     placeholder="My Awesome Folio"
                     allowClear={true}
                     onChange={onChange}

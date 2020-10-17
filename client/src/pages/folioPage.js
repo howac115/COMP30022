@@ -95,7 +95,6 @@ function FolioPage(props) {
     return (
         <div>
             <Layout />
-
             <div
                 className="folioPage"
                 style={{width: '90%', margin: '3rem auto'}}

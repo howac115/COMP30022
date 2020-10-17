@@ -3,7 +3,17 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Input, Modal, message, Row, Typography, Button} from 'antd';
+import {
+    Card,
+    Col,
+    Input,
+    Modal,
+    message,
+    Row,
+    Typography,
+    Button,
+    AutoComplete,
+} from 'antd';
 import 'antd/dist/antd.css';
 import {
     ShareAltOutlined,
@@ -12,13 +22,13 @@ import {
     LeftCircleOutlined,
 } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
-
 const {Title} = Typography;
 const {Meta} = Card;
 
 export default function Template(props) {
     let history = useHistory();
     const [folios, setFolios] = useState([]);
+    const [searchFolios, setSearchFolios] = useState([]);
     const [visible, setVisible] = useState();
     const [name, setName] = useState('');
     const [clonedFolio, setClonedFolio] = useState();
@@ -28,6 +38,7 @@ export default function Template(props) {
         axios.get('/folio/templates').then(response => {
             if (response.data.success) {
                 setFolios(response.data.folios);
+                setSearchFolios(response.data.folios);
             } else {
                 message.error('Couldnt get folio`s lists');
             }
@@ -128,7 +139,7 @@ export default function Template(props) {
         }
     }
 
-    const renderCards = folios.map((folio, index) => {
+    const renderCards = searchFolios.map((folio, index) => {
         return (
             <Col key={index} lg={8} md={12} xs={24}>
                 <Draggable>
@@ -160,6 +171,15 @@ export default function Template(props) {
         );
     });
 
+    const handleSearch = text => {
+        let _folio = [...folios];
+        _folio = _folio.filter(p => {
+            const matchArray = p.name.match(new RegExp(text, 'gi'));
+            return !!matchArray;
+        });
+        setSearchFolios(_folio);
+    };
+
     return (
         <div>
             <Layout />
@@ -174,6 +194,20 @@ export default function Template(props) {
                     </button>
                     <Title level={2}>&nbsp;Templates </Title>
                 </Row>
+                <Row justify="center">
+                    <AutoComplete
+                        onSearch={searhText => {
+                            handleSearch(searhText);
+                        }}
+                        style={{width: 800}}
+                    >
+                        <Input.Search
+                            size="large"
+                            placeholder="Search Your Favourite Portfolio Template"
+                        />
+                    </AutoComplete>
+                </Row>
+
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>
             <Modal
@@ -188,6 +222,7 @@ export default function Template(props) {
                     </Button>
                 }
             >
+                <div>Enter your portfolio name:</div>
                 <Input
                     placeholder="My Awesome Folio"
                     allowClear={true}
