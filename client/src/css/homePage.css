@@ -1,0 +1,39 @@
+
+.title{
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+
+.step-main-title{
+    font-size: xx-large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.step-title{
+    font-size: x-large;
+    margin-bottom: 10px;
+}
+
+
+.text-bottom-content{
+    margin-top: 20px;
+}
+
+.bottom{
+    margin-top: 80px;
+    text-align: center;
+    background-color: rgb(98, 100, 100);
+    color: aliceblue;
+    height:70px;
+    width: 100%;
+    bottom: 0;
+}
+
+.homepage-img{
+    height: 400px;
+    width: 600px;
+}
+
+

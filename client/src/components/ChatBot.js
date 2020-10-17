@@ -93,17 +93,15 @@ const steps = [
 class HelperBot extends React.Component {
     render() {
         return (
-            <div>
-                <ThemeProvider theme={theme}>
-                    <ChatBot
-                        headerTitle="Exportfolio Virtual Assistant"
-                        floating={true}
-                        floatingStyle={{background: 'dark'}}
-                        hideSubmitButton={true}
-                        steps={steps}
-                    />
-                </ThemeProvider>
-            </div>
+            <ThemeProvider theme={theme}>
+                <ChatBot
+                    headerTitle="Exportfolio Virtual Assistant"
+                    floating={true}
+                    floatingStyle={{background: 'dark'}}
+                    hideSubmitButton={true}
+                    steps={steps}
+                />
+            </ThemeProvider>
         );
     }
 }

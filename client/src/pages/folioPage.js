@@ -85,7 +85,6 @@ function FolioPage(props) {
                 }
             )
             .then(message.success('Email sent successfully!'));
-        console.log(values);
         setVisible(false);
     };
 

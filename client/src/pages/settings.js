@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
@@ -9,10 +9,10 @@ import {
     SnippetsOutlined,
     SettingOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
+import {useHistory} from 'react-router-dom';
+import {message} from 'antd';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 export default function User(props) {
     let history = useHistory();
@@ -28,7 +28,7 @@ export default function User(props) {
     const [confirmPassword, setConfirm] = useState('');
 
     useEffect(() => {
-        document.title = 'ExPortfolio ｜ Settings';
+        document.title = 'ExPortfolio | Settings';
         (async () => {
             const user = global.auth.getUser().id;
             const _res = await axios.get('/user/' + user);
@@ -43,7 +43,7 @@ export default function User(props) {
     const handleCreate = async () => {
         try {
             const user = global.auth.getUser().id;
-            await axios.post('/folio/create', { name, user });
+            await axios.post('/folio/create', {name, user});
             message.success(name + ' successfully created!');
             history.go(0);
         } catch (error) {
@@ -142,7 +142,7 @@ export default function User(props) {
             <Layout />
             <Row>
                 <Menu
-                    style={{ width: '15%', marginLeft: '2%', marginTop: '2%' }}
+                    style={{width: '15%', marginLeft: '2%', marginTop: '2%'}}
                     mode="inline"
                     defaultSelectedKeys="4"
                 >
@@ -151,7 +151,7 @@ export default function User(props) {
                         icon={<PlusOutlined />}
                         onClick={showModal}
                     >
-                        Create
+                        Create Your Own
                     </Menu.Item>
                     <Menu.Item
                         key="2"
@@ -165,7 +165,7 @@ export default function User(props) {
                         icon={<FolderOpenOutlined />}
                         onClick={FoliosRedirect}
                     >
-                        My Folios
+                        My Portfolios
                     </Menu.Item>
                     <Menu.Item
                         key="4"
@@ -175,7 +175,7 @@ export default function User(props) {
                         Settings
                     </Menu.Item>
                 </Menu>
-                <div style={{ width: '70%', marginLeft: '7%', marginTop: '4%' }}>
+                <div style={{width: '70%', marginLeft: '7%', marginTop: '4%'}}>
                     <Title level={3}> Settings </Title>
                     <div
                         style={{
@@ -262,16 +262,27 @@ export default function User(props) {
                 </div>
             </Row>
             <Modal
-                title="Create Folio"
+                title="Create Portfolio"
                 visible={visible}
                 closable={false}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={null}
+                footer={
+                    <Button type="primary" onClick={handleCreate}>
+                        Create
+                    </Button>
+                }
             >
+                <div>
+                    Want to use a tamplate?
+                    <Button type="link" onClick={TemplateRedirect}>
+                        Click here to Explore
+                    </Button>
+                    <br />
+                </div>
+                <div>Enter your own portfolio name:</div>
                 <Input
-                    addonAfter="Enter"
-                    placeholder="My Awesome Folio"
+                    placeholder="My Awesome Portfolio"
                     allowClear={true}
                     onChange={onChange}
                     onPressEnter={handleCreate}

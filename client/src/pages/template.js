@@ -3,17 +3,32 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import Layout from '../layout.js';
 import Draggable from 'react-draggable';
 import axios from 'axios';
-import {Card, Col, Input, Modal, message, Row, Typography} from 'antd';
+import {
+    Card,
+    Col,
+    Input,
+    Modal,
+    message,
+    Row,
+    Typography,
+    Button,
+    AutoComplete,
+} from 'antd';
 import 'antd/dist/antd.css';
-import {ShareAltOutlined, EyeOutlined, PlusOutlined} from '@ant-design/icons';
+import {
+    ShareAltOutlined,
+    EyeOutlined,
+    PlusOutlined,
+    LeftCircleOutlined,
+} from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
-
 const {Title} = Typography;
 const {Meta} = Card;
 
 export default function Template(props) {
     let history = useHistory();
     const [folios, setFolios] = useState([]);
+    const [searchFolios, setSearchFolios] = useState([]);
     const [visible, setVisible] = useState();
     const [name, setName] = useState('');
     const [clonedFolio, setClonedFolio] = useState();
@@ -23,11 +38,20 @@ export default function Template(props) {
         axios.get('/folio/templates').then(response => {
             if (response.data.success) {
                 setFolios(response.data.folios);
+                setSearchFolios(response.data.folios);
             } else {
                 message.error('Couldnt get folio`s lists');
             }
         });
     }, []);
+
+    const handleBack = () => {
+        if (global.auth.getUser() !== null) {
+            history.push('/' + global.auth.getUser().id);
+        } else {
+            history.push('/');
+        }
+    };
 
     const handleCreate = async () => {
         const user = global.auth.getUser().id;
@@ -115,7 +139,7 @@ export default function Template(props) {
         }
     }
 
-    const renderCards = folios.map((folio, index) => {
+    const renderCards = searchFolios.map((folio, index) => {
         return (
             <Col key={index} lg={8} md={12} xs={24}>
                 <Draggable>
@@ -147,11 +171,47 @@ export default function Template(props) {
         );
     });
 
+    const handleSearch = text => {
+        let _folio = [...folios];
+        _folio = _folio.filter(p => {
+            const matchArray = p.name.match(new RegExp(text, 'gi'));
+            return !!matchArray;
+        });
+        setSearchFolios(_folio);
+    };
+
     return (
         <div>
             <Layout />
             <div style={{width: '85%', margin: '3rem auto'}}>
-                <Title level={2}> Templates </Title>
+                <Row>
+                    <Col span="2">
+                        <button
+                            className="button is-light"
+                            onClick={handleBack.bind(this)}
+                        >
+                            <LeftCircleOutlined />
+                            <div>&nbsp; Back</div>
+                        </button>
+                    </Col>
+                    <Col span="6">
+                        <Title level={2}>&nbsp;Templates </Title>
+                    </Col>
+                    <Col span="16">
+                        <AutoComplete
+                            onSearch={searhText => {
+                                handleSearch(searhText);
+                            }}
+                            style={{width: 600}}
+                        >
+                            <Input.Search
+                                size="large"
+                                placeholder="Search Your Favourite Portfolio Template"
+                            />
+                        </AutoComplete>
+                    </Col>
+                </Row>
+
                 <Row gutter={[32, 16]}>{renderCards}</Row>
             </div>
             <Modal
@@ -160,10 +220,14 @@ export default function Template(props) {
                 closable={false}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={null}
+                footer={
+                    <Button type="primary" onClick={handleCreate}>
+                        Clone
+                    </Button>
+                }
             >
+                <div>Enter your portfolio name:</div>
                 <Input
-                    addonAfter="Enter"
                     placeholder="My Awesome Folio"
                     allowClear={true}
                     onChange={onChange}

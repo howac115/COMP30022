@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../layout.js';
 import FolioList from './folioList.js';
-import {Input, Menu, Modal, Row} from 'antd';
+import {Input, Menu, Modal, Row, Button} from 'antd';
 import {
     PlusOutlined,
     FolderOpenOutlined,
@@ -39,10 +39,6 @@ export default function User(props) {
         }
     };
 
-    const onChange = event => {
-        setName(event.target.value);
-    };
-
     const showModal = () => {
         setVisible(true);
     };
@@ -57,6 +53,10 @@ export default function User(props) {
 
     const TemplateRedirect = () => {
         history.push('/template');
+    };
+
+    const onChange = event => {
+        setName(event.target.value);
     };
 
     const FoliosRedirect = () => {
@@ -85,7 +85,7 @@ export default function User(props) {
                         icon={<PlusOutlined />}
                         onClick={showModal}
                     >
-                        Create
+                        Create Your Own
                     </Menu.Item>
                     <Menu.Item
                         key="2"
@@ -99,7 +99,7 @@ export default function User(props) {
                         icon={<FolderOpenOutlined />}
                         onClick={FoliosRedirect}
                     >
-                        My Folios
+                        My Portfolios
                     </Menu.Item>
                     <Menu.Item
                         key="4"
@@ -112,16 +112,27 @@ export default function User(props) {
                 <FolioList />
             </Row>
             <Modal
-                title="Create Folio"
+                title="Create Portfolio"
                 visible={visible}
                 closable={false}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={null}
+                footer={
+                    <Button type="primary" onClick={handleCreate}>
+                        Create
+                    </Button>
+                }
             >
+                <div>
+                    Want to use a tamplate?
+                    <Button type="link" onClick={TemplateRedirect}>
+                        Click here to Explore
+                    </Button>
+                    <br />
+                </div>
+                <div>Enter your own portfolio name:</div>
                 <Input
-                    addonAfter="Enter"
-                    placeholder="My Awesome Folio"
+                    placeholder="My Awesome Portfolio"
                     allowClear={true}
                     onChange={onChange}
                     onPressEnter={handleCreate}
