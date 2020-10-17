@@ -4,6 +4,7 @@ import Carousel from '../components/carousel.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/homePage.css';
 import '../css/stylesheets.css';
+import {Row, Col} from 'antd';
 import {
     ProfileOutlined,
     EditOutlined,
@@ -28,11 +29,11 @@ class App extends React.Component {
             <div className="App">
                 <Layout />
                 <Carousel />
-                <div className="grid-wrapper">
-                    <div className="section-1-top title">
-                        See what's possible ExPortfolio
-                    </div>
-                    <div className="section-1-top content">
+                <Row justify="center" style={{textAlign: 'center'}}>
+                    <Col>
+                        <div className="title">
+                            See what's possible ExPortfolio
+                        </div>
                         <div>
                             Create a simple, fully responsive one page site.
                             Ideal for a personal landing page or digital
@@ -49,90 +50,103 @@ class App extends React.Component {
                         <button className="icon" onClick={this.handleClick}>
                             Start
                         </button>
-                    </div>
-                    <div className="section-2">
+                    </Col>
+                </Row>
+                <Row justify="center">
+                    <Col>
                         <img
                             src={[require('../css/image/social_media.png')]}
                             alt=""
                         />
-                    </div>
-                    <div className="section-3-left title">
-                        What do you want to create?
-                    </div>
-                    <div className="section-3-left content">
-                        1.Convey your necessary skills andcapabilities; <br />
-                        2.Show your experience; <br />
-                        3.Attach videos and images; <br />
-                        4.Show your personality and style. Be creative!
-                    </div>
-                    <div className="section-2"></div>
-                    <div className="section-3-right title">
-                        Why do we need a Portfolio?
-                    </div>
-                    <div className="section-3-right content">
-                        Opportunities are reserved for those who are prepared !{' '}
-                        <br />
-                        Portfolios are a great way to demonstrate your
-                        competencies, to show yourself.
-                        <br />
-                        Let other people to know your ability.
-                    </div>
-                    <div className="section-4">
+                    </Col>
+                </Row>
+                <Row style={{textAlign: 'center'}}>
+                    <Col span="12">
+                        <div className="title">What do you want to create?</div>
+                        <div>
+                            1.Convey your necessary skills andcapabilities;
+                            <br />
+                            2.Show your experience; <br />
+                            3.Attach videos and images; <br />
+                            4.Show your personality and style. Be creative!
+                        </div>
+                    </Col>
+                    <Col span="12">
+                        <div className="title">Why do we need a Portfolio?</div>
+                        <div>
+                            Opportunities are reserved for those who are
+                            prepared!
+                            <br />
+                            Portfolios are a great way to demonstrate your
+                            competencies, to show yourself.
+                            <br />
+                            Let other people to know your ability.
+                        </div>
+                    </Col>
+                </Row>
+                <Row justify="center">
+                    <Col>
                         <img
                             src={[require('../css/image/meeting.jpg')]}
                             alt=""
                         />
-                    </div>
-                </div>
-                <div className="step-wrapper">
+                    </Col>
+                </Row>
+                <Row justify="center" style={{backgroundColor: '#00b0ff'}}>
                     <div className="step-main-title">
                         Show your work in minutes
                     </div>
-                    <div className="step-1">
+                </Row>
+                <Row
+                    justify="center"
+                    style={{textAlign: 'center', backgroundColor: '#00b0ff'}}
+                >
+                    <Col span="8">
                         <EditOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Create</div>
-                        <div className="step-content">
+                        <div>
                             Whether you want to showcase your work in a
                             portfolio website, or create a single-page website,
                             we've got you covered.
                         </div>
-                    </div>
-                    <div className="step-2">
+                    </Col>
+                    <Col span="8">
                         <ProfileOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Template</div>
-                        <div className="step-content">
+                        <div>
                             Don’t know HTML or CSS? No problem. With
                             ExPortfolio, our easy-to-customize themes are the
                             most beautiful way to present your work online.
+                            <br />
+                            <br />
                         </div>
-                    </div>
-                    <div className="step-3">
+                    </Col>
+                    <Col span="8">
                         <ShareAltOutlined style={{fontSize: '40px'}} />
                         <div className="step-title">Share</div>
-                        <div className="step-content">
-                            Share your portfolio to the world. Click share to
-                            give everyone access.
-                        </div>
-                    </div>
-                </div>
+                        <div>Share your portfolio to the world. </div>
+                        <div> Click share to give everyone access.</div>
+                    </Col>
+                </Row>
 
-                <div className="text-bottom">
-                    <div className="text-bottom-title">It's all free !!</div>
-                    <div className="text-bottom-content">
-                        <div>
-                            ExPortfolio is included for free with a full accuess
-                            to ceating your own portfolio.
+                <Row justify="center" style={{textAlign: 'center'}}>
+                    <Col>
+                        <div className="title">It's all free !!</div>
+                        <div className="text-bottom-content">
+                            <div>
+                                ExPortfolio is included for free with a full
+                                accuess to ceating your own portfolio.
+                            </div>
+                            <div>
+                                Don't have one yet? Register and get access to
+                                ExPortfolio!
+                            </div>
                         </div>
-                        <div>
-                            Don't have one yet? Register and get access to
-                            ExPortfolio!
-                        </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
 
                 <div className="bottom">
-                    <br />
-                    <br />© 2020, Bounty Programmers.
+                    <br />© 2020, Bounty Programmers. All Right Reserved.
                 </div>
             </div>
         );
