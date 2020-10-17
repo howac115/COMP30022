@@ -17,6 +17,7 @@ function FolioPage(props) {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [contentState, setContentState] = useState(false);
+    const [emailConsent, setEmailConsent] = useState();
 
     useEffect(() => {
         document.title = 'ExPortfolio | View';
@@ -34,18 +35,25 @@ function FolioPage(props) {
                 );
                 setEmail(response.data.user.email);
                 if (
+                    global.auth.getUser() !== null &&
+                    global.auth.getUser().id === response.data.user._id
+                ) {
+                    setEmailConsent(false);
+                } else {
+                    setEmailConsent(response.data.user.emailConsent);
+                }
+                if (
                     response.data.folio.visible === true ||
                     (global.auth.getUser() !== null &&
                         global.auth.getUser().id === response.data.user._id)
                 ) {
-                    if (response.data.folio) {
+                    if (response.data.folio.content) {
                         setContentState(true);
                         setContent(response.data.folio.content);
                     } else {
                         setContent('This portfolio is currently empty.');
                     }
                 } else {
-                    console.log(response.data.user);
                     setContent(
                         'This portfolio has been set private by the portfolio owner.'
                     );
@@ -71,7 +79,8 @@ function FolioPage(props) {
             .post(
                 '/user/' + history.location.pathname.split('/')[1] + '/email',
                 {
-                    email: email,
+                    sender: values.sender.email,
+                    receiver: email,
                     body: values.sender.body,
                 }
             )
@@ -90,6 +99,22 @@ function FolioPage(props) {
                 />
             );
         } else return content;
+    };
+
+    const RenderEmail = () => {
+        if (emailConsent) {
+            return (
+                <Title level={4}>
+                    <div style={{textAlign: 'right', display: 'in-line'}}>
+                        <Button type="text" onClick={showModal}>
+                            <MailOutlined style={{fontSize: '24px'}} />
+                            {' Email Me'}
+                        </Button>
+                    </div>
+                </Title>
+            );
+        }
+        return <div></div>;
     };
 
     return (
@@ -135,16 +160,7 @@ function FolioPage(props) {
                 <div style={{textAlign: 'right'}}>
                     <Title level={3}>{'Made By: ' + username}</Title>
                 </div>
-
-                <Title level={4}>
-                    <div style={{textAlign: 'right', display: 'in-line'}}>
-                        <Button type="text" onClick={showModal}>
-                            <MailOutlined style={{fontSize: '24px'}} />
-                            {' Email Me'}
-                        </Button>
-                    </div>
-                </Title>
-
+                <RenderEmail />
                 <div style={{maxWidth: '100%', margin: '2rem auto'}}>
                     <div style={{textAlign: 'center'}}></div>
                     <RenderContent />

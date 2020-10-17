@@ -72,7 +72,10 @@ exports.folio_create_post = function (req, res) {
         if (folio) {
             res.status(409).json({ error: 'You have used that name already!' });
         } else {
-            const folio = new Folio({ name: req.body.name, user: req.body.user });
+            const folio = new Folio({
+                name: req.body.name, user: req.body.user,
+                shareAsTemplate: false, visible: true
+            });
             folio.save((err, postInfo) => {
                 if (err) {
                     res.status(400).json({ success: false, err });
@@ -97,6 +100,8 @@ exports.folio_clone_post = function (req, res) {
                 name: req.body.name,
                 user: req.body.user,
                 content: req.body.content,
+                shareAsTemplate: false,
+                visible: true
             });
             folio.save((err, postInfo) => {
                 if (err) {

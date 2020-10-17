@@ -59,8 +59,8 @@ exports.user_purge_post = function (req, res) {
 };
 
 exports.user_email_post = function (req, res) {
-    email_controller.data.userNotification(req.body.email, req.body.body);
-    res.status(200).json({ sender: req.body.email, subject: req.body.subject, body: req.body.body })
+    email_controller.data.userNotification(req.body.receiver, req.body.sender, req.body.body);
+    res.status(200).json({ sender: req.body.sender, subject: req.body.subject, body: req.body.body })
 }
 
 // POST request for update user's detail
@@ -75,9 +75,9 @@ exports.user_update_post = function (req, res) {
                     {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
+                        emailConsent: req.body.emailConsent,
                         email: req.body.email,
-                    },
-                    function (err, updatedUser) {
+                    }, function (err, updatedUser) {
                         if (err) {
                             res.status(400).json({ success: false, err });
                         } else {
@@ -98,6 +98,7 @@ exports.user_update_post = function (req, res) {
                             {
                                 firstName: req.body.firstName,
                                 lastName: req.body.lastName,
+                                emailConsent: req.body.emailConsent,
                                 email: req.body.email,
                                 password: hash,
                             },
