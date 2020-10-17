@@ -31,7 +31,7 @@ export default function FolioList(props) {
                 if (response.data.success) {
                     setFolios(response.data.folios);
                 } else {
-                    message.error('Couldnt get folio`s lists');
+                    message.error('Couldnt get portfolio`s lists');
                 }
             });
         }
@@ -262,7 +262,10 @@ export default function FolioList(props) {
     return (
         <div style={{width: '70%', marginLeft: '5%', marginTop: '3%'}}>
             <Collapse defaultActiveKey={['1']} ghost>
-                <Panel header={<Title level={3}> My Folios </Title>} key="1">
+                <Panel
+                    header={<Title level={3}> My Portfolios </Title>}
+                    key="1"
+                >
                     <Row gutter={[32, 16]}>{renderCards}</Row>
                 </Panel>
             </Collapse>

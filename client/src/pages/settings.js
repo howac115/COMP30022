@@ -159,7 +159,7 @@ export default function User(props) {
                         icon={<FolderOpenOutlined />}
                         onClick={FoliosRedirect}
                     >
-                        My Folios
+                        My Portfolios
                     </Menu.Item>
                     <Menu.Item
                         key="4"
@@ -242,7 +242,7 @@ export default function User(props) {
                 </div>
             </Row>
             <Modal
-                title="Create Folio"
+                title="Create Portfolio"
                 visible={visible}
                 closable={false}
                 onOk={handleOk}
@@ -262,7 +262,7 @@ export default function User(props) {
                 </div>
                 <div>Enter your own portfolio name:</div>
                 <Input
-                    placeholder="My Awesome Folio"
+                    placeholder="My Awesome Portfolio"
                     allowClear={true}
                     onChange={onChange}
                     onPressEnter={handleCreate}

@@ -185,27 +185,31 @@ export default function Template(props) {
             <Layout />
             <div style={{width: '85%', margin: '3rem auto'}}>
                 <Row>
-                    <button
-                        className="button is-light"
-                        onClick={handleBack.bind(this)}
-                    >
-                        <LeftCircleOutlined />
-                        <div>&nbsp; Back</div>
-                    </button>
-                    <Title level={2}>&nbsp;Templates </Title>
-                </Row>
-                <Row justify="center">
-                    <AutoComplete
-                        onSearch={searhText => {
-                            handleSearch(searhText);
-                        }}
-                        style={{width: 800}}
-                    >
-                        <Input.Search
-                            size="large"
-                            placeholder="Search Your Favourite Portfolio Template"
-                        />
-                    </AutoComplete>
+                    <Col span="2">
+                        <button
+                            className="button is-light"
+                            onClick={handleBack.bind(this)}
+                        >
+                            <LeftCircleOutlined />
+                            <div>&nbsp; Back</div>
+                        </button>
+                    </Col>
+                    <Col span="6">
+                        <Title level={2}>&nbsp;Templates </Title>
+                    </Col>
+                    <Col span="16">
+                        <AutoComplete
+                            onSearch={searhText => {
+                                handleSearch(searhText);
+                            }}
+                            style={{width: 600}}
+                        >
+                            <Input.Search
+                                size="large"
+                                placeholder="Search Your Favourite Portfolio Template"
+                            />
+                        </AutoComplete>
+                    </Col>
                 </Row>
 
                 <Row gutter={[32, 16]}>{renderCards}</Row>
