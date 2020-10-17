@@ -55,6 +55,7 @@ class App extends React.Component {
                 <Row justify="center">
                     <Col>
                         <img
+                            className="homepage_img"
                             src={[require('../css/image/social_media.png')]}
                             alt=""
                         />
@@ -87,6 +88,7 @@ class App extends React.Component {
                 <Row justify="center">
                     <Col>
                         <img
+                            className="homepage_img"
                             src={[require('../css/image/meeting.jpg')]}
                             alt=""
                         />
