@@ -20,15 +20,15 @@ const steps = [
     {
         id: '1',
         message:
-            'Welcome to ExportFolio! Please choose one of the following options.',
+            'Welcome to ExPortfolio! Please choose one of the following options.',
         trigger: '2',
     },
     {
         id: '2',
         options: [
             {value: 1, label: 'What can I do with this web app?', trigger: '3'},
-            {value: 2, label: 'I want to create a folio.', trigger: '4'},
-            {value: 3, label: 'How can I share my E-portfolio?', trigger: '5'},
+            {value: 2, label: 'I want to create a E-Portfolio.', trigger: '4'},
+            {value: 3, label: 'How can I share my E-Portfolio?', trigger: '5'},
             {
                 value: 4,
                 label: 'Just wanna hang around by myself!',
@@ -44,24 +44,24 @@ const steps = [
     },
     {
         id: '3',
-        message: 'You can build your own e-portfolio here! Fully customized!',
+        message: 'You can build your own E-Portfolio here! Fully customized!',
         trigger: '6',
     },
     {
         id: '4',
         message:
-            'You can create your folio by signing in, click "create" on navigation bar',
+            'You can create your E-Portfolio by signing in, click "create" on navigation bar',
         trigger: '9',
     },
     {
         id: '5',
         message:
-            'You can share your folio simply by clicking the share button under your folio',
+            'You can share your portfolio simply by clicking the share button under your portfolio',
         trigger: 'reroute',
     },
     {
         id: '6',
-        message: "Don't know what e-portfolio is?",
+        message: "Don't know what E-Portfolio is?",
         trigger: '7',
     },
     {
@@ -95,7 +95,7 @@ class HelperBot extends React.Component {
         return (
             <ThemeProvider theme={theme}>
                 <ChatBot
-                    headerTitle="Exportfolio Virtual Assistant"
+                    headerTitle="ExPortfolio Virtual Assistant"
                     floating={true}
                     floatingStyle={{background: 'dark'}}
                     hideSubmitButton={true}
