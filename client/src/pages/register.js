@@ -10,7 +10,7 @@ export default function SignUp(props) {
     password.current = watch('password', '');
 
     useEffect(() => {
-        document.title = 'ExPortfolio ｜ Sign up';
+        document.title = 'ExPortfolio | Sign up';
     }, []);
 
     const handleSignUp = async data => {

@@ -21,7 +21,7 @@ export default function Login(props) {
             const userName = _res.data.firstName;
             global.auth.setUserName(userName);
             message.success('Welcome ' + userName);
-            props.history.push('/' + global.auth.getUser().id);
+            props.history.go(-1);
         } catch (error) {
             const errorMessage = error.response.data.error;
             message.error(errorMessage);

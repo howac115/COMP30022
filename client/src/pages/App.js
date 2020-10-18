@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Layout from '../layout.js';
 import Carousel from '../components/carousel.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -41,10 +42,10 @@ class App extends React.Component {
                             if desired.
                             <br />
                             Creatives around the world use ExPortfolio to
-                            showcase their work. See some examples below.
+                            showcase their work.
                         </div>
-                        <div className="helightText">
-                            See some examples below.
+                        <div>
+                            Click <b>Start </b> to view our fantastic template.
                         </div>
                         <br />
                         <button className="icon" onClick={this.handleClick}>
@@ -139,14 +140,25 @@ class App extends React.Component {
                                 ExPortfolio is included for free with a full
                                 accuess to ceating your own portfolio.
                             </div>
+                            <div>Don't have one yet?</div>
                             <div>
-                                Don't have one yet? Register and get access to
-                                ExPortfolio!
+                                <Link to="../Register">
+                                    <i>Register</i>
+                                </Link>{' '}
+                                and get access to ExPortfolio!
                             </div>
                         </div>
                     </Col>
                 </Row>
-
+                <Row justify="center">
+                    <Col>
+                        <img
+                            className="homepage-img"
+                            src={[require('../css/image/portfolio.png')]}
+                            alt=""
+                        />
+                    </Col>
+                </Row>
                 <div className="bottom">
                     <br />© 2020, Bounty Programmers. All Right Reserved.
                 </div>
