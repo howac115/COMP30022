@@ -50,7 +50,7 @@ const steps = [
     {
         id: '4',
         message:
-            'You can create your E-Portfolio by signing in, click "create" on navigation bar',
+            'You can create your E-Portfolio by signing in, click "create your own" or click "+" button under template ',
         trigger: '9',
     },
     {
