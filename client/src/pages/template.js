@@ -150,7 +150,7 @@ export default function Template(props) {
                     >
                         <Meta
                             title={folio.name}
-                            description="This is the description"
+                            description="——————————————————————————————"
                         />
                         <div
                             style={{

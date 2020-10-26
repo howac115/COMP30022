@@ -238,7 +238,7 @@ export default function FolioList(props) {
                     >
                         <Meta
                             title={folio.name}
-                            description="This is the description"
+                            description="——————————————————————————————"
                         />
                         <div
                             style={{
