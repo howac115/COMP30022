@@ -1,6 +1,7 @@
 # COMP30022
 
 Bounty Programmers Repository.
+[Introduction](doc/instruction.pdf)
 
 To run locally
 
