@@ -1,4 +1,3 @@
-~~~markdown
 # ExPortfolio
 
 [![standard-readme compliant](https://api.travis-ci.com/howac115/COMP30022.svg?token=J4ZPsoMp7ebKr4DtszSg&branch=master&status=passed)](https://travis-ci.com/github/howac115/COMP30022)
