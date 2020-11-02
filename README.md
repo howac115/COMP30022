@@ -88,13 +88,15 @@ email | String type, created through user controller, email address of user
 password | String type, created through user controller, password of user account
 emailConsent | 	Boolean type, consent of other people send email to current user
  ```
- {"_id":{"$oid":"5f70e313c5df74000812edb0"},
- "firstName":"Hao Qi",
- "lastName":"Chen",
- "email":"haoqic@student.unimelb.edu.au",
- "password":"$2a$10$QuL0yJjlKwPPebxc/mWMMebIt2km.Oq2c3UoVj5Y14KROS9NZHwV.",
- "__v":0,
- "emailConsent":false}
+ {
+ 	"_id":{"$oid":"5f70e313c5df74000812edb0"},
+	 "firstName":"Hao Qi",
+	 "lastName":"Chen",
+	 "email":"haoqic@student.unimelb.edu.au",
+	 "password":"$2a$10$QuL0yJjlKwPPebxc/mWMMebIt2km.Oq2c3UoVj5Y14KROS9NZHwV.",
+	 "__v":0,
+	 "emailConsent":false
+ }
  ```
  - ### Portfolio
  Property | Description
@@ -107,14 +109,16 @@ shareAsTemplate | Boolean type, consent of if current portfolio has been shared 
 visible | Boolean type, consent of if current portfolio can be seen by other users
 
  ```
- {"_id":{"$oid":"5f6b1356ff6a530d3e8d1a45"},
- "name":"My skills",
- "user":{"$oid":"5f5a48e1e746ca001727ea51"},
- "createdAt":{"$date":"2020-09-23T09:20:22.701Z"},
- "updatedAt":{"$date":"2020-09-30T14:09:02.337Z"},
- "__v":0,
- "shareAsTemplate":false,
- "visible":false}
+ {
+	 "_id":{"$oid":"5f6b1356ff6a530d3e8d1a45"},
+	 "name":"My skills",
+	 "user":{"$oid":"5f5a48e1e746ca001727ea51"},
+	 "createdAt":{"$date":"2020-09-23T09:20:22.701Z"},
+	 "updatedAt":{"$date":"2020-09-30T14:09:02.337Z"},
+	 "__v":0,
+	 "shareAsTemplate":false,
+	 "visible":false
+ }
  ```
 
 ## Deployment
