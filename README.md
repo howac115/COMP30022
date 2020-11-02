@@ -27,7 +27,7 @@
 ## Document
 
 1. The [Product(ExPortfolio) Instructions](doc/instruction.pdf) for how to use our web application.
-2. A [User Story](doc/product backlog.pdf) contains all functionalities that intended to achieve.
+2. A [User Story](doc/product-backlog.pdf) contains all functionalities that intended to achieve.
 3. A [Software Architecture](doc/architecture.pdf) you can use to see our app's architecture.
 4. An [API Documents](doc/api.pdf) to track all the APIs.
 
