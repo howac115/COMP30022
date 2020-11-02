@@ -8,7 +8,7 @@
 - [Document](#document)
 - [Install](#install)
 - [Usage](#usage)
-- [Test] (#test)
+- [Test](#test)
 - [Key Algorithms](#key-algorithms)
 	- [Chatbot](#chatbot)
 	- [Path Protection](#path-protection)
