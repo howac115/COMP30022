@@ -100,8 +100,8 @@ Some key classes for important functionalities.
 ```
 ├── COMP30022
 │    └── client
-│	        └── src
-│  		         └── components
+│         └── src
+│              └── components
 │                   └── SunEditor.js
 ```
 
