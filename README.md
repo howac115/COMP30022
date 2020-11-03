@@ -2,10 +2,9 @@
 
 [![standard-readme compliant](https://api.travis-ci.com/howac115/COMP30022.svg?token=J4ZPsoMp7ebKr4DtszSg&branch=master&status=passed)](https://travis-ci.com/github/howac115/COMP30022)
 
-
 ## Table of Contents
 
-- [Document](#document)
+- [Documents](#documents)
 - [Install](#install)
 - [Usage](#usage)
 - [Test](#test)
@@ -24,12 +23,16 @@
 - [Contribution](#contribution)
 - [License](#license)
 
-## Document
 
-1. The [Product(ExPortfolio) Instructions](doc/instruction.pdf) for how to use our web application.
-2. A [User Story](doc/product-backlog.pdf) contains all functionalities that intended to achieve.
-3. A [Software Architecture](doc/architecture.pdf) you can use to see our app's architecture.
-4. An [API Documents](doc/api.pdf) to track all the APIs.
+
+## Documents
+
+- The [Product(ExPortfolio) Instructions](doc/instruction.pdf) for how to use our web application.
+- A [User Story](doc/product-backlog.pdf) contains all functionalities that intended to achieve.
+- A [Software Architecture](doc/architecture.pdf) you can use to see our app's architecture.
+- An [API Documents](doc/api.pdf) to track all the APIs.
+
+
 
 ## Install
 
@@ -42,43 +45,74 @@ $ npm install
 $ cd ..
 ```
 
+
+
 ## Usage
 
 The front end will run port 3000 and the back end will run in port 5000 cocurrently.
 
 ```sh
 $ npm run dev
-# Open http://localhost:3000 to view it in the browser.
+# open http://localhost:3000 to view it in the browser.
 ```
 
+
+
 ## Test
-run the test cases for the backend, this is automatically done every time right after pushing new code to github. this is done by Travis CI, to learn more, see https://travis-ci.com/
+
+Run the test cases for the backend, this is automatically done every time right after pushing new code to github. this is done by Travis CI, to learn more, see https://travis-ci.com/
 
 ```sh
 $ npm run test
-# Prints out test case and outcome.
+# prints out test case and outcome.
 ```
+
+
 ## Key Algorithms
-Demonstration of some key algorithms.
-### Chatbot
 
-### Path Protection
+Demonstration of some key algorithms that used in the ExPortfolio Systems.
 
-### Email
+ - ### Chatbot
 
-### Fuzzy Search
+ - ### Email
+
+ - ### Path Protection
+
+ - ### Fuzzy Search
+
+   Fuzzy search is utilised in the template searching. User can simply type part of a word to match some outcomes. 
+   
+   For instance, Ex can match both "exportfolio", "Exportfolio", "Ex Portfolio" and of course "Ex".
+
 
 
 ## Key Classes
+
 Some key classes for important functionalities.
-### Text Editor 
 
-### User Portfolios Management
+ - ### Text Editor 
 
-### Templates
+   We use [Sun Editor](http://suneditor.com/sample/index.html) to implement the user's e-portfolio pages and templates. 
+
+   This editor is a lightweight, flexible, customizable text editor for web applications.
+
+   The configurations of this editor that used in our application can be found in following path.
+```
+├── COMP30022
+│    └── client
+│	        └── src
+│  		         └── components
+│                   └── SunEditor.js
+```
+
+ - ### User Portfolios Management
+
+ - ### Templates
+
 
 
 ## Database Structure
+
  - ### User
  Property | Description
 ---- | ---
@@ -87,9 +121,9 @@ lastName |  String type, created through user controller, last name of user
 email | String type, created through user controller, email address of user
 password | String type, created through user controller, password of user account
 emailConsent | 	Boolean type, consent of other people send email to current user
- ```
+```javascript
  {
- 	"_id":{"$oid":"5f70e313c5df74000812edb0"},
+ 	 "_id":{"$oid":"5f70e313c5df74000812edb0"},
 	 "firstName":"Hao Qi",
 	 "lastName":"Chen",
 	 "email":"haoqic@student.unimelb.edu.au",
@@ -97,7 +131,8 @@ emailConsent | 	Boolean type, consent of other people send email to current user
 	 "__v":0,
 	 "emailConsent":false
  }
- ```
+```
+
  - ### Portfolio
  Property | Description
 ---- | ---
@@ -108,7 +143,7 @@ updatedAt | Date type,  can be updated through user's portfolio page, record las
 shareAsTemplate | Boolean type, consent of if current portfolio has been shared as template
 visible | Boolean type, consent of if current portfolio can be seen by other users
 
- ```
+```javascript
  {
 	 "_id":{"$oid":"5f6b1356ff6a530d3e8d1a45"},
 	 "name":"My skills",
@@ -119,15 +154,15 @@ visible | Boolean type, consent of if current portfolio can be seen by other use
 	 "shareAsTemplate":false,
 	 "visible":false
  }
- ```
+```
 
 ## Deployment
 
-### Heroku
+ - ### Heroku
 
-### MongoDB
+ - ### MongoDB
 
-### Nodemailer
+ - ### Nodemailer
 
 
 
@@ -135,16 +170,23 @@ visible | Boolean type, consent of if current portfolio can be seen by other use
 
 This project exists thanks to all the people who contribute.
 
-1. [Haoqi Chen](https://github.com/howac115)
-2. [Tianze Liu](https://github.com/matthewkkkk)
-3. [Peiyu Wu](https://github.com/PeiyuOwO)
-4. [Yutao Wang](https://github.com/yutaow97)
-5. [Haoyuan Yu](https://github.com/HarryHaoyuan)
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/HarryHaoyuan"><img src="https://avatars1.githubusercontent.com/u/61959614" width="120px;" alt=""/><br /><sub><b>Haoyuan Yu</b></sub></a></td>
+    <td align="center"><a href="https://github.com/howac115"><img src="https://avatars0.githubusercontent.com/u/39285061" width="120px;" alt=""/><br /><sub><b>Haoqi Chen</b></sub></a></td>
+    <td align="center"><a href="https://github.com/matthewkkkk"><img src="https://avatars3.githubusercontent.com/u/53592281" width="120px;" alt=""/><br /><sub><b>Tianze Liu</b></sub></a></td>
+    <td align="center"><a href="https://github.com/PeiyuOwO"><img src="https://avatars2.githubusercontent.com/u/56665146" width="120px;" alt=""/><br /><sub><b>Peiyu Wu</b></sub></a></td>
+    <td align="center"><a href="https://github.com/yutaow97"><img src="https://avatars0.githubusercontent.com/u/43752155" width="120px;" alt=""/><br /><sub><b>Yutao Wang</b></sub></a></td>
+  </tr>
+</table>
+
+
 
 ## License
 
 Copyright 2020 Bounty Programmers  
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.   
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  
 
