@@ -64,7 +64,14 @@ $ npm run test
 Test cases are designed to test mainly backend functions using Mocha/Chai. Those are polished up for\
 corner cases testing, which also involves the automatic database cleanning mechnism to
 prevent the database from being overloaded by test data.
-To learn more about how test cases are designed, check out "test/auth_user_test.js" and "test/folio_test.js"<br><br>
+To learn more about how test cases are designed, check out
+
+```
+├── COMP30022
+│    └── test
+│         └── auth_user_test.js 
+│         └── folio_test.js 
+```
 
 ## Key Algorithms
 
