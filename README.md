@@ -233,9 +233,7 @@ Some key classes for important functionalities.
 
 - **Entity Relationship Diagram**
 
-<p align="center">
-  <img src="Imgs/doc\entity relationship diagram.png">
-</p>
+![image-20201106201503651](doc\entity relationship diagram.png)
 
 ## Deployment
 
