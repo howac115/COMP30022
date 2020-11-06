@@ -233,7 +233,7 @@ Some key classes for important functionalities.
 
 - **Entity Relationship Diagram**
 
-![image-20201106201503651](doc\erd.png)
+![image](https://raw.githubusercontent.com/howac115/COMP30022/master/doc/erd.PNG?token=AOYW3PWCGPHD274GISLHUO27VZJG2)
 
 ## Deployment
 
