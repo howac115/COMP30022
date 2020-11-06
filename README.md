@@ -231,20 +231,22 @@ Some key classes for important functionalities.
  }
 ```
 
+- **Entity Relationship Diagram**
+
+![image-20201106201503651](doc\entity relationship diagram.png)
+
 ## Deployment
 
 - ### Heroku
 
   Heroku is the platform where Exportfolio is running on. It is well set up
   to take upgrades from github Master branch automatically.
-  Heroku Deployment Address: https://exportfolio.herokuapp.com/<br><br>
+  Heroku Deployment Address: https://exportfolio.herokuapp.com/
 
 - ### MongoDB
 
   MongoDB is our backend database server(NoSQL). It is designed to hold two
-  collections as discussed in [Database Structure](#database-structure).<br><br>
-
-- ### Nodemailer
+  collections as discussed in [Database Structure](#database-structure).
 
 ## Contributors
 
